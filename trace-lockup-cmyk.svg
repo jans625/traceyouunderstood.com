@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  TRACE — primary lockup, full colour, print master
+  Artwork size: 100 mm wide at 1:1. Scales without loss.
+  Colour targets for press (SVG itself is RGB, set these values in your layout app):
+    Carbon   #0B0E12  =  C60 M40 Y40 K100 (rich black)  |  1-colour: K100
+    Olympian #0C61DA  =  C90 M60 Y0  K0
+    Platinum #9AA1A8  =  C8  M4  Y0  K34   (the trademark symbol only)
+
+  IMPORTANT, TYPE IS LIVE IN THIS FILE.
+  The wordmark is set in Inter Light 300. Before sending to a printer,
+  open in Illustrator or Inkscape and convert the type to outlines
+  (Illustrator: Type > Create Outlines. Inkscape: Path > Object to Path).
+  If the press cannot guarantee that, use trace-mark-cmyk.svg instead,
+  which is pure geometry and needs no fonts.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 329 100" width="100mm" height="30.4mm" font-family="Inter, 'Segoe UI', sans-serif">
+  <rect x="10" y="36" width="11" height="28" rx="5.5" fill="#0b0e12"/>
+  <rect x="28" y="26" width="11" height="48" rx="5.5" fill="#0b0e12"/>
+  <rect x="46" y="14" width="11" height="72" rx="5.5" fill="#0c61da"/>
+  <rect x="64" y="26" width="11" height="48" rx="5.5" fill="#0b0e12"/>
+  <rect x="82" y="36" width="11" height="28" rx="5.5" fill="#0b0e12"/>
+  <text x="126" y="66" font-size="44" font-weight="300" letter-spacing="14" fill="#0b0e12">TRACE</text>
+  <text x="309" y="36" font-size="12" font-weight="400" fill="#9aa1a8">&#8482;</text>
+</svg>

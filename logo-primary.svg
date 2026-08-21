@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 329 100" width="329" height="100" font-family="Inter, 'Segoe UI', sans-serif">
+  <!-- Pulse mark -->
+  <rect x="10" y="36" width="11" height="28" rx="5.5" fill="#0b0e12"/>
+  <rect x="28" y="26" width="11" height="48" rx="5.5" fill="#0b0e12"/>
+  <rect x="46" y="14" width="11" height="72" rx="5.5" fill="#0c61da"/>
+  <rect x="64" y="26" width="11" height="48" rx="5.5" fill="#0b0e12"/>
+  <rect x="82" y="36" width="11" height="28" rx="5.5" fill="#0b0e12"/>
+  <!-- Wordmark -->
+  <text x="126" y="66" font-size="44" font-weight="300" letter-spacing="14" fill="#0b0e12">TRACE</text>
+  <!-- Trademark -->
+  <text x="309" y="36" font-size="12" font-weight="400" fill="#9aa1a8">&#8482;</text>
+</svg>
