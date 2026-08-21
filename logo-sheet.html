@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRACE — Logo Sheet (print to PDF)</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --white:#f6f7f8; --ink:#0b0e12; --platinum:#9aa1a8; --blue:#0c61da; --border:#e2e5e8; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:"Inter",sans-serif; color:var(--ink); background:#dfe2e5; }
+
+    /* A4 sheet */
+    .sheet {
+      width:210mm; min-height:297mm; margin:12mm auto; background:#fff;
+      padding:18mm 18mm 15mm; box-shadow:0 10px 40px rgba(0,0,0,.18);
+    }
+    .head { border-bottom:1px solid var(--ink); padding-bottom:6mm; margin-bottom:9mm; display:flex; justify-content:space-between; align-items:flex-end; }
+    .head h1 { font-weight:300; font-size:20pt; letter-spacing:-0.02em; }
+    .head .meta { text-align:right; font-family:"Oswald",sans-serif; font-size:7pt; letter-spacing:.18em; text-transform:uppercase; color:var(--platinum); line-height:1.9; }
+    .eyebrow { font-family:"Oswald",sans-serif; font-size:7.5pt; font-weight:500; letter-spacing:.24em; text-transform:uppercase; color:var(--blue); margin-bottom:3mm; }
+
+    .block { margin-bottom:10mm; page-break-inside:avoid; }
+    .stage { border:1px solid var(--border); border-radius:2mm; padding:8mm; display:flex; align-items:center; justify-content:center; }
+    .stage--dark { background:var(--ink); border-color:var(--ink); }
+    .cap { font-family:"Oswald",sans-serif; font-size:7pt; letter-spacing:.16em; text-transform:uppercase; color:var(--platinum); margin-top:2.5mm; }
+
+    /* The lockup, drawn live so the type stays vector on export */
+    .lockup { display:flex; align-items:center; gap:5mm; }
+    .lockup svg { width:14mm; height:14mm; flex-shrink:0; }
+    .lockup .word { font-weight:300; font-size:30pt; letter-spacing:.32em; line-height:1; }
+    .lockup .tm { font-size:8pt; align-self:flex-start; margin-left:-4.2mm; margin-top:1mm; color:var(--platinum); }
+    .lockup--dark .word { color:var(--white); }
+    .lockup--mono .word { color:#000; }
+    .lockup--mono .tm { color:#000; }
+
+    .row { display:grid; grid-template-columns:1fr 1fr; gap:6mm; }
+    .marks { display:flex; gap:10mm; align-items:center; justify-content:center; }
+    .marks svg { width:18mm; height:18mm; }
+
+    .foot { border-top:1px solid var(--border); padding-top:4mm; margin-top:4mm; display:flex; justify-content:space-between; font-size:7pt; color:var(--platinum); }
+    .hint { background:#eef0f2; border-left:2px solid var(--blue); padding:4mm 5mm; font-size:8pt; font-weight:300; line-height:1.6; margin-bottom:8mm; }
+    .hint b { font-weight:600; }
+
+    @media print {
+      body { background:#fff; }
+      .sheet { margin:0; box-shadow:none; width:auto; min-height:auto; padding:0; }
+      .hint { display:none; }
+      @page { size:A4; margin:15mm; }
+    }
+  </style>
+</head>
+<body>
+  <div class="sheet">
+    <div class="hint">
+      <b>To create a vector PDF of the full lockup:</b> press Ctrl+P, choose <b>Save as PDF</b>, set margins to Default and enable Background graphics. The wordmark exports as embedded vector type, so it stays sharp at any size and does not depend on Inter being installed on the printer's machine. This panel is hidden in the printed output.
+    </div>
+
+    <header class="head">
+      <div>
+        <p class="eyebrow">Artwork Sheet</p>
+        <h1>TRACE logo masters</h1>
+      </div>
+      <div class="meta">TRACE&trade;<br>Version 1.0<br>CMYK / 1-colour</div>
+    </header>
+
+    <div class="block">
+      <p class="eyebrow">01 · Primary lockup, full colour</p>
+      <div class="stage">
+        <div class="lockup">
+          <svg viewBox="0 0 100 100" aria-hidden="true">
+            <rect x="10" y="36" width="11" height="28" rx="5.5" fill="#0b0e12"/>
+            <rect x="28" y="26" width="11" height="48" rx="5.5" fill="#0b0e12"/>
+            <rect x="46" y="14" width="11" height="72" rx="5.5" fill="#0c61da"/>
+            <rect x="64" y="26" width="11" height="48" rx="5.5" fill="#0b0e12"/>
+            <rect x="82" y="36" width="11" height="28" rx="5.5" fill="#0b0e12"/>
+          </svg>
+          <span class="word">TRACE</span><span class="tm">&#8482;</span>
+        </div>
+      </div>
+      <p class="cap">Carbon C60 M40 Y40 K100 · Olympian C90 M60 Y0 K0 · Platinum C8 M4 Y0 K34</p>
+    </div>
+
+    <div class="row">
+      <div class="block">
+        <p class="eyebrow">02 · One colour, black</p>
+        <div class="stage">
+          <div class="lockup lockup--mono" style="transform:scale(.62); transform-origin:center;">
+            <svg viewBox="0 0 100 100" aria-hidden="true">
+              <rect x="10" y="36" width="11" height="28" rx="5.5" fill="#000"/>
+              <rect x="28" y="26" width="11" height="48" rx="5.5" fill="#000"/>
+              <rect x="46" y="14" width="11" height="72" rx="5.5" fill="#000"/>
+              <rect x="64" y="26" width="11" height="48" rx="5.5" fill="#000"/>
+              <rect x="82" y="36" width="11" height="28" rx="5.5" fill="#000"/>
+            </svg>
+            <span class="word">TRACE</span><span class="tm">&#8482;</span>
+          </div>
+        </div>
+        <p class="cap">K100 solid</p>
+      </div>
+
+      <div class="block">
+        <p class="eyebrow">03 · Knockout, white</p>
+        <div class="stage stage--dark">
+          <div class="lockup lockup--dark" style="transform:scale(.62); transform-origin:center;">
+            <svg viewBox="0 0 100 100" aria-hidden="true">
+              <rect x="10" y="36" width="11" height="28" rx="5.5" fill="#f6f7f8"/>
+              <rect x="28" y="26" width="11" height="48" rx="5.5" fill="#f6f7f8"/>
+              <rect x="46" y="14" width="11" height="72" rx="5.5" fill="#0c61da"/>
+              <rect x="64" y="26" width="11" height="48" rx="5.5" fill="#f6f7f8"/>
+              <rect x="82" y="36" width="11" height="28" rx="5.5" fill="#f6f7f8"/>
+            </svg>
+            <span class="word">TRACE</span><span class="tm">&#8482;</span>
+          </div>
+        </div>
+        <p class="cap">0% ink, knocked out of the background</p>
+      </div>
+    </div>
+
+    <div class="block">
+      <p class="eyebrow">04 · Mark alone</p>
+      <div class="stage">
+        <div class="marks">
+          <svg viewBox="0 0 100 100" aria-hidden="true">
+            <rect x="10" y="36" width="11" height="28" rx="5.5" fill="#0b0e12"/>
+            <rect x="28" y="26" width="11" height="48" rx="5.5" fill="#0b0e12"/>
+            <rect x="46" y="14" width="11" height="72" rx="5.5" fill="#0c61da"/>
+            <rect x="64" y="26" width="11" height="48" rx="5.5" fill="#0b0e12"/>
+            <rect x="82" y="36" width="11" height="28" rx="5.5" fill="#0b0e12"/>
+          </svg>
+          <svg viewBox="0 0 100 100" aria-hidden="true">
+            <rect x="10" y="36" width="11" height="28" rx="5.5" fill="#000"/>
+            <rect x="28" y="26" width="11" height="48" rx="5.5" fill="#000"/>
+            <rect x="46" y="14" width="11" height="72" rx="5.5" fill="#000"/>
+            <rect x="64" y="26" width="11" height="48" rx="5.5" fill="#000"/>
+            <rect x="82" y="36" width="11" height="28" rx="5.5" fill="#000"/>
+          </svg>
+          <span style="background:var(--ink); padding:4mm; border-radius:2mm; display:inline-flex;">
+            <svg viewBox="0 0 100 100" aria-hidden="true" style="width:18mm; height:18mm;">
+              <rect x="10" y="36" width="11" height="28" rx="5.5" fill="#f6f7f8"/>
+              <rect x="28" y="26" width="11" height="48" rx="5.5" fill="#f6f7f8"/>
+              <rect x="46" y="14" width="11" height="72" rx="5.5" fill="#0c61da"/>
+              <rect x="64" y="26" width="11" height="48" rx="5.5" fill="#f6f7f8"/>
+              <rect x="82" y="36" width="11" height="28" rx="5.5" fill="#f6f7f8"/>
+            </svg>
+          </span>
+        </div>
+      </div>
+      <p class="cap">Minimum 6 mm wide · clear space equals the height of one pulse bar</p>
+    </div>
+
+    <footer class="foot">
+      <span>TRACE&trade; Logo Sheet · v1.0</span>
+      <span>&copy; 2026 TRACE&trade;</span>
+    </footer>
+  </div>
+</body>
+</html>

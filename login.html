@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRACE — Log in</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .auth {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 7.5rem 1.5rem 4rem;
+      background:
+        radial-gradient(900px 600px at 92% 0%, var(--blue-tint) 0%, transparent 55%),
+        var(--white);
+    }
+    .auth__card {
+      width: 100%;
+      max-width: 420px;
+      background: #fff;
+      border: 1px solid var(--platinum);
+      border-radius: 20px;
+      padding: 2.6rem 2.4rem;
+      box-shadow: 0 30px 70px -30px rgba(11, 14, 18, 0.18);
+    }
+    .auth__title { font-weight: 300; font-size: 1.9rem; letter-spacing: -0.03em; margin-bottom: 0.4rem; }
+    .auth__sub { color: var(--grey-700); font-weight: 300; font-size: 0.95rem; margin-bottom: 2rem; }
+
+    .field { margin-bottom: 1.1rem; }
+    .field label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--grey-700);
+      margin-bottom: 0.4rem;
+    }
+    .field input {
+      width: 100%;
+      padding: 0.75rem 0.9rem;
+      border: 1.5px solid var(--platinum);
+      border-radius: 8px;
+      background: #fff;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s;
+      box-sizing: border-box;
+    }
+    .field input:focus { border-color: var(--blue); }
+    .auth__error {
+      display: none;
+      font-size: 0.82rem;
+      color: #e5484d;
+      margin-bottom: 1rem;
+    }
+    .auth__card .btn { width: 100%; text-align: center; padding: 0.85rem; box-sizing: border-box; border: none; cursor: pointer; font-size: 0.98rem; }
+    .auth__foot {
+      margin-top: 1.6rem;
+      padding-top: 1.4rem;
+      border-top: 1px solid var(--grey-100);
+      font-size: 0.85rem;
+      color: var(--grey-700);
+      font-weight: 300;
+      text-align: center;
+    }
+    .auth__foot a { color: var(--blue); text-decoration: none; font-weight: 500; }
+    .auth__note { margin-top: 1.2rem; font-size: 0.72rem; color: var(--grey-500); text-align: center; font-weight: 300; }
+
+    /* Logged-in account view */
+    .account {
+      display: none;
+      max-width: 460px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    .account__head { text-align: center; margin-bottom: 1.8rem; }
+    .account__head h1 { font-weight: 300; font-size: 2rem; letter-spacing: -0.03em; }
+    .account__head p { color: var(--grey-700); font-weight: 300; font-size: 0.92rem; margin-top: 0.3rem; }
+    .account .device { justify-self: auto; margin: 0 auto; }
+    .account__actions { display: flex; justify-content: center; gap: 1rem; margin-top: 1.8rem; }
+
+    body.is-authed .auth__card { display: none; }
+    body.is-authed .account { display: block; }
+  </style>
+</head>
+<body>
+
+  <!-- Pulse thread: the signal that accompanies you down the page -->
+  <div class="pulse-rail" aria-hidden="true">
+    <div class="pulse-rail__track"></div>
+    <div class="pulse-rail__progress"></div>
+    <svg class="pulse-rail__blip" viewBox="0 0 40 24">
+      <path d="M0 12 h9 l4 -8 l6 16 l4 -8 h17"/>
+    </svg>
+  </div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">
+        <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true">
+          <rect x="10" y="36" width="11" height="28" rx="5.5"/>
+          <rect x="28" y="26" width="11" height="48" rx="5.5"/>
+          <rect x="46" y="14" width="11" height="72" rx="5.5" class="logo-mark__pulse"/>
+          <rect x="64" y="26" width="11" height="48" rx="5.5"/>
+          <rect x="82" y="36" width="11" height="28" rx="5.5"/>
+        </svg>
+        <span class="wordmark">TRACE</span><span class="wordmark__tm">™</span>
+      </a>
+      <nav class="nav__links">
+        <a href="index.html">&larr; Back to home</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="auth">
+    <!-- Sign-in card -->
+    <div class="auth__card">
+      <h1 class="auth__title">Welcome back<span class="accent">.</span></h1>
+      <p class="auth__sub">Log in to see how you're really doing.</p>
+      <form id="login-form" novalidate>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" type="email" placeholder="you@example.com" autocomplete="username" required>
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input id="password" type="password" placeholder="••••••••" autocomplete="current-password" minlength="6" required>
+        </div>
+        <p class="auth__error" id="login-error">Enter a valid email and a password of at least 6 characters.</p>
+        <button class="btn btn--primary" type="submit">Log in</button>
+      </form>
+      <p class="auth__foot">New to TRACE? <a href="checkout.html?plan=complete">Start your free trial</a></p>
+      <p class="auth__note">This is a design-fiction prototype. No account exists and nothing you type is sent anywhere.</p>
+    </div>
+
+    <!-- Logged-in view -->
+    <div class="account">
+      <div class="account__head">
+        <h1 id="account-greeting">Good morning<span class="accent">.</span></h1>
+        <p id="account-email"></p>
+      </div>
+
+      <div class="device" aria-hidden="true">
+        <div class="device__head">
+          <div>
+            <p class="device__date" id="account-date">Today</p>
+            <p class="device__greeting">Your day so far</p>
+          </div>
+          <span class="device__avatar"></span>
+        </div>
+        <div class="device__card">
+          <div class="ring">
+            <svg viewBox="0 0 120 120">
+              <circle class="ring__track" cx="60" cy="60" r="52"/>
+              <circle class="ring__value" cx="60" cy="60" r="52"/>
+            </svg>
+            <div class="ring__center">
+              <span class="ring__num">81</span>
+              <span class="ring__label">Recovery</span>
+            </div>
+          </div>
+          <div class="device__stats">
+            <div class="device__stat">
+              <p class="device__stat-label">HRV</p>
+              <p class="device__stat-value">67<span> ms</span></p>
+            </div>
+            <div class="device__stat">
+              <p class="device__stat-label">Resting HR</p>
+              <p class="device__stat-value">57<span> bpm</span></p>
+            </div>
+          </div>
+        </div>
+        <div class="device__card device__card--row">
+          <div class="mood">
+            <div class="mood__head">
+              <span class="device__stat-label">Today's mood read</span>
+              <span class="mood__verdict">Calm &amp; focused</span>
+            </div>
+            <div class="mood__bar">
+              <span style="--seg:48%; --c:var(--blue)"></span>
+              <span style="--seg:34%; --c:#4d8bff"></span>
+              <span style="--seg:12%; --c:#f5b301"></span>
+              <span style="--seg:6%; --c:#e5484d"></span>
+            </div>
+            <div class="mood__legend">
+              <span>Calm 48%</span><span>Focused 34%</span><span>Anxious 12%</span><span>Stress 6%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="account__actions">
+        <a href="index.html" class="btn btn--outline">Back to home</a>
+        <button class="btn btn--dark" id="logout" type="button">Log out</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    const KEY = "traceUser";
+
+    function greetingForNow() {
+      const h = new Date().getHours();
+      return h < 12 ? "Good morning" : h < 18 ? "Good afternoon" : "Good evening";
+    }
+
+    function showAccount(email) {
+      const name = email.split("@")[0].replace(/[._-]+/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+      document.getElementById("account-greeting").innerHTML = greetingForNow() + ", " + name + '<span class="accent">.</span>';
+      document.getElementById("account-email").textContent = "Signed in as " + email;
+      document.getElementById("account-date").textContent =
+        new Date().toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" });
+      document.body.classList.add("is-authed");
+    }
+
+    // Already signed in from a previous visit?
+    const saved = localStorage.getItem(KEY);
+    if (saved) showAccount(saved);
+
+    document.getElementById("login-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = document.getElementById("email").value.trim();
+      const pass = document.getElementById("password").value;
+      const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && pass.length >= 6;
+      document.getElementById("login-error").style.display = valid ? "none" : "block";
+      if (!valid) return;
+      // Mock auth for the design-fiction prototype: any valid-looking credentials sign in.
+      localStorage.setItem(KEY, email);
+      showAccount(email);
+      window.scrollTo(0, 0);
+    });
+
+    document.getElementById("logout").addEventListener("click", () => {
+      localStorage.removeItem(KEY);
+      document.body.classList.remove("is-authed");
+      document.getElementById("login-form").reset();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRACE — Brand Guidelines</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --white: #f6f7f8;
+      --ink: #0b0e12;
+      --platinum: #9aa1a8;
+      --blue: #0c61da;
+      --border: #e2e5e8;
+      --grey-100: #eef0f2;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Inter", sans-serif;
+      background: var(--white);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 1080px; margin: 0 auto; padding: 4rem 2rem 5rem; }
+
+    /* Back link */
+    .back-link {
+      display: block;
+      text-align: right;
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: #444a51;
+      text-decoration: none;
+      margin-bottom: 2rem;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--ink); }
+
+    /* Header */
+    .doc-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--ink);
+      margin-bottom: 3.5rem;
+    }
+    .doc-head__logo { display: flex; align-items: center; gap: 0.7rem; }
+    .doc-head__logo img { height: 34px; }
+    .doc-head__meta {
+      text-align: right;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--platinum);
+      font-family: "Oswald", sans-serif;
+    }
+    .doc-title { font-weight: 300; font-size: 2.6rem; letter-spacing: -0.03em; margin-bottom: 0.4rem; }
+
+    /* Sections */
+    section { margin-bottom: 4.5rem; }
+    .sec-label {
+      font-family: "Oswald", sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.8rem;
+    }
+    .sec-title { font-weight: 300; font-size: 1.9rem; letter-spacing: -0.02em; margin-bottom: 0.6rem; }
+    .sec-note { color: #444a51; font-weight: 300; max-width: 640px; margin-bottom: 2rem; font-size: 0.98rem; }
+
+    /* Origin, mission, ethos */
+    .origin { display: grid; grid-template-columns: 1.05fr 1fr; gap: 1.6rem; align-items: stretch; }
+    .origin__story {
+      background:
+        repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.016) 0 2px, transparent 2px 6px),
+        repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.013) 0 2px, transparent 2px 6px),
+        var(--ink);
+      color: var(--white);
+      border: 1px solid var(--ink);
+      border-radius: 14px;
+      padding: 2rem 2.2rem;
+    }
+    .origin__year {
+      font-family: "Oswald", sans-serif;
+      font-size: 0.66rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.8rem;
+    }
+    .origin__story h3 { font-weight: 300; font-size: 1.5rem; letter-spacing: -0.02em; margin-bottom: 1rem; }
+    .origin__story p { font-size: 0.92rem; font-weight: 300; color: #c5cad0; line-height: 1.75; margin-bottom: 0.9rem; }
+    .origin__story p:last-child { margin-bottom: 0; }
+    .origin__story em { font-style: normal; color: var(--white); }
+
+    .mission {
+      background:
+        repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.016) 0 2px, transparent 2px 6px),
+        repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.013) 0 2px, transparent 2px 6px),
+        var(--ink);
+      color: var(--white);
+      border-radius: 14px;
+      padding: 2.2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .mission__label {
+      font-family: "Oswald", sans-serif;
+      font-size: 0.66rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 1.1rem;
+    }
+    .mission__statement { font-weight: 300; font-size: 1.55rem; line-height: 1.3; letter-spacing: -0.02em; }
+    .mission__note { margin-top: 1.2rem; font-size: 0.88rem; font-weight: 300; color: #c5cad0; line-height: 1.7; }
+
+    .principles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 1.6rem; }
+    .principle {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.3rem 1.4rem;
+    }
+    .principle__num {
+      font-family: "Oswald", sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      color: var(--platinum);
+      margin-bottom: 0.7rem;
+    }
+    .principle b { display: block; font-weight: 600; font-size: 0.92rem; margin-bottom: 0.4rem; }
+    .principle span { font-size: 0.82rem; font-weight: 300; color: #444a51; line-height: 1.6; }
+
+    /* Logo suite */
+    .logo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+    .tile {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 170px;
+      background: #fff;
+      position: relative;
+    }
+    .tile--dark {
+      background:
+        repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.016) 0 2px, transparent 2px 6px),
+        repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.013) 0 2px, transparent 2px 6px),
+        var(--ink);
+      border-color: var(--ink);
+    }
+    .tile__tag {
+      position: absolute;
+      top: 0.9rem;
+      left: 1.1rem;
+      font-family: "Oswald", sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--platinum);
+    }
+    .tile img { max-width: 78%; max-height: 96px; }
+    .rules { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 1.2rem; }
+    .rule {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: #fff;
+      padding: 1.3rem 1.4rem;
+      font-size: 0.85rem;
+      color: #444a51;
+      font-weight: 300;
+    }
+    .rule strong { display: block; font-weight: 600; color: var(--ink); margin-bottom: 0.3rem; font-size: 0.85rem; }
+
+    /* Rule diagrams */
+    .rule__demo {
+      margin-top: 1.1rem;
+      background: var(--grey-100);
+      border-radius: 10px;
+      min-height: 130px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.6rem;
+      padding: 1.2rem 1rem;
+    }
+    .cs-box {
+      position: relative;
+      border: 1.5px dashed var(--platinum);
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cs-box img { height: 20px; display: block; }
+    .cs-box span {
+      position: absolute;
+      font-family: "Oswald", sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      color: var(--blue);
+      background: var(--grey-100);
+      padding: 0 3px;
+    }
+    .cs-box .cs-t { top: -8px; left: 50%; transform: translateX(-50%); }
+    .cs-box .cs-b { bottom: -8px; left: 50%; transform: translateX(-50%); }
+    .cs-box .cs-l { left: -7px; top: 50%; transform: translateY(-50%); }
+    .cs-box .cs-r { right: -7px; top: 50%; transform: translateY(-50%); }
+    .ms-item { text-align: center; }
+    .ms-item img { display: block; margin: 0 auto; }
+    .ms-item figcaption {
+      margin-top: 0.55rem;
+      font-family: "Oswald", sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--platinum);
+      border-top: 1px solid var(--platinum);
+      padding-top: 0.35rem;
+    }
+    .no-tile {
+      position: relative;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 74px;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .no-tile::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top right, transparent 46.5%, #e5484d 46.5%, #e5484d 53.5%, transparent 53.5%);
+      opacity: 0.85;
+    }
+    .no-tile svg, .no-tile img { width: 30px; height: 30px; }
+    .no-tile .no-stretch { width: 52px; height: 24px; }
+    .no-tile b { font-weight: 700; font-size: 0.7rem; letter-spacing: 0.18em; }
+
+    /* Color */
+    .swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
+    .swatch { text-align: center; }
+    .swatch__chip { height: 96px; display: grid; place-items: center; }
+    .swatch__chip svg { width: 62px; height: 62px; }
+    .swatch__info { padding: 1rem 1.2rem; }
+    .swatch__name { font-weight: 600; font-size: 0.92rem; }
+    .swatch__hex {
+      font-family: "Oswald", sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--platinum);
+      margin-top: 0.15rem;
+    }
+    .swatch__use { font-size: 0.78rem; color: #444a51; font-weight: 300; margin-top: 0.45rem; }
+
+    /* Proportional usage bar: how much of each color the brand actually uses */
+    .spectrum-panel {
+      margin-top: 1.2rem;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2rem;
+    }
+    .usage {
+      display: flex;
+      height: 84px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .usage .u-white { width: 70%; background: #f6f7f8; }
+    .usage .u-carbon { width: 15%; background: #0b0e12; }
+    .usage .u-plat { width: 10%; background: #9aa1a8; }
+    .usage .u-blue { width: 5%; background: #0c61da; }
+    .usage-legend {
+      display: flex;
+      justify-content: center;
+      gap: 2.2rem;
+      flex-wrap: wrap;
+      margin-top: 1.1rem;
+    }
+    .usage-legend div {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-family: "Oswald", sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--platinum);
+      white-space: nowrap;
+    }
+    .usage-legend .u4 { color: var(--blue); }
+    .usage-legend i {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    /* Typography */
+    .type-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; }
+    .type-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.3rem 1.5rem;
+    }
+    .type-card__tag {
+      font-family: "Oswald", sans-serif;
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.9rem;
+    }
+    .type-card__aa { font-size: 3.2rem; line-height: 1; margin-bottom: 1rem; }
+    .type-card--inter .type-card__aa { font-family: "Inter", sans-serif; font-weight: 300; letter-spacing: -0.03em; }
+    .type-card--oswald .type-card__aa { font-family: "Oswald", sans-serif; font-weight: 500; }
+    .type-card__row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.5rem 0;
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem;
+    }
+    .type-card__row b { font-weight: 600; }
+    .type-card__row span { color: #444a51; font-weight: 300; }
+    .type-card__alpha {
+      margin-top: 0.8rem;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: var(--ink);
+      word-break: break-all;
+    }
+    .type-card--inter .type-card__alpha { font-family: "Inter", sans-serif; font-weight: 300; }
+    .type-card--oswald .type-card__alpha { font-family: "Oswald", sans-serif; font-weight: 400; letter-spacing: 0.06em; }
+    .tc-sample { margin-top: 0.8rem; }
+
+    .type-row {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 2rem;
+      align-items: baseline;
+      padding: 1.6rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .type-row:last-child { border-bottom: none; }
+    .type-meta {
+      font-family: "Oswald", sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--platinum);
+      line-height: 1.9;
+    }
+    .type-meta b { color: var(--ink); font-weight: 500; display: block; }
+    .t-display { font-weight: 300; font-size: 2.6rem; letter-spacing: -0.03em; line-height: 1.1; }
+    .t-word { font-weight: 300; font-size: 1.9rem; letter-spacing: 0.32em; }
+    .t-eyebrow { font-family: "Oswald", sans-serif; font-weight: 500; font-size: 0.78rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--blue); }
+    .t-body { font-weight: 300; font-size: 1rem; max-width: 560px; color: #444a51; }
+    .t-label { font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--platinum); font-weight: 600; }
+
+    /* Icons */
+    .icon-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.2rem; }
+    .icon-cell {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: #fff;
+      padding: 1.6rem 1rem 1.2rem;
+      text-align: center;
+    }
+    .icon-cell svg { width: 42px; height: 42px; color: var(--blue); }
+    .icon-cell p {
+      margin-top: 0.8rem;
+      font-family: "Oswald", sans-serif;
+      font-size: 0.64rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--platinum);
+    }
+
+    /* Voice */
+    .voice {
+      background:
+        repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.016) 0 2px, transparent 2px 6px),
+        repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.013) 0 2px, transparent 2px 6px),
+        var(--ink);
+      color: var(--white);
+      border-radius: 14px;
+      padding: 3rem 2.5rem;
+    }
+    .voice__tag { font-weight: 300; font-size: 2.2rem; letter-spacing: -0.02em; margin-bottom: 1rem; }
+    .voice__tag .dot { color: var(--blue); }
+    .voice p { font-weight: 300; color: #c5cad0; max-width: 640px; font-size: 0.98rem; }
+    .voice__words { display: flex; gap: 2.2rem; margin-top: 1.8rem; flex-wrap: wrap; }
+    .voice__words span {
+      font-family: "Oswald", sans-serif;
+      font-size: 0.74rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+    .voice__pairs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin-top: 2.2rem;
+      padding-top: 2rem;
+      border-top: 1px solid #242830;
+    }
+    .vp__head {
+      font-family: "Oswald", sans-serif;
+      font-size: 0.66rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 1rem;
+    }
+    .vp--no .vp__head { color: var(--platinum); }
+    .vp p:not(.vp__head) {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--white);
+      padding: 0.5rem 0;
+      max-width: none;
+    }
+    .vp--no p:not(.vp__head) { color: #6f767e; text-decoration: line-through; text-decoration-thickness: 1px; }
+
+    .doc-foot {
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.72rem;
+      color: var(--platinum);
+    }
+
+    @media (max-width: 760px) {
+      .origin { grid-template-columns: 1fr; }
+      .principles { grid-template-columns: 1fr 1fr; }
+      .logo-grid, .swatches { grid-template-columns: 1fr 1fr; }
+      .icon-grid { grid-template-columns: repeat(3, 1fr); }
+      .rules { grid-template-columns: 1fr; }
+      .type-row { grid-template-columns: 1fr; gap: 0.6rem; }
+    }
+    /* Pulse thread (signal rail) */
+    .pulse-rail {
+      position: fixed;
+      left: 30px;
+      top: 0;
+      bottom: 0;
+      width: 40px;
+      z-index: 90;
+      pointer-events: none;
+    }
+    .pulse-rail__track {
+      position: absolute;
+      left: 19px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: rgba(154, 161, 168, 0.28);
+    }
+    .pulse-rail__progress {
+      position: absolute;
+      left: 19px;
+      top: 0;
+      width: 2px;
+      height: 0;
+      background: var(--blue);
+    }
+    .pulse-rail__blip {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 40px;
+      height: 24px;
+      margin-top: -12px;
+      fill: none;
+      stroke: var(--blue);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      animation: blipBeat 1.6s ease-in-out infinite;
+    }
+    @keyframes blipBeat {
+      0%, 100% { opacity: 0.55; }
+      12% { opacity: 1; }
+      24% { opacity: 0.7; }
+      32% { opacity: 1; }
+    }
+    @media (max-width: 1240px) {
+      .pulse-rail { display: none; }
+    }
+
+    /* ============================================================
+       PRINT / PDF
+       A4 portrait, one section per page, dark panels preserved.
+       In the browser print dialog, turn ON "Background graphics".
+       ============================================================ */
+    @page {
+      size: A4 portrait;
+      margin: 14mm 14mm 16mm;
+    }
+
+    @media print {
+      /* keep the brand's dark panels and colour chips from dropping out */
+      *, *::before, *::after {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      html, body { background: #fff !important; }
+      body { font-size: 10.5pt; line-height: 1.55; }
+      .page { max-width: none; padding: 0; }
+
+      /* screen-only furniture */
+      .pulse-rail, .back-link { display: none !important; }
+
+      /* Let content flow and fill each page. Sections are kept together
+         where they fit, rather than each one starting a fresh page,
+         which used to strand short sections in half-empty pages. */
+      .doc-head { margin-bottom: 4mm; padding-bottom: 4mm; }
+      section { break-before: auto; margin-bottom: 6mm; }
+      .sec-note { margin-bottom: 2.5mm; }
+
+      /* Trim block heights so more fits per page and the tall,
+         unsplittable panels stop pushing themselves onto a fresh sheet. */
+      /* The origin spread is a CSS grid, and Chrome will not place a grid
+         into the space left on a page: it moves the whole thing to the next
+         sheet, which left page one two-thirds empty. Stacking the two panels
+         as ordinary blocks lets each one land wherever it fits. */
+      .origin { display: block; }
+      .origin__story { margin-bottom: 3mm; }
+      .origin__story, .mission { padding: 5mm; }
+      .origin__story p { font-size: 8.9pt; line-height: 1.6; margin-bottom: 2.2mm; }
+      .mission__label { margin-bottom: 2.5mm; }
+      .mission__note { margin-top: 2.5mm; }
+      .principle, .type-card, .rule, .spectrum-panel { padding: 4.5mm 5mm; }
+      /* Chrome will not fragment a CSS grid across a page boundary, so a
+         grid that does not fit jumps whole to the next page and leaves a
+         gap behind. Flex wrapping fragments row by row, which fills pages. */
+      .principles, .type-cards, .rules, .logo-grid, .swatches, .icon-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4mm;
+      }
+      .logo-grid > *, .type-cards > * { width: calc(50% - 2mm); }
+      .rules > * { width: calc(33.333% - 2.7mm); }
+      .principles > *, .swatches > * { width: calc(25% - 3mm); }
+      .icon-grid > * { width: calc(20% - 3.2mm); }
+      .tile { min-height: 30mm; }
+      .voice { padding: 7mm; }
+      .voice__pairs { margin-top: 5mm; padding-top: 5mm; }
+
+      /* Tall unsplittable blocks are what create whitespace: if one cannot
+         fit in the space left on a page it jumps whole to the next, leaving
+         the remainder blank. Trimming their height keeps pages full. */
+      .rule { padding: 4mm; font-size: 8pt; }
+      .rule__demo { min-height: 0; padding: 3mm 2mm; margin-top: 3mm; }
+      .cs-box { padding: 7px 9px; }
+      .cs-box img { height: 13px; }
+      .no-tile { width: 52px; height: 40px; }
+      .ms-item img { max-height: 34px; }
+
+      /* deliberately generous: the taller cards fill the foot of page one
+         instead of leaving a blank strip under the origin spread */
+      .principle { padding: 7mm 5mm; }
+      .principle__num { margin-bottom: 2mm; }
+      .principle b { font-size: 8.5pt; margin-bottom: 1mm; }
+      .principle span { font-size: 7.8pt; }
+
+      .type-card { padding: 4mm 4.5mm; }
+      .type-card__tag { margin-bottom: 2.5mm; }
+      .type-card__aa { font-size: 21pt; margin-bottom: 3mm; }
+      .type-card__row { padding: 1.4mm 0; font-size: 8pt; }
+      .type-card__alpha { font-size: 7.5pt; margin-top: 2mm; }
+      .tc-sample { margin-top: 2mm; }
+      .t-display { font-size: 13pt; }
+      .swatch__chip { height: 20mm; }
+      .swatch__chip svg { width: 13mm; height: 13mm; }
+
+      /* the voice panel is mostly text, so let it flow across a break
+         rather than reserving a whole page for itself */
+      .voice { break-inside: auto; }
+      section > .principles,
+      section > .type-cards,
+      section > .icon-grid,
+      section > .logo-grid { break-before: avoid; }
+
+      /* never split a specimen, tile, card or swatch across pages */
+      .tile, .rule, .swatch, .type-card, .principle, .icon-cell,
+      .spectrum-panel, .voice, .mission, .origin__story, .vp {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      /* Deliberately NOT protecting the big grids here. Keeping a whole
+         grid together forces it onto a new page and leaves the previous
+         one two-thirds empty. Individual cards are protected above, so a
+         grid may split between rows but never mid-card. */
+
+      /* headings must not be stranded at the foot of a page */
+      h1, h2, h3, .sec-label, .sec-title { break-after: avoid; page-break-after: avoid; }
+      .sec-note { break-before: avoid; }
+
+      /* tighten the scale for paper */
+      .doc-title { font-size: 24pt; }
+      .sec-title { font-size: 17pt; }
+      .type-card__aa { font-size: 30pt; margin-bottom: 6mm; }
+      .mission__statement { font-size: 14pt; }
+      .voice__tag { font-size: 17pt; }
+      .tile { min-height: 34mm; padding: 8mm 6mm; }
+      .icon-cell { padding: 6mm 3mm 4mm; }
+      .usage { height: 18mm; }
+
+      /* borders read better than shadows on paper */
+      .type-card, .rule, .principle, .stat, .swatch, .tile, .spectrum-panel {
+        box-shadow: none !important;
+      }
+
+      a { color: inherit; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Pulse thread: the signal that accompanies you down the page -->
+  <div class="pulse-rail" aria-hidden="true">
+    <div class="pulse-rail__track"></div>
+    <div class="pulse-rail__progress"></div>
+    <svg class="pulse-rail__blip" viewBox="0 0 40 24">
+      <path d="M0 12 h9 l4 -8 l6 16 l4 -8 h17"/>
+    </svg>
+  </div>
+  <div class="page">
+
+    <a href="index.html" class="back-link">&larr; Back to home</a>
+
+    <!-- Header -->
+    <header class="doc-head">
+      <div>
+        <div class="doc-head__logo"><img src="brand/logo-primary.svg" alt="TRACE logo"></div>
+        <h1 class="doc-title" style="margin-top:1.6rem;">Brand Guidelines</h1>
+        <p style="font-weight:300; color:#444a51;">One-page identity reference · Version 1.0</p>
+      </div>
+      <div class="doc-head__meta">
+        TRACE<br>
+        DIT3001<br>
+        Jan Singh
+      </div>
+    </header>
+
+    <!-- 00 Origin, Mission, Ethos -->
+    <section>
+      <p class="sec-label">00 · Origin, Mission &amp; Ethos</p>
+      <h2 class="sec-title">Where TRACE came from</h2>
+      <p class="sec-note">The brand begins with a question the body had already answered. Everything that follows, the mark, the palette, the voice, exists to make that answer feel like care.</p>
+
+      <div class="origin">
+        <div class="origin__story">
+          <p class="origin__year">2026 · Origin</p>
+          <h3>A question no one could answer</h3>
+          <p>TRACE began with a simple frustration. Our founder, a digital marketer and a designer, kept meeting people who could describe their day in detail but could not explain how they actually felt. The body had been keeping a record all along. Nobody was reading it.</p>
+          <p>The first prototype was a sensor taped to a wrist and a week of data nobody knew how to interpret. What surprised us was not the numbers. It was the moment a colleague looked at her own stress curve and said, quietly, <em>"so it already knew."</em></p>
+          <p>We spent months building something worthy of that sentence.</p>
+        </div>
+
+        <div class="mission">
+          <p class="mission__label">Mission</p>
+          <p class="mission__statement">To give every person a clear picture of themselves, and give it to no one else<span class="accent" style="color:var(--blue);">.</span></p>
+          <p class="mission__note">Understanding is the product. Confidentiality is the promise that makes it possible. TRACE exists so that no one has to guess how they are doing.</p>
+        </div>
+      </div>
+
+      <div class="principles">
+        <div class="principle">
+          <p class="principle__num">01</p>
+          <b>The body speaks first</b>
+          <span>You feel it before you can name it. TRACE listens at that level, so nothing important goes unsaid.</span>
+        </div>
+        <div class="principle">
+          <p class="principle__num">02</p>
+          <b>Understanding, not judgement</b>
+          <span>We measure to reveal, never to score. There is no failing week.</span>
+        </div>
+        <div class="principle">
+          <p class="principle__num">03</p>
+          <b>Yours alone</b>
+          <span>Everything TRACE knows belongs to one person. Confidentiality is not a setting, it is the architecture.</span>
+        </div>
+        <div class="principle">
+          <p class="principle__num">04</p>
+          <b>Quiet by default</b>
+          <span>TRACE speaks only when it matters. Care that constantly interrupts is not care.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 01 Logo Suite -->
+    <section>
+      <p class="sec-label">01 · Logo Suite</p>
+      <h2 class="sec-title">The pulse mark and wordmark</h2>
+      <p class="sec-note">The mark is five rounded pulse bars, a heartbeat rendered as data with a single Olympian blue centre bar. The wordmark is Inter Light, tracked wide, always uppercase. The ™ sits at the cap-height corner in platinum.</p>
+      <div class="logo-grid">
+        <div class="tile"><span class="tile__tag">Primary lockup</span><img src="brand/logo-primary.svg" alt="Primary lockup"></div>
+        <div class="tile tile--dark"><span class="tile__tag">Reverse lockup</span><img src="brand/logo-primary-reverse.svg" alt="Reverse lockup"></div>
+        <div class="tile"><span class="tile__tag">Mark only</span><img src="brand/logo-mark.svg" alt="Mark only" style="height:76px;"></div>
+        <div class="tile"><span class="tile__tag">App icon</span><img src="brand/app-icon.svg" alt="App icon" style="height:84px;"></div>
+      </div>
+      <div class="rules">
+        <div class="rule"><strong>Clear space</strong>Keep space equal to the height of one pulse bar on all sides of the logo.
+          <div class="rule__demo">
+            <div class="cs-box">
+              <img src="brand/logo-primary.svg" alt="Lockup with clear space">
+              <span class="cs-t">x</span><span class="cs-b">x</span><span class="cs-l">x</span><span class="cs-r">x</span>
+            </div>
+          </div>
+        </div>
+        <div class="rule"><strong>Print</strong>Press-ready files, CMYK values and minimum sizes live in the <a href="print-specs.html" style="color:var(--blue); text-decoration:none; font-weight:500;">print specifications</a>.
+          <div class="rule__demo">
+            <div class="ms-item">
+              <img src="brand/print/trace-mark-black.svg" alt="One colour mark" style="width:44px;">
+            </div>
+            <div class="ms-item" style="background:var(--ink); border-radius:8px; padding:0.8rem 1.2rem;">
+              <img src="brand/print/trace-mark-white.svg" alt="Knockout mark" style="width:44px;">
+            </div>
+          </div>
+        </div>
+        <div class="rule"><strong>Don't</strong>Recolour the bars, stretch the mark, add effects, or set the wordmark in another weight.
+          <div class="rule__demo">
+            <div class="no-tile">
+              <svg viewBox="0 0 100 100" aria-label="Recoloured mark">
+                <rect x="10" y="36" width="11" height="28" rx="5.5" fill="#e5484d"/>
+                <rect x="28" y="26" width="11" height="48" rx="5.5" fill="#f5b301"/>
+                <rect x="46" y="14" width="11" height="72" rx="5.5" fill="#2fb344"/>
+                <rect x="64" y="26" width="11" height="48" rx="5.5" fill="#f5b301"/>
+                <rect x="82" y="36" width="11" height="28" rx="5.5" fill="#e5484d"/>
+              </svg>
+            </div>
+            <div class="no-tile"><img src="brand/logo-mark.svg" alt="Stretched mark" class="no-stretch"></div>
+            <div class="no-tile"><b>TRACE</b></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 Color -->
+    <section>
+      <p class="sec-label">02 · Color</p>
+      <h2 class="sec-title">Four colors. One accent.</h2>
+      <p class="sec-note">The palette is deliberately restrained: near white surfaces, carbon depth, platinum detail, and a single Olympian blue reserved for data, emphasis, and the pulse. Blue is never decoration, it always means signal.</p>
+      <div class="swatches">
+        <div class="swatch">
+          <div class="swatch__chip">
+            <svg viewBox="0 0 100 100" aria-hidden="true">
+              <rect x="10" y="36" width="11" height="28" rx="5.5" fill="#f6f7f8" stroke="#d5d9dd" stroke-width="1.5"/>
+              <rect x="28" y="26" width="11" height="48" rx="5.5" fill="#f6f7f8" stroke="#d5d9dd" stroke-width="1.5"/>
+              <rect x="46" y="14" width="11" height="72" rx="5.5" fill="#f6f7f8" stroke="#d5d9dd" stroke-width="1.5"/>
+              <rect x="64" y="26" width="11" height="48" rx="5.5" fill="#f6f7f8" stroke="#d5d9dd" stroke-width="1.5"/>
+              <rect x="82" y="36" width="11" height="28" rx="5.5" fill="#f6f7f8" stroke="#d5d9dd" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="swatch__info"><p class="swatch__name">Near White</p><p class="swatch__hex">#F6F7F8</p><p class="swatch__use">Backgrounds, reverse type</p></div></div>
+        <div class="swatch">
+          <div class="swatch__chip">
+            <svg viewBox="0 0 100 100" aria-hidden="true">
+              <rect x="10" y="36" width="11" height="28" rx="5.5" fill="#9aa1a8"/>
+              <rect x="28" y="26" width="11" height="48" rx="5.5" fill="#9aa1a8"/>
+              <rect x="46" y="14" width="11" height="72" rx="5.5" fill="#9aa1a8"/>
+              <rect x="64" y="26" width="11" height="48" rx="5.5" fill="#9aa1a8"/>
+              <rect x="82" y="36" width="11" height="28" rx="5.5" fill="#9aa1a8"/>
+            </svg>
+          </div>
+          <div class="swatch__info"><p class="swatch__name">Platinum</p><p class="swatch__hex">#9AA1A8</p><p class="swatch__use">Secondary text, labels, ™</p></div></div>
+        <div class="swatch">
+          <div class="swatch__chip">
+            <svg viewBox="0 0 100 100" aria-hidden="true">
+              <rect x="10" y="36" width="11" height="28" rx="5.5" fill="#0b0e12"/>
+              <rect x="28" y="26" width="11" height="48" rx="5.5" fill="#0b0e12"/>
+              <rect x="46" y="14" width="11" height="72" rx="5.5" fill="#0b0e12"/>
+              <rect x="64" y="26" width="11" height="48" rx="5.5" fill="#0b0e12"/>
+              <rect x="82" y="36" width="11" height="28" rx="5.5" fill="#0b0e12"/>
+            </svg>
+          </div>
+          <div class="swatch__info"><p class="swatch__name">Carbon</p><p class="swatch__hex">#0B0E12</p><p class="swatch__use">Headlines, dark panels, device UI</p></div></div>
+        <div class="swatch">
+          <div class="swatch__chip">
+            <svg viewBox="0 0 100 100" aria-hidden="true">
+              <rect x="10" y="36" width="11" height="28" rx="5.5" fill="#0c61da"/>
+              <rect x="28" y="26" width="11" height="48" rx="5.5" fill="#0c61da"/>
+              <rect x="46" y="14" width="11" height="72" rx="5.5" fill="#0c61da"/>
+              <rect x="64" y="26" width="11" height="48" rx="5.5" fill="#0c61da"/>
+              <rect x="82" y="36" width="11" height="28" rx="5.5" fill="#0c61da"/>
+            </svg>
+          </div>
+          <div class="swatch__info"><p class="swatch__name">Olympian</p><p class="swatch__hex">#0C61DA</p><p class="swatch__use">The single accent: data, CTAs, pulse</p></div></div>
+      </div>
+
+      <div class="spectrum-panel">
+        <div class="usage">
+          <span class="u-white"></span><span class="u-carbon"></span><span class="u-plat"></span><span class="u-blue"></span>
+        </div>
+        <div class="usage-legend">
+          <div><i style="background:#f6f7f8; border:1px solid var(--border);"></i>Near White · 70%</div>
+          <div><i style="background:#0b0e12;"></i>Carbon · 15%</div>
+          <div><i style="background:#9aa1a8;"></i>Platinum · 10%</div>
+          <div class="u4"><i style="background:#0c61da;"></i>Olympian · 5% · The signal</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 Typography -->
+    <section>
+      <p class="sec-label">03 · Typography</p>
+      <h2 class="sec-title">Light voice, precise labels</h2>
+      <p class="sec-note">Two families carry the entire system. Inter speaks are light, large, and human. Oswald annotates are small, uppercase, letterspaced, like instrument markings on a device.</p>
+
+      <div class="type-cards">
+        <div class="type-card type-card--inter">
+          <p class="type-card__tag">Display &amp; Voice</p>
+          <p class="type-card__aa">Aa</p>
+          <div class="type-card__row"><b>Inter</b><span>Light 300 &#8211; Semibold 600</span></div>
+          <div class="type-card__row"><span>Use for</span><span>Headlines, body, data values</span></div>
+          <p class="type-card__alpha">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz 0123456789</p>
+        </div>
+        <div class="type-card type-card--oswald">
+          <p class="type-card__tag">Labels &amp; Annotations</p>
+          <p class="type-card__aa">Aa</p>
+          <div class="type-card__row"><b>Oswald</b><span>Regular 400 &#8211; Semibold 600</span></div>
+          <div class="type-card__row"><span>Use for</span><span>Eyebrows, labels, instrument markings</span></div>
+          <p class="type-card__alpha">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz 0123456789</p>
+        </div>
+      </div>
+
+      <div class="type-cards">
+        <div class="type-card">
+          <p class="type-card__tag">Display</p>
+          <p class="type-card__aa" style="font-family:'Inter',sans-serif; font-weight:300; letter-spacing:-0.03em;">Aa</p>
+          <div class="type-card__row"><b>Inter</b><span>Light 300</span></div>
+          <div class="type-card__row"><span>Use for</span><span>Headlines, sentence case</span></div>
+          <p class="tc-sample t-display" style="font-size:1.5rem;">The workplace that reads the room.</p>
+        </div>
+        <div class="type-card">
+          <p class="type-card__tag">Wordmark</p>
+          <p class="type-card__aa" style="font-family:'Inter',sans-serif; font-weight:300; letter-spacing:0.18em;">AA</p>
+          <div class="type-card__row"><b>Inter</b><span>Light 300</span></div>
+          <div class="type-card__row"><span>Use for</span><span>The TRACE wordmark, uppercase</span></div>
+          <p class="tc-sample t-word">TRACE</p>
+        </div>
+        <div class="type-card">
+          <p class="type-card__tag">Eyebrow</p>
+          <p class="type-card__aa" style="font-family:'Oswald',sans-serif; font-weight:500; color:var(--blue);">AA</p>
+          <div class="type-card__row"><b>Oswald</b><span>Medium 500</span></div>
+          <div class="type-card__row"><span>Use for</span><span>Section eyebrows, Olympian</span></div>
+          <p class="tc-sample t-eyebrow">Real-time wellness intelligence</p>
+        </div>
+        <div class="type-card">
+          <p class="type-card__tag">Body</p>
+          <p class="type-card__aa" style="font-family:'Inter',sans-serif; font-weight:300;">Aa</p>
+          <div class="type-card__row"><b>Inter</b><span>Light 300</span></div>
+          <div class="type-card__row"><span>Use for</span><span>Paragraphs and product copy</span></div>
+          <p class="tc-sample t-body">TRACE turns raw signals into plain language: how recovered you are, when stress is climbing.</p>
+        </div>
+        <div class="type-card">
+          <p class="type-card__tag">Data label</p>
+          <p class="type-card__aa" style="font-family:'Inter',sans-serif; font-weight:600; color:var(--platinum); letter-spacing:0.08em;">AA</p>
+          <div class="type-card__row"><b>Inter</b><span>Semibold 600</span></div>
+          <div class="type-card__row"><span>Use for</span><span>Data labels in the device UI</span></div>
+          <p class="tc-sample t-label">Heart rate · live</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 Icon Set -->
+    <section>
+      <p class="sec-label">04 · Icon Set</p>
+      <h2 class="sec-title">Drawn like the mark</h2>
+      <p class="sec-note">Icons are line-drawn on a 48px grid with a 2px stroke, rounded caps, and a single colour. Use Olympian on light surfaces, near white on carbon. No fills, no gradients, no second colour.</p>
+      <div class="icon-grid">
+        <div class="icon-cell">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 24h8l4-10 6 20 5-14 3 4h14"/></svg>
+          <p>Heart rate</p>
+        </div>
+        <div class="icon-cell">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 30v-6M16 34V16M24 40V8M32 34V16M40 30v-6"/></svg>
+          <p>HRV / Pulse</p>
+        </div>
+        <div class="icon-cell">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 27c3.2 4.2 6.8 6.3 11 6.3s7.8-2.1 11-6.3"/><path d="M15 17h.02M33 17h.02" stroke-width="3"/></svg>
+          <p>Mood</p>
+        </div>
+        <div class="icon-cell">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 20h.01M24 20h.01M31 20h.01" stroke-width="3"/><path d="M14 28h20"/></svg>
+          <p>Typing rhythm</p>
+        </div>
+        <div class="icon-cell">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="20" y="11" width="8" height="17" rx="4"/><path d="M14 26a10 10 0 0 0 20 0"/></svg>
+          <p>Voice sentiment</p>
+        </div>
+        <div class="icon-cell">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 34h28M18 26h20M26 18h12"/></svg>
+          <p>Steps &amp; stairs</p>
+        </div>
+        <div class="icon-cell">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="27" cy="11" r="3"/><path d="M25 17l-5 9 6 5 1 8M25 17l7 4"/></svg>
+          <p>Walking</p>
+        </div>
+        <div class="icon-cell">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M24 9a15 15 0 1 1-13 7.5"/></svg>
+          <p>Workouts</p>
+        </div>
+        <div class="icon-cell">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M24 7l14 5.5v9c0 8.5-6 15.5-14 19.5-8-4-14-11-14-19.5v-9z"/></svg>
+          <p>Privacy</p>
+        </div>
+        <div class="icon-cell">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="17" y="14" width="14" height="20" rx="5"/><path d="M21 14v-4M27 14v-4M21 34v4M27 34v4"/></svg>
+          <p>TRACE band</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 Voice -->
+    <section>
+      <p class="sec-label">05 · Voice</p>
+      <h2 class="sec-title">Calm, certain, close</h2>
+      <div class="voice">
+        <p class="voice__tag">You, understood<span class="dot">.</span></p>
+        <p>TRACE speaks the way it senses: quietly, and with total certainty. Sentences are short. There is no hype, no jargon, and never an exclamation mark. It speaks to one person rather than an audience, and it never congratulates, scolds, or asks what it already knows. The full stop does the work that volume does elsewhere. Calm, final, certain.</p>
+        <div class="voice__words">
+          <span>Precise</span><span>Warm</span><span>Unhurried</span><span>Confident</span><span>Personal</span>
+        </div>
+        <div class="voice__pairs">
+          <div class="vp">
+            <p class="vp__head">We say</p>
+            <p>"Your recovery is strong today."</p>
+            <p>"You have been carrying some stress this week."</p>
+            <p>"A good window for something harder."</p>
+            <p>"Only you can see this."</p>
+          </div>
+          <div class="vp vp--no">
+            <p class="vp__head">We never say</p>
+            <p>"Great job, you crushed it!"</p>
+            <p>"Warning: elevated stress detected."</p>
+            <p>"Time to smash your goals!"</p>
+            <p>"Your data is 100% secure, guaranteed."</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="doc-foot">
+      <span>TRACE™ Brand Guidelines · v1.0</span>
+      <span>© 2026 TRACE&#8482;</span>
+    </footer>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

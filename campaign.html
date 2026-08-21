@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRACE — Typographic Campaign</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@100;200;300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --white:#f6f7f8; --ink:#0b0e12; --platinum:#9aa1a8; --blue:#0c61da; --border:#e2e5e8; --grey:#444a51; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:"Inter",sans-serif; background:var(--white); color:var(--ink); line-height:1.7; -webkit-font-smoothing:antialiased; }
+    .wrap { max-width:1080px; margin:0 auto; padding:3.5rem 1.5rem 6rem; }
+
+    .back { display:block; text-align:right; font-size:.92rem; font-weight:500; color:var(--grey); text-decoration:none; margin-bottom:2rem; }
+    .back:hover { color:var(--ink); }
+    .head { padding-bottom:2rem; border-bottom:1px solid var(--ink); margin-bottom:3rem; }
+    .eyebrow { font-family:"Oswald",sans-serif; font-size:.72rem; font-weight:500; letter-spacing:.24em; text-transform:uppercase; color:var(--blue); }
+    .head h1 { font-weight:300; font-size:2.4rem; letter-spacing:-.03em; margin:.5rem 0 .4rem; }
+    .head p { color:var(--grey); font-weight:300; max-width:640px; }
+
+    .label { font-family:"Oswald",sans-serif; font-size:.66rem; font-weight:500; letter-spacing:.2em; text-transform:uppercase; color:var(--platinum); margin:2.6rem 0 .8rem; }
+
+    /* ---------- artboards ---------- */
+    .board {
+      container-type: inline-size;
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .board--portrait { aspect-ratio: 297 / 420; }
+    .board--landscape { aspect-ratio: 1920 / 1080; }
+    .board--square { aspect-ratio: 1 / 1; }
+
+    .dark {
+      background:
+        repeating-linear-gradient(45deg, rgba(255,255,255,.016) 0 2px, transparent 2px 6px),
+        repeating-linear-gradient(-45deg, rgba(255,255,255,.013) 0 2px, transparent 2px 6px),
+        var(--ink);
+      color: var(--white);
+    }
+    .light { background: var(--white); color: var(--ink); border:1px solid var(--border); }
+
+    .board__top, .board__bottom { display:flex; justify-content:space-between; align-items:flex-end; }
+    .board__pad { padding: 7cqw; }
+
+    /* the headline */
+    .line {
+      font-weight: 200;
+      letter-spacing: -.035em;
+      line-height: 1.02;
+    }
+    .board--portrait .line { font-size: 13.4cqw; }
+    .board--landscape .line { font-size: 7.6cqw; }
+    .board--square .line { font-size: 11cqw; }
+    .dot { color: var(--blue); }
+
+    .kicker {
+      font-family:"Oswald",sans-serif; font-weight:500; text-transform:uppercase;
+      letter-spacing:.26em; color:var(--platinum);
+    }
+    .board--portrait .kicker { font-size: 2.1cqw; }
+    .board--landscape .kicker { font-size: 1.3cqw; }
+    .board--square .kicker { font-size: 1.9cqw; }
+
+    .support { font-weight:300; color:var(--platinum); max-width: 62%; }
+    .board--portrait .support { font-size: 3.1cqw; line-height:1.55; }
+    .board--landscape .support { font-size: 1.7cqw; line-height:1.55; }
+
+    .fineprint { font-weight:300; color:#555b62; }
+    .board--portrait .fineprint { font-size: 1.9cqw; line-height:1.65; max-width:78%; }
+
+    /* logo lockup inside artboards */
+    .lock { display:flex; align-items:center; gap:1.6cqw; }
+    .lock svg { width: 5cqw; height: 5cqw; }
+    .board--landscape .lock svg { width:3cqw; height:3cqw; }
+    .lock span { font-weight:300; letter-spacing:.32em; }
+    .board--portrait .lock span { font-size: 3.3cqw; }
+    .board--landscape .lock span { font-size: 2cqw; }
+    .board--square .lock span { font-size: 3cqw; }
+    .lock sup { font-size:.42em; color:var(--platinum); margin-left:-.28em; vertical-align:.95em; }
+
+    /* signal rail motif inside a poster */
+    .rail { position:absolute; left:7cqw; top:0; bottom:0; width:.35cqw; background:rgba(154,161,168,.28); }
+    .rail i { position:absolute; left:0; top:18%; width:100%; height:34%; background:var(--blue); display:block; }
+
+    .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:1.4rem; }
+    .note { background:#fff; border:1px solid var(--border); border-radius:12px; padding:1.3rem 1.5rem; font-size:.88rem; color:var(--grey); font-weight:300; margin-top:.9rem; }
+    .note b { color:var(--ink); font-weight:600; }
+    .rationale { margin-top:3.5rem; padding-top:2rem; border-top:1px solid var(--border); }
+    .rationale h2 { font-weight:300; font-size:1.6rem; letter-spacing:-.02em; margin:.4rem 0 1rem; }
+    .rationale p { color:var(--grey); font-weight:300; margin-bottom:1rem; }
+    .rationale ul { margin:0 0 1rem 1.1rem; }
+    .rationale li { color:var(--grey); font-weight:300; margin-bottom:.5rem; }
+    .rationale strong { color:var(--ink); font-weight:600; }
+
+    @media (max-width:760px){ .grid2{grid-template-columns:1fr} }
+
+    /* ---------- print: one poster per page ---------- */
+    @page { size: A3 portrait; margin: 0; }
+    @media print {
+      *, *::before, *::after { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      .back, .head, .label, .note, .rationale, .foot { display:none !important; }
+      .wrap { max-width:none; padding:0; }
+      .grid2 { display:block; }
+      /* break BEFORE each board rather than after, so the run of posters
+         does not end with a trailing empty page */
+      .board { break-before: page; break-after: auto; border-radius:0; border:none; width:100%; }
+      .board.is-first { break-before: auto; }
+
+      /* A full-bleed portrait board computes to almost exactly one page, and
+         sub-pixel rounding tips it over, spilling a sliver onto a second
+         sheet. Shaving the ratio by under one percent keeps each poster on
+         a single page without any visible change to the composition. */
+      .board--portrait { aspect-ratio: 297 / 416; }
+
+      /* The woven texture is a semi-transparent repeating gradient, and Chrome
+         flattens any page carrying one into a 72dpi bitmap, which destroys the
+         type. At under 2% opacity the weave is nearly invisible in print
+         anyway, so the posters fall back to flat carbon and stay fully vector. */
+      .dark { background: var(--ink) !important; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <a href="index.html" class="back">&larr; Back to home</a>
+
+  <header class="head">
+    <p class="eyebrow">Deliverable &middot; Typographic Campaign</p>
+    <h1>Everything sensed. Nothing shared<span class="dot">.</span></h1>
+    <p>Two executions of a single line, one poster and one billboard. The campaign carries no imagery at all, so there is nothing between the reader and the product's voice.</p>
+  </header>
+
+  <!-- ============ 1. PRIMARY POSTER ============ -->
+  <p class="label">01 &middot; Primary poster &middot; A3 portrait &middot; carbon</p>
+  <div class="board board--portrait dark board__pad is-first">
+    <div class="board__top">
+      <span class="kicker">Wellbeing, understood</span>
+      <span class="kicker">TRACE&#8482;</span>
+    </div>
+    <p class="line">Everything<br>sensed<span class="dot">.</span><br>Nothing<br>shared<span class="dot">.</span></p>
+    <div class="board__bottom">
+      <div class="lock">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <rect x="10" y="36" width="11" height="28" rx="5.5" fill="#f6f7f8"/>
+          <rect x="28" y="26" width="11" height="48" rx="5.5" fill="#f6f7f8"/>
+          <rect x="46" y="14" width="11" height="72" rx="5.5" fill="#0c61da"/>
+          <rect x="64" y="26" width="11" height="48" rx="5.5" fill="#f6f7f8"/>
+          <rect x="82" y="36" width="11" height="28" rx="5.5" fill="#f6f7f8"/>
+        </svg>
+        <span>TRACE<sup>&#8482;</sup></span>
+      </div>
+    </div>
+  </div>
+  <div class="note"><b>Reading.</b> The two sentences are stacked so the eye lands on "sensed" and "shared" in isolation. The full stops are set in Olympian blue, the one colour reserved for signal, which makes the brand's certainty a visible property of the type.</div>
+
+  <!-- ============ 4. LANDSCAPE ============ -->
+  <p class="label">02 &middot; Digital billboard &middot; 16:9 &middot; carbon</p>
+  <div class="board board--landscape dark board__pad">
+    <div class="board__top">
+      <span class="kicker">TRACE&#8482;</span>
+      <span class="kicker">Wellbeing, understood</span>
+    </div>
+    <p class="line">Everything sensed<span class="dot">.</span> Nothing shared<span class="dot">.</span></p>
+    <div class="board__bottom">
+      <div class="lock">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <rect x="10" y="36" width="11" height="28" rx="5.5" fill="#f6f7f8"/>
+          <rect x="28" y="26" width="11" height="48" rx="5.5" fill="#f6f7f8"/>
+          <rect x="46" y="14" width="11" height="72" rx="5.5" fill="#0c61da"/>
+          <rect x="64" y="26" width="11" height="48" rx="5.5" fill="#f6f7f8"/>
+          <rect x="82" y="36" width="11" height="28" rx="5.5" fill="#f6f7f8"/>
+        </svg>
+        <span>TRACE<sup>&#8482;</sup></span>
+      </div>
+      <span class="kicker">Available now</span>
+    </div>
+  </div>
+
+  <!-- ============ RATIONALE ============ -->
+  <section class="rationale">
+    <p class="eyebrow">Rationale</p>
+    <h2>Why this line, set this way</h2>
+    <p><strong>The line does the argument in four words.</strong> "Everything sensed" is an admission of total capture. "Nothing shared" is an absolute privacy promise. Placed together they are meant to reassure, and the reassurance only works if you accept the first half. The campaign never has to accuse the reader of anything, because the sentence has already asked them to trade one for the other.</p>
+    <p><strong>No imagery, by decision rather than style.</strong> Removing photography removes the model who would otherwise absorb the attention, so the reader is left alone with the product's voice. In a category that fills its advertising with bodies mid-stride, an empty page reads as confidence.</p>
+    <ul>
+      <li><strong>Weight.</strong> Inter at 200 rather than the 300 used elsewhere in the system. At poster scale the lighter weight keeps the tone calm and stops the line from shouting.</li>
+      <li><strong>Tracking.</strong> Tightened to -0.035em so the words hold together as statements rather than drifting apart.</li>
+      <li><strong>The full stops.</strong> Set in Olympian blue, the colour reserved throughout the brand for live signal. The brand guideline states that the full stop is part of the voice, calm and final and certain, so the campaign makes that literal.</li>
+      <li><strong>Line breaks.</strong> Stacking isolates "sensed" and "shared" on their own lines, which are the two words the whole argument turns on.</li>
+    </ul>
+    <p><strong>Two formats, one sentence.</strong> The poster stacks the line so it is read slowly, and the billboard sets it on a single line to be read at a glance from distance. Neither adds an image or a second idea, because the sentence is already doing both halves of the argument on its own.</p>
+  </section>
+
+  <footer class="foot" style="margin-top:3rem;padding-top:1.4rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:.72rem;color:var(--platinum);">
+    <span>TRACE&#8482; Typographic Campaign</span>
+    <span>&copy; 2026 TRACE&#8482;</span>
+  </footer>
+</div>
+</body>
+</html>

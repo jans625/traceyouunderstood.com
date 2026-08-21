@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRACE — Checkout</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .checkout {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 8.5rem 1.5rem 5rem;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 3.5rem;
+      align-items: start;
+    }
+    .checkout__title { margin-bottom: 0.4rem; }
+    .checkout__sub { color: var(--grey-700); font-weight: 300; margin-bottom: 2.4rem; }
+
+    /* Plan picker */
+    .plan {
+      display: block;
+      border: 1.5px solid var(--platinum);
+      border-radius: var(--radius);
+      background: #fff;
+      padding: 1.2rem 1.4rem;
+      margin-bottom: 0.9rem;
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .plan:hover { border-color: var(--grey-500); }
+    .plan input { position: absolute; opacity: 0; }
+    .plan.is-selected {
+      border-color: var(--blue);
+      box-shadow: 0 8px 30px -14px rgba(12, 97, 218, 0.45);
+    }
+    .plan__row { display: flex; justify-content: space-between; align-items: baseline; }
+    .plan__name { font-weight: 600; font-size: 1rem; }
+    .plan__name span {
+      font-family: var(--font-head);
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #fff;
+      background: var(--blue);
+      border-radius: 999px;
+      padding: 0.18rem 0.6rem;
+      margin-left: 0.6rem;
+      vertical-align: middle;
+    }
+    .plan__price { font-weight: 500; }
+    .plan__price small { color: var(--grey-500); font-weight: 400; }
+    .plan__desc { font-size: 0.85rem; color: var(--grey-700); font-weight: 300; margin-top: 0.25rem; }
+
+    /* Form */
+    .field { margin-bottom: 1.1rem; }
+    .field label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--grey-700);
+      margin-bottom: 0.4rem;
+    }
+    .field input, .field select {
+      width: 100%;
+      padding: 0.75rem 0.9rem;
+      border: 1.5px solid var(--platinum);
+      border-radius: 8px;
+      background: #fff;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .field input:focus, .field select:focus { border-color: var(--blue); }
+    .field--split { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-section {
+      font-family: var(--font-head);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin: 2.2rem 0 1.1rem;
+    }
+
+    /* Summary card */
+    .summary {
+      background:
+        repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.016) 0 2px, transparent 2px 6px),
+        repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.013) 0 2px, transparent 2px 6px),
+        var(--ink);
+      color: var(--white);
+      border-radius: 20px;
+      padding: 2rem;
+      position: sticky;
+      top: 6.5rem;
+    }
+    .summary h3 {
+      font-family: var(--font-head);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--grey-500);
+      margin-bottom: 1.4rem;
+    }
+    .summary__line {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.92rem;
+      font-weight: 300;
+      color: var(--grey-300);
+      padding: 0.5rem 0;
+    }
+    .summary__line strong { color: var(--white); font-weight: 500; }
+    .summary__total {
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid #242830;
+      margin-top: 1rem;
+      padding-top: 1.2rem;
+      font-size: 1.05rem;
+      font-weight: 500;
+    }
+    .summary__note { font-size: 0.75rem; color: var(--grey-500); margin-top: 1.2rem; font-weight: 300; line-height: 1.6; }
+    .summary .btn { width: 100%; text-align: center; margin-top: 1.5rem; padding: 0.95rem; font-size: 1rem; }
+
+    /* Success state */
+    .success {
+      display: none;
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 10rem 1.5rem 6rem;
+      text-align: center;
+    }
+    .success__ring {
+      width: 88px; height: 88px;
+      margin: 0 auto 1.8rem;
+      border-radius: 50%;
+      border: 2px solid var(--blue);
+      display: grid;
+      place-items: center;
+      color: var(--blue);
+    }
+    .success__ring svg { width: 40px; height: 40px; }
+    .success h1 { font-weight: 300; font-size: 2.4rem; letter-spacing: -0.03em; margin-bottom: 0.9rem; }
+    .success p { color: var(--grey-700); font-weight: 300; margin-bottom: 2rem; }
+
+    body.is-complete .checkout { display: none; }
+    body.is-complete .success { display: block; }
+
+    @media (max-width: 900px) {
+      .checkout { grid-template-columns: 1fr; }
+      .summary { position: static; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Pulse thread: the signal that accompanies you down the page -->
+  <div class="pulse-rail" aria-hidden="true">
+    <div class="pulse-rail__track"></div>
+    <div class="pulse-rail__progress"></div>
+    <svg class="pulse-rail__blip" viewBox="0 0 40 24">
+      <path d="M0 12 h9 l4 -8 l6 16 l4 -8 h17"/>
+    </svg>
+  </div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">
+        <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true">
+          <rect x="10" y="36" width="11" height="28" rx="5.5"/>
+          <rect x="28" y="26" width="11" height="48" rx="5.5"/>
+          <rect x="46" y="14" width="11" height="72" rx="5.5" class="logo-mark__pulse"/>
+          <rect x="64" y="26" width="11" height="48" rx="5.5"/>
+          <rect x="82" y="36" width="11" height="28" rx="5.5"/>
+        </svg>
+        <span class="wordmark">TRACE</span><span class="wordmark__tm">™</span>
+      </a>
+      <nav class="nav__links">
+        <a href="index.html#pricing">&larr; Back to pricing</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============ CHECKOUT ============ -->
+  <main class="checkout">
+    <div>
+      <h1 class="section__title checkout__title">Start your subscription<span class="accent">.</span></h1>
+      <p class="checkout__sub">14-day free trial. The TRACE band ships free. Cancel anytime.</p>
+
+      <p class="form-section">1 · Your plan</p>
+      <label class="plan" data-plan="move">
+        <input type="radio" name="plan" value="move">
+        <span class="plan__row"><span class="plan__name">Move</span><span class="plan__price">$10<small>/month</small></span></span>
+        <span class="plan__desc">The fitness essentials, tracked effortlessly.</span>
+      </label>
+      <label class="plan" data-plan="complete">
+        <input type="radio" name="plan" value="complete">
+        <span class="plan__row"><span class="plan__name">Complete<span>Most chosen</span></span><span class="plan__price">$20<small>/month</small></span></span>
+        <span class="plan__desc">Your body and mind, fully understood.</span>
+      </label>
+      <label class="plan" data-plan="yearly">
+        <input type="radio" name="plan" value="yearly">
+        <span class="plan__row"><span class="plan__name">Complete, Yearly</span><span class="plan__price">$15<small>/mo, billed yearly</small></span></span>
+        <span class="plan__desc">Everything in Complete, for less.</span>
+      </label>
+
+      <form id="checkout-form">
+        <p class="form-section">2 · Your details</p>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" type="email" placeholder="you@example.com" required>
+        </div>
+        <div class="field">
+          <label for="name">Full name</label>
+          <input id="name" type="text" placeholder="Jan Singh" required>
+        </div>
+
+        <p class="form-section">3 · Payment</p>
+        <div class="field">
+          <label for="card">Card number</label>
+          <input id="card" type="text" inputmode="numeric" placeholder="1234 5678 9012 3456" maxlength="19" required>
+        </div>
+        <div class="field field--split">
+          <div>
+            <label for="expiry">Expiry</label>
+            <input id="expiry" type="text" placeholder="MM / YY" maxlength="7" required>
+          </div>
+          <div>
+            <label for="cvc">CVC</label>
+            <input id="cvc" type="text" inputmode="numeric" placeholder="123" maxlength="4" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="country">Country</label>
+          <select id="country" required>
+            <option>Singapore</option>
+            <option>Australia</option>
+            <option>United Kingdom</option>
+            <option>United States</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </form>
+    </div>
+
+    <!-- Order summary -->
+    <aside class="summary">
+      <h3>Order summary</h3>
+      <div class="summary__line"><span>Plan</span><strong id="sum-plan">Complete</strong></div>
+      <div class="summary__line"><span id="sum-billing">Billed monthly</span><strong id="sum-price">$20.00</strong></div>
+      <div class="summary__line"><span>TRACE band</span><strong>Included</strong></div>
+      <div class="summary__line"><span>14-day free trial</span><strong>&minus; first 14 days</strong></div>
+      <div class="summary__total"><span>Due today</span><span>$0.00</span></div>
+      <p class="summary__note" id="sum-note">Then $20.00/month after your trial ends. Cancel anytime and your data is deleted the moment you ask.</p>
+      <button class="btn btn--primary" type="submit" form="checkout-form">Start free trial</button>
+      <p class="summary__note">Payments are encrypted end to end, like everything else about you.</p>
+    </aside>
+  </main>
+
+  <!-- ============ SUCCESS ============ -->
+  <div class="success">
+    <div class="success__ring">
+      <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 25l9 9 19-20"/></svg>
+    </div>
+    <h1>Welcome to TRACE<span class="accent">.</span></h1>
+    <p>Your trial has started and your band is on its way. From the moment you put it on, you'll finally know how you're really doing and no one else will.</p>
+    <a href="index.html" class="btn btn--primary btn--lg">Back to home</a>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    const PLANS = {
+      move:     { name: "Move",             price: 10, billing: "Billed monthly", note: "Then $10.00/month after your trial ends." },
+      complete: { name: "Complete",         price: 20, billing: "Billed monthly", note: "Then $20.00/month after your trial ends." },
+      yearly:   { name: "Complete, Yearly", price: 180, billing: "Billed yearly", note: "Then $180.00/year ($15.00/mo) after your trial ends." }
+    };
+
+    function selectPlan(key) {
+      if (!PLANS[key]) key = "complete";
+      document.querySelectorAll(".plan").forEach(el => {
+        const active = el.dataset.plan === key;
+        el.classList.toggle("is-selected", active);
+        el.querySelector("input").checked = active;
+      });
+      const p = PLANS[key];
+      document.getElementById("sum-plan").textContent = p.name;
+      document.getElementById("sum-billing").textContent = p.billing;
+      document.getElementById("sum-price").textContent = "$" + p.price.toFixed(2);
+      document.getElementById("sum-note").textContent = p.note + " Cancel anytime and your data is deleted the moment you ask.";
+    }
+
+    // Preselect from ?plan= in the URL
+    selectPlan(new URLSearchParams(location.search).get("plan"));
+
+    document.querySelectorAll(".plan input").forEach(input => {
+      input.addEventListener("change", () => selectPlan(input.value));
+    });
+
+    // Mock submission — this is a design-fiction product; nothing is charged or stored.
+    document.getElementById("checkout-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      document.body.classList.add("is-complete");
+      window.scrollTo(0, 0);
+    });
+  </script>
+</body>
+</html>

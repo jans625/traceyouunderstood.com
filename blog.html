@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRACE — Production Blog</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --white:#f6f7f8; --ink:#0b0e12; --platinum:#9aa1a8; --blue:#0c61da; --border:#e2e5e8; --grey:#444a51; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:"Inter",sans-serif; background:var(--white); color:var(--ink); line-height:1.7; -webkit-font-smoothing:antialiased; }
+    .wrap { max-width:820px; margin:0 auto; padding:4rem 1.5rem 6rem; }
+
+    .top { display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; flex-wrap:wrap; margin-bottom:3rem; padding-bottom:2rem; border-bottom:1px solid var(--ink); }
+    .top__logo { display:flex; align-items:center; gap:.6rem; }
+    .top__logo svg { width:28px; height:28px; }
+    .top__logo span { font-weight:300; font-size:1.35rem; letter-spacing:.3em; }
+    .top__logo sup { font-size:.5rem; color:var(--platinum); margin-left:-.28em; vertical-align:.9em; }
+    .top__meta { text-align:right; font-family:"Oswald",sans-serif; font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:var(--platinum); line-height:1.9; }
+    h1.title { font-weight:300; font-size:2.6rem; letter-spacing:-.03em; margin:1.6rem 0 .5rem; }
+    .subtitle { color:var(--grey); font-weight:300; font-size:1.05rem; }
+
+    .eyebrow { font-family:"Oswald",sans-serif; font-size:.7rem; font-weight:500; letter-spacing:.24em; text-transform:uppercase; color:var(--blue); }
+    h2 { font-weight:300; font-size:1.75rem; letter-spacing:-.02em; margin:.5rem 0 1rem; }
+    h3 { font-weight:600; font-size:1.02rem; margin:1.8rem 0 .5rem; }
+    p { margin-bottom:1.1rem; font-weight:300; color:var(--grey); }
+    p strong, li strong { color:var(--ink); font-weight:600; }
+    a { color:var(--blue); }
+
+    .entry { padding:2.5rem 0; border-bottom:1px solid var(--border); }
+    .entry:last-of-type { border-bottom:none; }
+    .stamp { font-family:"Oswald",sans-serif; font-size:.66rem; letter-spacing:.2em; text-transform:uppercase; color:var(--platinum); }
+
+    .panel { background:#fff; border:1px solid var(--border); border-radius:14px; padding:1.6rem 1.8rem; margin:1.4rem 0; }
+    .panel--dark {
+      background:
+        repeating-linear-gradient(45deg, rgba(255,255,255,.016) 0 2px, transparent 2px 6px),
+        repeating-linear-gradient(-45deg, rgba(255,255,255,.013) 0 2px, transparent 2px 6px),
+        var(--ink);
+      color:var(--white); border-color:var(--ink);
+    }
+    .panel--dark p { color:#c5cad0; }
+    .panel--dark .eyebrow { color:var(--blue); }
+
+    ul { margin:0 0 1.1rem 1.1rem; }
+    li { margin-bottom:.5rem; font-weight:300; color:var(--grey); }
+
+    figure { margin:1.6rem 0; }
+    figure img { width:100%; display:block; border:1px solid var(--border); border-radius:12px; background:#fff; }
+    figcaption { margin-top:.6rem; font-size:.8rem; color:var(--platinum); font-weight:300; }
+    .figrow { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    .placeholder {
+      border:1.5px dashed var(--platinum); border-radius:12px; padding:2.5rem 1.5rem;
+      text-align:center; color:var(--platinum); font-size:.85rem; background:#fff;
+    }
+
+    table { width:100%; border-collapse:collapse; margin:1.2rem 0; background:#fff; border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+    th, td { text-align:left; padding:.7rem 1rem; font-size:.88rem; border-bottom:1px solid var(--border); font-weight:300; color:var(--grey); }
+    th { font-family:"Oswald",sans-serif; font-weight:500; font-size:.64rem; letter-spacing:.16em; text-transform:uppercase; color:var(--platinum); }
+    td strong { color:var(--ink); }
+    tr:last-child td { border-bottom:none; }
+
+    .refs p { font-size:.85rem; text-indent:-2rem; padding-left:2rem; margin-bottom:.7rem; }
+    .todo { background:#fff8e6; border:1px solid #f5d78e; border-radius:10px; padding:1rem 1.2rem; font-size:.85rem; color:#6b5416; margin:1.2rem 0; }
+    .todo b { color:#4a3a0d; }
+
+    .foot { margin-top:3rem; padding-top:1.5rem; border-top:1px solid var(--border); display:flex; justify-content:space-between; font-size:.72rem; color:var(--platinum); flex-wrap:wrap; gap:.5rem; }
+    @media (max-width:640px){ .figrow{grid-template-columns:1fr} h1.title{font-size:2rem} }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="top__logo">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <rect x="10" y="36" width="11" height="28" rx="5.5" fill="#0b0e12"/>
+        <rect x="28" y="26" width="11" height="48" rx="5.5" fill="#0b0e12"/>
+        <rect x="46" y="14" width="11" height="72" rx="5.5" fill="#0c61da"/>
+        <rect x="64" y="26" width="11" height="48" rx="5.5" fill="#0b0e12"/>
+        <rect x="82" y="36" width="11" height="28" rx="5.5" fill="#0b0e12"/>
+      </svg>
+      <span>TRACE</span><sup>&#8482;</sup>
+    </div>
+    <div class="top__meta">
+      Production Blog<br>
+      DIT3001 Design Project<br>
+      Jan Singh &middot; U1156156
+    </div>
+  </header>
+
+  <h1 class="title">Building TRACE</h1>
+  <p class="subtitle">A production blog documenting the design, testing and iteration of a critical design fiction.</p>
+
+  <div class="todo">
+    <b>Before submitting:</b> replace the dated headings with your actual working dates, drop your own screenshots into the marked placeholders, add your production management tool link and pre-production materials link, and confirm every reference is one you have genuinely read. Then delete this note.
+  </div>
+
+  <!-- ============ OVERVIEW ============ -->
+  <section class="entry">
+    <p class="eyebrow">Project Overview</p>
+    <h2>What TRACE is</h2>
+    <p>TRACE is a critical design fiction: a fictional but entirely believable personal wellness platform that monitors biometric and behavioural data in real time, including heart rate variability, mood, typing rhythm and voice sentiment, and translates it into plain-language insight that is encrypted and visible to the user alone. The project takes the form of a fully realised brand, comprising an identity system, a landing page, a typographic advertising campaign and physical packaging for a wrist-worn sensor, executed in the premium visual language of Apple and Whoop. TRACE is not a dystopia. It is a product people would genuinely want, and that is the argument.</p>
+    <p style="font-size:.82rem;color:var(--platinum);">Overview word count: approximately 110 words, per the task sheet requirement.</p>
+  </section>
+
+  <!-- ============ FULL CONCEPT ============ -->
+  <section class="entry">
+    <p class="stamp">Entry 01 &middot; Week 1</p>
+    <p class="eyebrow">Concept</p>
+    <h2>The argument before the artefact</h2>
+    <p>TRACE is a critical design fiction, a fictional but entirely believable personal wellness platform that monitors your biometric and behavioral data in real time, your heart rate variability, your mood, your typing rhythm, and your voice sentiment. It translates them into clear, plain-language insight, encrypted and visible to you only. The project takes the form of a fully realized brand, which is an identity system, a landing page, a typographic advertising campaign, and physical packaging mockup for a wrist-worn sensor, all executed in the precise, premium visual language of Apple and Whoop.</p>
+    <p>Crucially, TRACE is not a dystopia, it is a coherent, desirable product that people would genuinely want, and that is the point. The critique is carried by seduction rather than warning and the brand is so polished, so caring, so credible that you want it before you catch yourself asking what it means to be understood completely. The typographic campaign carries this furthest stripped of imagery, each advertisement leaves you alone with the product's voice, where reassurance and intimacy sit closer together than is comfortable.</p>
+    <p>Drawing on my professional background in sales, the project deliberately deploys the real techniques of persuasion, which turns features into benefits, and anxiety into opportunity, so that anyone with marketing literacy recognizes the seduction as it happens and feels the unease that follows. If TRACE feels like a product you could buy today, that is the argument, and the culture that would happily embrace it is already here.</p>
+    <p>This positioning is grounded in the established view that design fiction works by building artefacts that provoke rather than predict, using the object itself as the site of the argument (Dunne &amp; Raby 2013; Bleecker 2009). The subject matter draws on critical accounts of self-tracking culture and the commercial appetite for behavioural data (Lupton 2016; Zuboff 2019). The decision that TRACE must be desirable rather than frightening follows directly from that reading: a warning is easy to dismiss, whereas a product you catch yourself wanting implicates you.</p>
+  </section>
+
+  <!-- ============ RESEARCH ============ -->
+  <section class="entry">
+    <p class="stamp">Entry 02 &middot; Week 2</p>
+    <p class="eyebrow">Research</p>
+    <h2>Benchmarking the language of premium wellness</h2>
+    <p>Before designing anything I audited the visual and verbal conventions the fiction would need to inhabit convincingly. I looked closely at Whoop and Apple, along with a wider set of wellness and fitness brands, and recorded the patterns that recur across them:</p>
+    <ul>
+      <li><strong>Restraint as a trust signal.</strong> Near-white space, one accent colour, and almost no decoration. Visual quietness reads as clinical credibility.</li>
+      <li><strong>Data rendered beautifully.</strong> Rings, waveforms and scores presented as aesthetic objects rather than raw numbers.</li>
+      <li><strong>Second-person address.</strong> Copy speaks to one person, never an audience, and frames measurement as care.</li>
+      <li><strong>Absence of the body.</strong> Bodies appear rarely, and when they do they are abstracted into signals.</li>
+    </ul>
+    <p>That last pattern became the most useful finding. If the category already replaces the person with their data, then a brand that does so completely is not a leap into fiction, it is one honest step further. This is what made the seduction strategy viable rather than merely clever.</p>
+    <div class="placeholder">Insert your research board / benchmark screenshots here (Whoop, Apple, and the wellness brands you audited), with a short caption for each.</div>
+  </section>
+
+  <!-- ============ IDENTITY ============ -->
+  <section class="entry">
+    <p class="stamp">Entry 03 &middot; Weeks 2 to 3</p>
+    <p class="eyebrow">Identity</p>
+    <h2>The pulse mark, and getting the wordmark wrong twice</h2>
+    <p>The mark went through several rounds before it settled. The final form is five rounded bars of varying height with a single Olympian blue centre bar: a heartbeat rendered as data, and an audio-waveform silhouette that also reads as a voice, which matters because TRACE listens to voice sentiment. Building it from plain geometry rather than a drawn illustration meant it would survive any reproduction, from a favicon to an embossed box.</p>
+    <p>The wordmark took longer and taught me more. My first attempt set Inter Light with soft blue gradients bleeding into the T and the C, clipped inside the letterforms so the colour appeared to sit within the type. Reviewing it at small sizes I abandoned that entirely: the accents muddied the letterforms and fought the mark beside them. The lesson was that the blue had to mean one thing in the system, and if it appears in the mark it should not also decorate the type.</p>
+    <p>A second issue only appeared under measurement. The trademark symbol looked visibly detached from the final E. Inspecting the rendered geometry showed the wordmark's tracking was adding trailing space after the last letter, so the gap I was seeing was roughly nineteen units rather than the five I had specified. Correcting it required measuring the letterform's actual ink edge rather than its layout box.</p>
+    <figure>
+      <img src="brand/logo-primary.svg" alt="TRACE primary lockup">
+      <figcaption>Final primary lockup: the pulse mark with the Inter Light wordmark and trademark symbol, after the tracking correction.</figcaption>
+    </figure>
+    <p>The suite was then produced in the configurations a real brand needs: primary and reverse lockups, mark only, wordmark only, an app icon, and single-colour black and white versions for one-colour printing, embossing and embroidery.</p>
+  </section>
+
+  <!-- ============ COLOUR ============ -->
+  <section class="entry">
+    <p class="stamp">Entry 04 &middot; Week 3</p>
+    <p class="eyebrow">Colour and Type</p>
+    <h2>One accent, and a rule for using it</h2>
+    <p>The palette was fixed at four values: near white (#F6F7F8), platinum (#9AA1A8), carbon (#0B0E12) and Olympian blue (#0C61DA). The governing rule matters more than the values: <strong>blue is never decoration, it always means signal</strong>. It appears on live data, on the pulse itself, and on a single call to action, and nowhere else. Enforcing that made the interface feel instrument-like rather than styled.</p>
+    <p>To document this I built a proportional usage bar showing roughly seventy per cent near white, fifteen per cent carbon, ten per cent platinum and five per cent Olympian. Showing the accent as a thin sliver communicates the discipline far more efficiently than a paragraph explaining it.</p>
+    <p>Typography uses two families. Inter carries the voice, light and large and human. Oswald annotates, small and uppercase and letterspaced, like the markings on a measuring instrument. Setting a clear hierarchy of display, wordmark, eyebrow, body and data label kept every subsequent artefact consistent without further decisions (Müller-Brockmann 1981).</p>
+    <div class="placeholder">Insert a screenshot of the colour section and the type specimen cards from your brand guidelines page.</div>
+  </section>
+
+  <!-- ============ LANDING PAGE ============ -->
+  <section class="entry">
+    <p class="stamp">Entry 05 &middot; Weeks 3 to 4</p>
+    <p class="eyebrow">Landing Page</p>
+    <h2>Making the product look like it already ships</h2>
+    <p>The landing page is a single scroll: a hero with a live dashboard, a "How It Works" section, a movement-tracking section, a dedicated privacy section, a pricing table and a footer carrying legal copy. Rather than mocking the interface as a flat image I built it as a working page, because motion is a large part of why the fiction reads as real. The recovery ring fills, the mood bar animates in, and the heart-rate line traces continuously.</p>
+    <p>The copy is where my sales background did the work. Every line is written the way this category actually writes:</p>
+    <div class="panel panel--dark">
+      <p class="eyebrow">Copy samples</p>
+      <p>"Your team won't notice a thing. That's the point."</p>
+      <p>"TRACE is built for you, not about you."</p>
+      <p>"Participation in wellbeing is not optional. TRACE is a benefit."</p>
+      <p style="margin-bottom:0;">Each of these is written to be reassuring on the first reading and unsettling on the second. The legal copy in the footer is the clearest example, since it is where a real product hides the things it would rather you skimmed.</p>
+    </div>
+    <p>I also built a working checkout flow and a login with a private dashboard. Neither is required by the brief, but a fiction that cannot be clicked through is easier to dismiss, and the checkout in particular makes the product feel purchasable rather than illustrated.</p>
+    <div class="placeholder">Insert screenshots of the hero, the movement section, the privacy section and the pricing table.</div>
+  </section>
+
+  <!-- ============ FEEDBACK ============ -->
+  <section class="entry">
+    <p class="stamp">Entry 06 &middot; Week 4</p>
+    <p class="eyebrow">Mentor Critique and Response</p>
+    <h2>"Minimal is not a signature"</h2>
+    <p>The most useful intervention in the project came from feedback on the work in progress. The point made was that my design was clean and minimal, but that minimalism alone does not distinguish a brand, and that there should be a rationale and a challenge that the design visibly overcomes. Three references were offered: the Spry interface, where a translucent voice prompt sits over a workout and feels as though it accompanies the user; the Brooks redesign, which uses texture drawn from maps and materials and pushes a timeline motif; and MoEngage, which uses colour, texture and layering to stay legible and friendly across many languages and cultures.</p>
+    <p>Sitting with that, I agreed with the criticism. TRACE was coherent but its restraint was generic premium, and it could have been almost any wellness brand. What each of the referenced projects had was a device that carried the product's core idea. I responded with two changes.</p>
+    <h3>The pulse thread</h3>
+    <p>A single thin signal line now runs down the full height of every page, drawing itself as you scroll, with a small ECG blip that beats gently at your position. It is the connective tissue of the whole site: continuous sensing rendered as one continuous line, always present and never loud. This gave me the rationale the feedback asked for. The challenge was to make continuous monitoring feel like calm care rather than clinical surveillance, and the answer was to let the signal itself become the brand's structure.</p>
+    <h3>Woven texture</h3>
+    <p>Following the Brooks logic of drawing texture from the product's own materials, I took the weave of the sensor's fabric strap and applied it as a near-subliminal crosshatch across every dark surface, at under two per cent opacity. You feel it more than you see it, and it ties the digital surfaces to the physical object.</p>
+    <p>Both changes were then rolled out across every page for consistency, which is what turned them from a homepage flourish into a system.</p>
+    <div class="placeholder">Insert a before and after screenshot showing the pulse rail and the woven dark sections.</div>
+  </section>
+
+  <!-- ============ ICONS ============ -->
+  <section class="entry">
+    <p class="stamp">Entry 07 &middot; Week 5</p>
+    <p class="eyebrow">Testing and Iteration</p>
+    <h2>Three icon systems, tested side by side</h2>
+    <p>The first icon set was accurate but visually busy, with a detailed keyboard, a face with eyes, and a running figure carrying more line work than the rest of the system. Rather than redraw them by instinct I built a comparison page and designed the same ten concepts three different ways, so they could be judged as systems rather than individually:</p>
+    <table>
+      <tr><th>Direction</th><th>Approach</th><th>Assessment</th></tr>
+      <tr><td><strong>A. Reduced</strong></td><td>Same concepts, minimum marks, lighter stroke</td><td>Safest and most legible</td></tr>
+      <tr><td><strong>B. One gesture</strong></td><td>Each icon drawn as a single unbroken line</td><td>Best conceptual fit, but several became abstract</td></tr>
+      <tr><td><strong>C. Pulse-bar language</strong></td><td>Built only from the logo's rounded bars</td><td>Strongest brand ownership, but icons blurred together</td></tr>
+    </table>
+    <p>Seeing them together made the decision obvious in a way that describing them could not. Direction C was seductive on paper but failed the basic test of an icon set, which is that ten icons must be distinguishable at a glance. I adopted Direction A as the base and then simplified individual icons one at a time against it, reducing the keyboard to three dots over a rule, the stairs to three ascending strokes, and the microphone to a single capsule and arc. The face, heart rate, HRV and privacy icons were left alone because they were already at their minimum.</p>
+    <div class="placeholder">Insert the three-direction comparison page and the final icon set.</div>
+  </section>
+
+  <!-- ============ CAMPAIGN ============ -->
+  <section class="entry">
+    <p class="stamp">Entry 08 &middot; Week 5</p>
+    <p class="eyebrow">Campaign</p>
+    <h2>The typographic campaign</h2>
+    <p>The advertising campaign strips away imagery entirely and leaves the viewer alone with the product's voice. Removing photography was a deliberate decision rather than a stylistic one: with no model to look at, there is nothing between the reader and the sentence, and the intimacy of the copy has nowhere to hide.</p>
+    <p>The voice rules I documented in the brand guidelines were written to make this repeatable. TRACE speaks quietly and with total certainty, in short sentences, with no hype and no exclamation marks, and it never congratulates, scolds, or asks what it already knows. To make that usable I wrote paired examples of what the brand says and what it never says, each pair rejecting a different failure mode: gym-brand hype, clinical alarm, goal-culture pressure, and defensive over-promising.</p>
+    <div class="placeholder">Insert your typographic campaign artboards here, with a caption for each line and the reasoning behind it.</div>
+  </section>
+
+  <!-- ============ PACKAGING ============ -->
+  <section class="entry">
+    <p class="stamp">Entry 09 &middot; Week 6</p>
+    <p class="eyebrow">Packaging</p>
+    <h2>An object that behaves like a gift</h2>
+    <p>TRACE ships as a small wrist-worn sensor in a matte white box carrying only a debossed pulse mark. Inside are the device, a welcome card and a short booklet titled "Your Wellbeing, Understood".</p>
+    <p>The booklet is where the fiction is at its most concentrated. It is written as a warm and reassuring welcome to a life of being continuously sensed, with pages titled "Always with you", "Nothing to perform" and "Yours alone". Lines such as "the picture of you is never a snapshot, it is a story, told in full" and "understanding you was never about improving you" are entirely at home in wellness marketing while carrying an unmistakable second meaning.</p>
+    <figure>
+      <img src="brand/print/trace-band-woven-onwhite.png" alt="The TRACE band, woven strap with sensor module">
+      <figcaption>The wrist-worn sensor rendered at print resolution, showing the woven carbon strap that the brand's dark-surface texture is drawn from.</figcaption>
+    </figure>
+    <p>The band render was produced at 2400 pixels wide with the weave built from two opposing sets of diagonal threads and a soft sheen, so the material would read as fabric rather than a flat pattern when reproduced at print size.</p>
+  </section>
+
+  <!-- ============ PRODUCTION PROBLEM ============ -->
+  <section class="entry">
+    <p class="stamp">Entry 10 &middot; Week 6</p>
+    <p class="eyebrow">Problem Solving</p>
+    <h2>The brand guidelines would not paginate</h2>
+    <p>Producing the guidelines as a print-ready document turned into the most technical problem of the project, and the most instructive.</p>
+    <p>The first exports had large blank areas: one page carried four small cards and two thirds of nothing. My initial diagnosis was that a rule forcing each section onto a new page was stranding short sections, so I removed it and let the content flow. The page count did not change. I then wrote a routine that measured every element and simulated where each page would break, which identified specific tall blocks that could not fit and were jumping whole to the following page. Trimming those reduced the reported whitespace substantially, and the export dropped from eight pages to six.</p>
+    <p>The document still had a large hole on the first page, and my measurements insisted it should not. The measurements were wrong. I built a probe file containing sixty blocks of a known height, exported it, and counted the pages, which told me that the usable height was two hundred millimetres rather than the two hundred and sixty-seven I had assumed. The export engine was rendering one CSS pixel as one point, so every element was landing on paper about one third larger than specified, and every calculation I had made was wrong by that factor.</p>
+    <p>With the true page height established, the remaining fault was structural rather than dimensional: the origin spread was a CSS grid, and a grid will not be placed into the space remaining on a page, so the entire block was moving to the next sheet. Setting it to stack in the print stylesheet allowed each panel to land where it fitted. A final adjustment of roughly thirteen millimetres, spread across the header, line spacing and one type size, brought the second panel up onto the first page.</p>
+    <div class="panel">
+      <p class="eyebrow" style="color:var(--blue);">Outcome</p>
+      <p style="margin-bottom:0;">The document went from eight pages with substantial voids to five pages that fill properly. More usefully, the process is a clear record of iterative diagnosis: form a hypothesis, measure, discover the measurement itself is faulty, build an independent probe to establish ground truth, and only then fix the actual cause.</p>
+    </div>
+    <p>The honest lesson is that I spent several rounds optimising against a number I had assumed rather than verified, and the fastest correction came from a peer simply sending me a screenshot of the output. Direct observation beat my instrumentation.</p>
+  </section>
+
+  <!-- ============ APP ============ -->
+  <section class="entry">
+    <p class="stamp">Entry 11 &middot; Week 7</p>
+    <p class="eyebrow">Extension</p>
+    <h2>From prototype to a working application</h2>
+    <p>I first built a companion app as an interactive prototype, presented in a phone frame with four screens covering the day's readings, trends, movement and privacy. Its most deliberate detail is on the privacy screen, where the toggles for sharing data with an employer or an insurer are real controls that refuse to switch on and shake when pressed. The refusal is the product, and it is also the most loaded interaction in the build, since the app is proud of the one thing it will not do while already recording mood, typing and voice.</p>
+    <p>I then rebuilt it as a genuinely functional progressive web application, which can be installed to a home screen and works offline. Entries are stored on the device, the readiness score is a transparent calculation from sleep, energy and mood, and the export and delete functions genuinely work. The distinction matters for the fiction: the version that actually works can only know what you choose to tell it, and keeps it nowhere but your own device. It is the version that keeps the promise the fictional one makes.</p>
+    <div class="placeholder">Insert screenshots of the app prototype and the installed progressive web app.</div>
+  </section>
+
+  <!-- ============ COLLABORATORS ============ -->
+  <section class="entry">
+    <p class="eyebrow">Collaboration</p>
+    <h2>Contributions and input</h2>
+    <p>This is an individual project. All design, writing and production work is my own. The following records external input received during production, as required by the task sheet.</p>
+    <table>
+      <tr><th>Contributor</th><th>Role</th><th>Contribution</th></tr>
+      <tr><td><strong>Jan Singh</strong></td><td>Sole designer</td><td>Concept, research, identity system, landing page, typographic campaign, packaging, brand guidelines, print production, companion application, all copywriting</td></tr>
+      <tr><td><strong>[Mentor / tutor name]</strong></td><td>Mentor critique</td><td>Feedback that minimalism alone is not a differentiator, with reference to Spry, Brooks and MoEngage. Directly produced the pulse thread and woven texture additions documented in Entry 06</td></tr>
+      <tr><td><strong>[Peer name]</strong></td><td>Peer review</td><td>Review of the exported guidelines document, identifying pagination faults that my own measurements had missed (Entry 10)</td></tr>
+    </table>
+    <div class="todo"><b>Fill in:</b> replace the bracketed names with the actual people who gave you feedback, and add any others. If your peer input came from a studio session or forum, note the date and format.</div>
+
+    <h3>Production management</h3>
+    <p>Production was tracked using [your tool], available here: [link]. Pre-production materials developed in DIT3000 are available here: [link].</p>
+    <div class="todo"><b>Fill in:</b> the task sheet asks for a link to your production management tool and a link to your completed pre-production materials, acknowledging that they were sourced from DIT3000.</div>
+  </section>
+
+  <!-- ============ REFLECTION ============ -->
+  <section class="entry">
+    <p class="eyebrow">Final Reflection</p>
+    <h2>What the project taught me</h2>
+    <p>The central risk of this project was that a critical design fiction can fail in two opposite directions. If it is too obviously a warning it becomes a poster and nobody has to reckon with it, and if it is too seductive it becomes an advertisement for the thing it set out to question. TRACE had to be genuinely desirable and quietly wrong at the same time, and holding that tension was the hardest part of the work.</p>
+    <p>The clearest evidence that I was managing it badly came in the middle of production. At one point I rewrote the product as a sincerely private, confidential wellness platform in which the data really did belong to the user. The result was coherent and pleasant and completely toothless, because a product that keeps all its promises makes no argument. Returning to the design fiction framing while keeping the product's internal logic intact was the decision that rescued the project. The brief calls for something almost indistinguishable from reality, and that only works if the product genuinely makes sense on its own terms. Coherence is not the opposite of critique, it is the delivery mechanism for it (Dunne &amp; Raby 2013).</p>
+    <p>The most valuable feedback I received was that minimalism is not a signature. I had mistaken restraint for identity, and produced something that was well executed but interchangeable with any number of wellness brands. The correction, which was to find a device that carries the product's core idea, produced the pulse thread and the woven texture, and both are now the elements I would point to first. That experience reframed how I read critique. The feedback was not asking for more decoration, it was asking what the design was arguing, and I could not answer that question at the time.</p>
+    <p>The production blog requirement also changed how I worked. Documenting the icon exploration forced me to build all three directions rather than defending my first instinct, and seeing them side by side made an unsuitable option obvious that I might otherwise have talked myself into. Testing produced a better outcome than taste alone would have.</p>
+    <p>The most uncomfortable lesson was technical. In producing the print-ready guidelines I spent several rounds refining a layout against a page height I had assumed rather than measured, and every conclusion I reached during that period was wrong by a third. I was measuring diligently and confidently, and I was confidently wrong. What broke the loop was an independent probe that established ground truth, and before that, a peer sending me a screenshot of what the file actually looked like. The professional habit I want to carry out of this is to verify the instrument before trusting its readings, and to seek direct observation early rather than treating it as a last resort.</p>
+    <p>If I were to continue the project I would push the typographic campaign furthest, because it is where the concept is most concentrated and least protected by craft. I would also want to test TRACE on viewers who do not know it is fiction, since the only real proof of the argument is whether someone reaches the pricing table before they start to feel uneasy.</p>
+    <p style="font-size:.82rem;color:var(--platinum);">Reflection word count: approximately 520 words, per the task sheet requirement.</p>
+  </section>
+
+  <!-- ============ REFERENCES ============ -->
+  <section class="entry refs">
+    <p class="eyebrow">References</p>
+    <h2>Reference list</h2>
+    <p>Bleecker, J 2009, <em>Design fiction: a short essay on design, science, fact and fiction</em>, Near Future Laboratory, Los Angeles.</p>
+    <p>Dunne, A &amp; Raby, F 2013, <em>Speculative everything: design, fiction, and social dreaming</em>, MIT Press, Cambridge, MA.</p>
+    <p>Lupton, D 2016, <em>The quantified self: a sociology of self-tracking</em>, Polity Press, Cambridge.</p>
+    <p>Müller-Brockmann, J 1981, <em>Grid systems in graphic design</em>, Niggli, Sulgen.</p>
+    <p>Zuboff, S 2019, <em>The age of surveillance capitalism: the fight for a human future at the new frontier of power</em>, PublicAffairs, New York.</p>
+    <div class="todo"><b>Important:</b> only keep references you have actually read, and verify each entry against the UniSQ Harvard AGPS guide before submitting. Add references for the brands you benchmarked (Whoop, Apple, Brooks, MoEngage) and for any images you did not create yourself.</div>
+  </section>
+
+  <footer class="foot">
+    <span>TRACE™ Production Blog &middot; DIT3001 Design Project</span>
+    <span>Jan Singh &middot; U1156156</span>
+  </footer>
+</div>
+</body>
+</html>

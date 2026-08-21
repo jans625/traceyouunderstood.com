@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRACE — Physical Package</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .pkg-page { max-width: 1080px; margin: 0 auto; padding: 8.5rem 1.5rem 5rem; }
+    .pkg-head { padding-bottom: 2rem; border-bottom: 1px solid var(--ink); margin-bottom: 3.5rem; }
+    .pkg-head h1 { font-weight: 300; font-size: 2.6rem; letter-spacing: -0.03em; margin: 0.6rem 0 0.3rem; }
+    .pkg-head p { color: var(--grey-700); font-weight: 300; }
+
+    .pkg-section { margin-bottom: 4.5rem; }
+
+    /* ---------- The box ---------- */
+    .box-stage {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin-top: 2rem;
+    }
+    .stage {
+      border: 1px solid var(--platinum);
+      border-radius: 14px;
+      background: linear-gradient(180deg, #fdfdfe, #eef0f2);
+      min-height: 360px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .stage__tag {
+      position: absolute;
+      top: 1rem;
+      left: 1.2rem;
+      font-family: var(--font-head);
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--grey-500);
+    }
+
+    /* Closed box */
+    .box {
+      width: 230px;
+      height: 230px;
+      background: linear-gradient(145deg, #ffffff, #f2f3f5);
+      border-radius: 10px;
+      box-shadow:
+        0 30px 50px -18px rgba(11, 14, 18, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      display: grid;
+      place-items: center;
+      position: relative;
+    }
+    .box::after {
+      /* lid seam */
+      content: "";
+      position: absolute;
+      left: 0; right: 0; top: 58%;
+      height: 1px;
+      background: rgba(11, 14, 18, 0.07);
+    }
+    .box__mark { width: 64px; height: 64px; opacity: 0.92; }
+    .box__word {
+      position: absolute;
+      bottom: 1.1rem;
+      font-weight: 300;
+      letter-spacing: 0.32em;
+      font-size: 0.72rem;
+      color: var(--grey-500);
+    }
+    .box__word sup {
+      font-size: 0.5em;
+      letter-spacing: 0;
+      margin-left: -0.15em;
+      vertical-align: 0.55em;
+    }
+
+    /* Open box with tray */
+    .tray {
+      width: 250px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 26px 46px -18px rgba(11, 14, 18, 0.26), inset 0 0 0 1px rgba(11,14,18,0.05);
+      padding: 1.3rem;
+    }
+    .tray__well {
+      background: var(--grey-100);
+      border-radius: 8px;
+      padding: 1.2rem;
+      display: grid;
+      place-items: center;
+      margin-bottom: 0.9rem;
+    }
+    .tray__row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+    .tray__slot {
+      background: var(--grey-100);
+      border-radius: 8px;
+      padding: 0.8rem 0.6rem;
+      text-align: center;
+      font-family: var(--font-head);
+      font-size: 0.56rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--grey-500);
+    }
+    .tray__slot b { display: block; font-family: var(--font-body); font-weight: 500; letter-spacing: 0; text-transform: none; font-size: 0.78rem; color: var(--ink); margin-bottom: 0.2rem; }
+
+    /* The band */
+    .band { position: relative; width: 150px; height: 118px; }
+    .band__strap {
+      position: absolute;
+      inset: 42px 0;
+      border-radius: 999px;
+      background:
+        repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.06) 0 2px, transparent 2px 5px),
+        repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.05) 0 2px, transparent 2px 5px),
+        linear-gradient(180deg, #14171c, #0b0e12);
+      box-shadow: 0 10px 20px -8px rgba(11, 14, 18, 0.5);
+    }
+    .band__sensor {
+      position: absolute;
+      left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
+      width: 76px; height: 36px;
+      border-radius: 17px;
+      background: linear-gradient(160deg, #1a1e24, #0b0e12);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 18px -6px rgba(11,14,18,0.55);
+      display: grid;
+      place-items: center;
+    }
+    .band__pulse { width: 24px; height: 24px; }
+
+    /* ---------- Welcome card ---------- */
+    .flat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 2rem; }
+    .card-mock {
+      background: #fff;
+      border: 1px solid var(--platinum);
+      border-radius: 14px;
+      padding: 3rem 2.6rem;
+      box-shadow: 0 24px 44px -22px rgba(11, 14, 18, 0.2);
+    }
+    .card-mock--dark {
+      background:
+        repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.016) 0 2px, transparent 2px 6px),
+        repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.013) 0 2px, transparent 2px 6px),
+        var(--ink);
+      border-color: var(--ink);
+      color: var(--white);
+    }
+    .card-mock .mini-mark { width: 34px; height: 34px; margin-bottom: 1.6rem; }
+    .card-mock h3 { font-weight: 300; font-size: 1.6rem; letter-spacing: -0.02em; margin-bottom: 0.9rem; }
+    .card-mock p { font-weight: 300; font-size: 0.92rem; line-height: 1.7; color: var(--grey-700); }
+    .card-mock--dark p { color: var(--grey-300); }
+    .card-mock .sig {
+      margin-top: 1.6rem;
+      font-family: var(--font-head);
+      font-size: 0.64rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--grey-500);
+    }
+
+    /* ---------- Booklet ---------- */
+    .booklet-cover {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 380px;
+    }
+    .booklet-cover h3 { font-size: 1.9rem; }
+    .spread { display: grid; gap: 1.2rem; }
+    .spread .card-mock { padding: 2.2rem 2.4rem; }
+    .spread h4 {
+      font-family: var(--font-head);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.7rem;
+    }
+
+    /* ---------- Specs ---------- */
+    .specs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.2rem;
+      margin-top: 2rem;
+    }
+    .spec {
+      border: 1px solid var(--platinum);
+      border-radius: 14px;
+      background: #fff;
+      padding: 1.4rem 1.4rem;
+    }
+    .spec b { display: block; font-family: var(--font-head); font-size: 0.64rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--grey-500); margin-bottom: 0.5rem; }
+    .spec span { font-size: 0.88rem; font-weight: 300; color: var(--ink); line-height: 1.5; }
+
+    .pkg-foot {
+      border-top: 1px solid var(--platinum);
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.72rem;
+      color: var(--grey-500);
+    }
+
+    @media (max-width: 820px) {
+      .box-stage, .flat-grid { grid-template-columns: 1fr; }
+      .specs { grid-template-columns: 1fr 1fr; }
+    }
+    @media print {
+      .nav { display: none; }
+      .pulse-rail { display: none; }
+      .pkg-page { padding-top: 1rem; }
+      .pkg-section { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Pulse thread: the signal that accompanies you down the page -->
+  <div class="pulse-rail" aria-hidden="true">
+    <div class="pulse-rail__track"></div>
+    <div class="pulse-rail__progress"></div>
+    <svg class="pulse-rail__blip" viewBox="0 0 40 24">
+      <path d="M0 12 h9 l4 -8 l6 16 l4 -8 h17"/>
+    </svg>
+  </div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">
+        <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true">
+          <rect x="10" y="36" width="11" height="28" rx="5.5"/>
+          <rect x="28" y="26" width="11" height="48" rx="5.5"/>
+          <rect x="46" y="14" width="11" height="72" rx="5.5" class="logo-mark__pulse"/>
+          <rect x="64" y="26" width="11" height="48" rx="5.5"/>
+          <rect x="82" y="36" width="11" height="28" rx="5.5"/>
+        </svg>
+        <span class="wordmark">TRACE</span><span class="wordmark__tm">™</span>
+      </a>
+      <nav class="nav__links">
+        <a href="index.html">&larr; Back to home</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="pkg-page">
+
+    <header class="pkg-head">
+      <p class="section__eyebrow">Deliverable · Physical Package</p>
+      <h1>The unboxing, understood<span class="accent">.</span></h1>
+      <p>TRACE ships as a small, wrist-worn sensor in a matte white, minimal box. Inside: the device, a welcome card, and a booklet titled "Your Wellbeing, Understood."</p>
+    </header>
+
+    <!-- 01 The box -->
+    <section class="pkg-section">
+      <p class="section__eyebrow">01 · The Box</p>
+      <h2 class="section__title">Matte white. Nothing to announce<span class="accent">.</span></h2>
+      <div class="box-stage">
+        <div class="stage">
+          <span class="stage__tag">Box · closed</span>
+          <div class="box">
+            <svg class="box__mark" viewBox="0 0 100 100" aria-hidden="true">
+              <rect x="10" y="36" width="11" height="28" rx="5.5" fill="#0b0e12"/>
+              <rect x="28" y="26" width="11" height="48" rx="5.5" fill="#0b0e12"/>
+              <rect x="46" y="14" width="11" height="72" rx="5.5" fill="#0c61da"/>
+              <rect x="64" y="26" width="11" height="48" rx="5.5" fill="#0b0e12"/>
+              <rect x="82" y="36" width="11" height="28" rx="5.5" fill="#0b0e12"/>
+            </svg>
+            <span class="box__word">TRACE<sup>&#8482;</sup></span>
+          </div>
+        </div>
+        <div class="stage">
+          <span class="stage__tag">Box · open, top tray</span>
+          <div class="tray">
+            <div class="tray__well">
+              <div class="band">
+                <div class="band__strap"></div>
+                <div class="band__sensor">
+                  <svg class="band__pulse" viewBox="0 0 100 100" aria-hidden="true">
+                    <rect x="10" y="36" width="11" height="28" rx="5.5" fill="#3a3f47"/>
+                    <rect x="28" y="26" width="11" height="48" rx="5.5" fill="#3a3f47"/>
+                    <rect x="46" y="14" width="11" height="72" rx="5.5" fill="#0c61da"/>
+                    <rect x="64" y="26" width="11" height="48" rx="5.5" fill="#3a3f47"/>
+                    <rect x="82" y="36" width="11" height="28" rx="5.5" fill="#3a3f47"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="tray__row">
+              <div class="tray__slot"><b>Welcome card</b>beneath the band</div>
+              <div class="tray__slot"><b>Booklet</b>bottom layer</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 Welcome card -->
+    <section class="pkg-section">
+      <p class="section__eyebrow">02 · The Welcome Card</p>
+      <h2 class="section__title">The first thing it says to you<span class="accent">.</span></h2>
+      <div class="flat-grid">
+        <div class="card-mock card-mock--dark">
+          <svg class="mini-mark" viewBox="0 0 100 100" aria-hidden="true">
+            <rect x="10" y="36" width="11" height="28" rx="5.5" fill="#f6f7f8"/>
+            <rect x="28" y="26" width="11" height="48" rx="5.5" fill="#f6f7f8"/>
+            <rect x="46" y="14" width="11" height="72" rx="5.5" fill="#0c61da"/>
+            <rect x="64" y="26" width="11" height="48" rx="5.5" fill="#f6f7f8"/>
+            <rect x="82" y="36" width="11" height="28" rx="5.5" fill="#f6f7f8"/>
+          </svg>
+          <h3>Welcome to TRACE<span class="accent">.</span></h3>
+          <p>You have just done something quietly remarkable. You have decided to stop guessing.</p>
+          <p class="sig">Card · front · carbon, soft-touch</p>
+        </div>
+        <div class="card-mock">
+          <h3>Put it on. That's all<span class="accent">.</span></h3>
+          <p>There is nothing to set up and nothing to remember. From the moment the band touches your wrist, TRACE begins listening to what your body has been trying to tell you. Heart, mood, movement. All of it becomes clarity, and all of it stays yours.</p>
+          <p class="sig">Card · reverse · near white</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 The booklet -->
+    <section class="pkg-section">
+      <p class="section__eyebrow">03 · The Booklet</p>
+      <h2 class="section__title">"Your Wellbeing, Understood"<span class="accent">.</span></h2>
+      <p class="section__sub">A small booklet written as a warm, reassuring welcome to a life of being continuously sensed.</p>
+      <div class="flat-grid">
+        <div class="card-mock booklet-cover">
+          <svg class="mini-mark" viewBox="0 0 100 100" aria-hidden="true">
+            <rect x="10" y="36" width="11" height="28" rx="5.5" fill="#0b0e12"/>
+            <rect x="28" y="26" width="11" height="48" rx="5.5" fill="#0b0e12"/>
+            <rect x="46" y="14" width="11" height="72" rx="5.5" fill="#0c61da"/>
+            <rect x="64" y="26" width="11" height="48" rx="5.5" fill="#0b0e12"/>
+            <rect x="82" y="36" width="11" height="28" rx="5.5" fill="#0b0e12"/>
+          </svg>
+          <div>
+            <h3>Your Wellbeing,<br>Understood<span class="accent">.</span></h3>
+            <p>A short guide to being known.</p>
+          </div>
+          <p class="sig">Booklet · cover · 105 × 148 mm</p>
+        </div>
+        <div class="spread">
+          <div class="card-mock">
+            <h4>Page 1 · Always with you</h4>
+            <p>TRACE never asks you to check in, log anything, or remember it exists. It simply stays with you, sensing gently and continuously, so that the picture of you is never a snapshot. It is a story, told in full.</p>
+          </div>
+          <div class="card-mock">
+            <h4>Page 2 · Nothing to perform</h4>
+            <p>You do not need to be your best self for TRACE. Anxious mornings, restless nights, the days you barely move. It sees all of it without judgement, because understanding you was never about improving you.</p>
+          </div>
+          <div class="card-mock">
+            <h4>Page 3 · Yours alone</h4>
+            <p>Everything TRACE learns is encrypted and belongs to you. No employer, no insurer, no one else will ever read it. Being understood this completely is a gift you are giving yourself, and only yourself.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 Materials -->
+    <section class="pkg-section">
+      <p class="section__eyebrow">04 · Materials &amp; Specifications</p>
+      <h2 class="section__title">Considered, down to the board<span class="accent">.</span></h2>
+      <div class="specs">
+        <div class="spec"><b>Box</b><span>Matte soft-touch board, 120 × 120 × 45 mm, debossed pulse mark, no gloss, no seal tape</span></div>
+        <div class="spec"><b>Device</b><span>TRACE band: woven carbon strap, slim 20 × 44 mm sensor, single blue pulse on wake</span></div>
+        <div class="spec"><b>Print</b><span>Welcome card and booklet on uncoated stock, soy inks, Inter Light and Oswald only</span></div>
+        <div class="spec"><b>Inside</b><span>One device, one card, one booklet. No cables shown, no leaflets, no offers</span></div>
+      </div>
+    </section>
+
+    <footer class="pkg-foot">
+      <span>TRACE™ Physical Package Mockup · Deliverable 04</span>
+      <span>© 2026 TRACE™</span>
+    </footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

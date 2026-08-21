@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRACE — You, understood.</title>
+  <meta name="description" content="TRACE is a subscription wellness platform that tracks your biometric and behavioral data in real time — heart rate, HRV, mood, movement and more. Kept completely confidential.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Oswald:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+
+  <!-- Pulse thread: the signal that accompanies you down the page -->
+  <div class="pulse-rail" aria-hidden="true">
+    <div class="pulse-rail__track"></div>
+    <div class="pulse-rail__progress"></div>
+    <svg class="pulse-rail__blip" viewBox="0 0 40 24">
+      <path d="M0 12 h9 l4 -8 l6 16 l4 -8 h17"/>
+    </svg>
+  </div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav">
+    <div class="nav__inner">
+      <a href="#" class="nav__logo">
+        <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true">
+          <rect x="10" y="36" width="11" height="28" rx="5.5"/>
+          <rect x="28" y="26" width="11" height="48" rx="5.5"/>
+          <rect x="46" y="14" width="11" height="72" rx="5.5" class="logo-mark__pulse"/>
+          <rect x="64" y="26" width="11" height="48" rx="5.5"/>
+          <rect x="82" y="36" width="11" height="28" rx="5.5"/>
+        </svg>
+        <span class="wordmark">TRACE</span><span class="wordmark__tm">™</span>
+      </a>
+      <nav class="nav__links">
+        <a href="#how">Platform</a>
+        <a href="#intelligence">Signals</a>
+        <a href="#privacy">Security</a>
+        <a href="#pricing">Pricing</a>
+        <a href="trace-app.html">Download app</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero__inner hero__inner--split">
+      <div class="hero__copy">
+        <p class="hero__eyebrow"><span class="hero__eyebrow-dot"></span>Real-time wellness intelligence</p>
+        <h1 class="hero__title">The workplace<br>that reads the room<span class="accent">.</span></h1>
+        <p class="hero__sub">TRACE is a subscription wellness platform that continuously reads your biometric and behavioral signals, heart rate variability, mood, typing rhythm, and voice sentiment, and turns them into clear, plain-language insight. Encrypted, and visible to you alone.</p>
+        <div class="hero__cta">
+          <a href="#pricing" class="btn btn--primary btn--lg">Request a workspace pilot</a>
+        </div>
+      </div>
+
+      <!-- Live dashboard mock -->
+      <div class="device" aria-hidden="true">
+        <div class="device__head">
+          <div>
+            <p class="device__date">Wed · 07:42</p>
+            <p class="device__greeting">Good morning, Jan</p>
+          </div>
+          <span class="device__avatar"></span>
+        </div>
+
+        <div class="device__card">
+          <div class="ring">
+            <svg viewBox="0 0 120 120">
+              <circle class="ring__track" cx="60" cy="60" r="52"/>
+              <circle class="ring__value" cx="60" cy="60" r="52"/>
+            </svg>
+            <div class="ring__center">
+              <span class="ring__num">77</span>
+              <span class="ring__label">Recovery</span>
+            </div>
+          </div>
+          <div class="device__stats">
+            <div class="device__stat">
+              <p class="device__stat-label">HRV</p>
+              <p class="device__stat-value">64<span> ms</span></p>
+            </div>
+            <div class="device__stat">
+              <p class="device__stat-label">Resting HR</p>
+              <p class="device__stat-value">58<span> bpm</span></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="device__card device__card--row">
+          <div class="mood">
+            <div class="mood__head">
+              <span class="device__stat-label">Today's mood read</span>
+              <span class="mood__verdict">Mostly calm</span>
+            </div>
+            <div class="mood__bar">
+              <span style="--seg:55%; --c:var(--blue)"></span>
+              <span style="--seg:22%; --c:#4d8bff"></span>
+              <span style="--seg:16%; --c:#f5b301"></span>
+              <span style="--seg:9%; --c:#e5484d"></span>
+            </div>
+            <div class="mood__legend">
+              <span>Calm 55%</span><span>Focused 22%</span><span>Anxious 16%</span><span>Stress 9%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="device__card">
+          <div class="hr">
+            <div class="hr__head">
+              <span class="device__stat-label">Heart rate · live</span>
+              <span class="hr__value">72<span> bpm</span></span>
+            </div>
+            <svg class="hr__wave" viewBox="0 0 320 60" preserveAspectRatio="none">
+              <path d="M0 30 H60 l6 -16 l8 30 l6 -14 H150 l6 -22 l8 40 l6 -18 H250 l6 -12 l8 24 l6 -12 H320"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section class="how" id="how">
+    <div class="section__inner">
+      <p class="section__eyebrow">How It Works</p>
+      <h2 class="section__title">Simple to wear. Impossible to ignore<span class="accent">.</span></h2>
+      <p class="section__sub">Three steps between you and a real understanding of your own body.</p>
+
+      <div class="how__grid">
+        <article class="how-card reveal">
+          <div class="how-card__num">01</div>
+          <div class="how-card__icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><circle cx="24" cy="24" r="10"/><circle cx="24" cy="24" r="3" fill="currentColor"/><path d="M24 4v6M24 38v6M4 24h6M38 24h6"/></svg>
+          </div>
+          <h3>Wear</h3>
+          <p>Slip on the featherweight TRACE band. It reads your heart rate, heart rate variability, mood, typing rhythm and voice sentiment continuously throughout day and night, without a single tap.</p>
+        </article>
+
+        <article class="how-card reveal">
+          <div class="how-card__num">02</div>
+          <div class="how-card__icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 36l10-12 8 8 12-18 6 8"/><path d="M6 42h36"/></svg>
+          </div>
+          <h3>Understand</h3>
+          <p>TRACE turns raw signals into plain language: how recovered you are, when stress is climbing, how well you moved and slept. No dashboards to decode. Just clarity, in the moment.</p>
+        </article>
+
+        <article class="how-card reveal">
+          <div class="how-card__num">03</div>
+          <div class="how-card__icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><rect x="12" y="22" width="24" height="18" rx="3"/><path d="M17 22v-5a7 7 0 0 1 14 0v5"/><circle cx="24" cy="31" r="2.5" fill="currentColor"/></svg>
+          </div>
+          <h3>Keep It Yours</h3>
+          <p>Every reading is encrypted and confidential. No employer, no manager, no one but you ever sees it. Export it or delete it whenever you like, your data belongs to you.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ INTELLIGENCE / MIND & BODY ============ -->
+  <section class="intel" id="intelligence">
+    <div class="section__inner intel__inner">
+      <div class="intel__copy reveal">
+        <p class="section__eyebrow section__eyebrow--light">Biometric &amp; Behavioral</p>
+        <h2 class="section__title section__title--light">Mind and body,<br>one picture<span class="accent">.</span></h2>
+        <p class="intel__lead">Most trackers watch your steps. TRACE understands how you actually feel by pairing physical signals with the subtle behavioral ones that reveal your stress, focus and mood in real time.</p>
+        <ul class="intel__list">
+          <li><strong>Heart Rate Variability:</strong> your stress and recovery, tracked continuously beneath the surface.</li>
+          <li><strong>Mood Sensing:</strong> anxious, stressed, calm or focused, recognised and gently surfaced.</li>
+          <li><strong>Typing Rhythm:</strong> the quiet shifts in your focus and fatigue as the day wears on.</li>
+          <li><strong>Voice Sentiment:</strong> the tension and tone in your voice, turned into insight only you can see.</li>
+        </ul>
+      </div>
+      <div class="intel__panel reveal">
+        <div class="person-card">
+          <div class="person-card__header">
+            <div class="person-card__avatar">You</div>
+            <div>
+              <p class="person-card__name">Your Day</p>
+              <p class="person-card__role">Tuesday · updated live</p>
+            </div>
+            <span class="person-card__flag person-card__flag--good">On Track</span>
+          </div>
+          <div class="person-card__rows">
+            <div class="row"><span>Recovery</span><div class="meter"><div class="meter__fill meter__fill--accent" style="--w:84%"></div></div><span class="row__val">Strong</span></div>
+            <div class="row"><span>HRV</span><div class="meter"><div class="meter__fill meter__fill--accent" style="--w:76%"></div></div><span class="row__val">Healthy</span></div>
+            <div class="row"><span>Stress</span><div class="meter"><div class="meter__fill" style="--w:31%"></div></div><span class="row__val">Low</span></div>
+            <div class="row"><span>Focus</span><div class="meter"><div class="meter__fill meter__fill--accent" style="--w:68%"></div></div><span class="row__val">Steady</span></div>
+          </div>
+          <p class="person-card__note">You're recovering well today. A good window for that harder workout you've been putting off.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MOVEMENT / FITNESS ============ -->
+  <section class="movement">
+    <div class="section__inner">
+      <p class="section__eyebrow movement__eyebrow">Movement &amp; Activity</p>
+      <h2 class="section__title section__title--light">Every step, counted<span class="accent">.</span></h2>
+
+      <div class="movement__grid">
+        <article class="mcard reveal">
+          <p class="mcard__label">Heart Rate</p>
+          <p class="mcard__value">72<span> bpm</span></p>
+          <svg class="mcard__wave" viewBox="0 0 260 46" preserveAspectRatio="none">
+            <path d="M0 28 H70 l6 -14 l8 26 l6 -12 H150 l6 -18 l8 34 l6 -16 H260"/>
+          </svg>
+        </article>
+
+        <article class="mcard reveal">
+          <p class="mcard__label">Walking Speed</p>
+          <p class="mcard__value">5.2<span> km/h</span></p>
+          <div class="mcard__track"><span style="--w:64%"></span></div>
+          <p class="mcard__note">+8% vs your average</p>
+        </article>
+
+        <article class="mcard reveal">
+          <p class="mcard__label">Steps &amp; Stairs</p>
+          <p class="mcard__value">8,410</p>
+          <p class="mcard__sub">12 floors climbed</p>
+          <div class="mcard__bars">
+            <span style="--h:40%"></span><span style="--h:55%"></span><span style="--h:48%"></span><span class="is-active" style="--h:100%"></span><span style="--h:62%"></span><span style="--h:70%"></span><span style="--h:38%"></span>
+          </div>
+        </article>
+
+        <article class="mcard reveal">
+          <p class="mcard__label">Workouts</p>
+          <div class="mcard__wk">
+            <div class="mini-ring">
+              <svg viewBox="0 0 80 80">
+                <circle class="mini-ring__track" cx="40" cy="40" r="33"/>
+                <circle class="mini-ring__value" cx="40" cy="40" r="33"/>
+              </svg>
+            </div>
+            <div>
+              <p class="mcard__value mcard__value--sm">3<span>/wk</span></p>
+              <p class="mcard__note">42 min avg</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRIVACY ============ -->
+  <section class="privacy" id="privacy">
+    <div class="section__inner privacy__inner">
+      <div class="privacy__icon" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M24 5l15 6v10c0 9-6.4 16.5-15 21-8.6-4.5-15-12-15-21V11z"/><path d="M17 24l5 5 9-10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <p class="section__eyebrow">Confidential by Design</p>
+      <h2 class="section__title">Your data never leaves your side<span class="accent">.</span></h2>
+      <p class="privacy__lead">TRACE is built for you, not about you. Everything it senses, which is your heart, your mood, your movement. Everything is encrypted end to end and tied to your account alone. No employer, no insurer, no advertiser, no one at TRACE can read it. Export it, or delete it forever, in a single tap.</p>
+      <div class="privacy__points">
+        <div class="privacy__point"><strong>End-to-end encrypted</strong><span>Your signals are unreadable to anyone but you.</span></div>
+        <div class="privacy__point"><strong>Never sold, never shared</strong><span>We don't sell data. There is no ad business here.</span></div>
+        <div class="privacy__point"><strong>Yours to delete</strong><span>Wipe your entire history whenever you choose.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRICING ============ -->
+  <section class="pricing" id="pricing">
+    <div class="section__inner">
+      <p class="section__eyebrow">Pricing</p>
+      <h2 class="section__title">One subscription. All of you<span class="accent">.</span></h2>
+      <p class="section__sub">Includes the TRACE band. Cancel anytime and your data is deleted the moment you ask.</p>
+
+      <div class="pricing__grid">
+        <article class="price-card reveal">
+          <h3 class="price-card__tier">Move</h3>
+          <p class="price-card__price">$10<span>/month</span></p>
+          <p class="price-card__desc">The fitness essentials, tracked effortlessly.</p>
+          <ul>
+            <li>Heart rate &amp; resting HR</li>
+            <li>Steps, stairs &amp; walking speed</li>
+            <li>Automatic workout tracking</li>
+            <li>Daily activity summary</li>
+          </ul>
+          <a href="checkout.html?plan=move" class="btn btn--outline btn--block">Start Free Trial</a>
+        </article>
+
+        <article class="price-card price-card--featured reveal">
+          <p class="price-card__badge">Most Chosen</p>
+          <h3 class="price-card__tier">Complete</h3>
+          <p class="price-card__price">$20<span>/month</span></p>
+          <p class="price-card__desc">Your body and mind, fully understood.</p>
+          <ul>
+            <li>Everything in Move</li>
+            <li>Heart rate variability &amp; recovery</li>
+            <li>Mood, stress &amp; voice sentiment</li>
+            <li>Typing rhythm &amp; focus insight</li>
+            <li>Full private history &amp; trends</li>
+          </ul>
+          <a href="checkout.html?plan=complete" class="btn btn--primary btn--block">Start Free Trial</a>
+        </article>
+
+        <article class="price-card reveal">
+          <h3 class="price-card__tier">Complete, Yearly</h3>
+          <p class="price-card__price">$15<span>/mo, billed yearly</span></p>
+          <p class="price-card__desc">Everything in Complete, for less.</p>
+          <ul>
+            <li>All Complete features</li>
+            <li>Save 20% vs monthly</li>
+            <li>Priority support</li>
+            <li>Free band upgrades</li>
+            <li>Advanced long-term reports</li>
+          </ul>
+          <a href="checkout.html?plan=yearly" class="btn btn--outline btn--block">Choose Yearly</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FINAL CTA ============ -->
+  <section class="cta-final">
+    <div class="section__inner">
+      <h2 class="cta-final__title reveal">Stop guessing<br>how you're doing<span class="accent">.</span></h2>
+      <a href="#pricing" class="btn btn--primary btn--lg">Start Your Free Trial</a>
+      <p class="cta-final__sub">14-day free trial · Cancel anytime · Your data is deleted the moment you ask.</p>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="section__inner">
+      <div class="footer__top">
+        <div>
+          <p class="footer__logo">
+            <svg class="logo-mark logo-mark--footer" viewBox="0 0 100 100" aria-hidden="true">
+              <rect x="10" y="36" width="11" height="28" rx="5.5"/>
+              <rect x="28" y="26" width="11" height="48" rx="5.5"/>
+              <rect x="46" y="14" width="11" height="72" rx="5.5" class="logo-mark__pulse"/>
+              <rect x="64" y="26" width="11" height="48" rx="5.5"/>
+              <rect x="82" y="36" width="11" height="28" rx="5.5"/>
+            </svg>
+            <span class="wordmark wordmark--light">TRACE</span><span class="wordmark__tm">™</span>
+          </p>
+          <p class="footer__tag">You, understood.</p>
+        </div>
+        <div class="footer__cols">
+          <div>
+            <h4>Product</h4>
+            <a href="#how">How It Works</a>
+            <a href="#intelligence">Features</a>
+            <a href="#privacy">Privacy</a>
+            <a href="#pricing">Pricing</a>
+          </div>
+          <div>
+            <h4>Design</h4>
+            <a href="brand.html">Brand Guidelines</a>
+            <a href="package.html">Physical Package</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__legal">
+        <p>© 2026 TRACE&#8482;. All rights reserved. TRACE, the TRACE mark, and "You, understood." are trademarks of TRACE&#8482;.</p>
+        <p>TRACE collects physiological, behavioral and movement data ("Wellbeing Signals") solely to provide insights to you, the account holder. Wellbeing Signals are encrypted end to end, are never sold or shared with employers, insurers or advertisers, and are accessible only to you. You may export or permanently delete your data at any time. Your wellbeing is your business and we simply help you see it clearly.</p>
+        <div class="footer__links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Security</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

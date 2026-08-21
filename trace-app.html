@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0b0e12">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="TRACE">
+  <title>TRACE</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --white:#f6f7f8; --ink:#0b0e12; --platinum:#9aa1a8; --blue:#0c61da;
+      --panel:#16191e; --line:#242830; --dim:#6f767e;
+      --calm:#0c61da; --focused:#4d8bff; --anxious:#f5b301; --stressed:#e5484d;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+    html, body { height:100%; }
+    body {
+      font-family:"Inter",-apple-system,sans-serif;
+      background:
+        repeating-linear-gradient(45deg, rgba(255,255,255,.016) 0 2px, transparent 2px 6px),
+        repeating-linear-gradient(-45deg, rgba(255,255,255,.013) 0 2px, transparent 2px 6px),
+        var(--ink);
+      color:var(--white);
+      -webkit-font-smoothing:antialiased;
+      display:flex; flex-direction:column;
+      overscroll-behavior:none;
+    }
+    .app { width:100%; max-width:460px; margin:0 auto; flex:1; display:flex; flex-direction:column; min-height:0; position:relative; }
+
+    /* Pulse thread: the same signal that runs down the website, carried into
+       the app. It draws as you scroll and the blip rides your position. */
+    .railwrap { position:absolute; left:3px; width:26px; pointer-events:none; z-index:4; }
+    .rail-track { position:absolute; left:12px; top:0; bottom:0; width:2px; background:rgba(154,161,168,.38); }
+    .rail-fill { position:absolute; left:12px; top:0; width:2px; height:0; background:var(--blue); }
+    .rail-blip {
+      position:absolute; left:0; top:0; width:26px; height:16px;
+      transform: translateY(-50%);
+      fill:none; stroke:var(--blue); stroke-width:2; stroke-linecap:round; stroke-linejoin:round;
+      animation: blip 1.6s ease-in-out infinite;
+    }
+    @keyframes blip { 0%,100%{opacity:.55} 12%{opacity:1} 24%{opacity:.7} 32%{opacity:1} }
+
+    header.bar {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:calc(env(safe-area-inset-top) + 1rem) 1.2rem .8rem;
+      flex-shrink:0;
+    }
+    .brand { display:flex; align-items:center; gap:.55rem; }
+    .brand svg { width:24px; height:24px; }
+    .brand span { font-weight:300; font-size:1.05rem; letter-spacing:.3em; }
+    .brand sup { font-size:.5rem; color:var(--platinum); margin-left:-.25em; }
+    .today-chip { font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:var(--platinum); }
+
+    main { flex:1; overflow-y:auto; padding:0 1.2rem 1.2rem 2rem; scrollbar-width:none; }
+    main::-webkit-scrollbar { display:none; }
+    .view { display:none; }
+    .view.on { display:block; animation:fade .3s ease; }
+    @keyframes fade { from { opacity:0; transform:translateY(8px); } }
+
+    h1.vt { font-size:1.55rem; font-weight:400; letter-spacing:-.02em; margin:.3rem 0 .2rem; }
+    p.vs { font-size:.85rem; color:var(--platinum); font-weight:300; margin-bottom:1.1rem; }
+
+    .card { background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:1.1rem; margin-bottom:.8rem; }
+    .lbl { font-size:.6rem; letter-spacing:.16em; text-transform:uppercase; color:var(--platinum); font-weight:600; }
+
+    /* score ring */
+    .scorewrap { display:flex; align-items:center; gap:1.2rem; }
+    .ring { position:relative; width:118px; height:118px; flex-shrink:0; }
+    .ring svg { width:100%; height:100%; transform:rotate(-90deg); }
+    .ring .t { fill:none; stroke:var(--line); stroke-width:10; }
+    .ring .v { fill:none; stroke:var(--blue); stroke-width:10; stroke-linecap:round; transition:stroke-dashoffset .9s cubic-bezier(.2,.7,.2,1); }
+    .ring .mid { position:absolute; inset:0; display:grid; place-items:center; text-align:center; }
+    .ring .n { font-size:2rem; font-weight:500; line-height:1; }
+    .ring .c { font-size:.55rem; letter-spacing:.16em; text-transform:uppercase; color:var(--platinum); margin-top:.25rem; }
+    .breakdown { display:grid; gap:.6rem; flex:1; }
+    .brow { font-size:.72rem; color:var(--platinum); }
+    .brow div { display:flex; justify-content:space-between; margin-bottom:.25rem; }
+    .brow b { color:var(--white); font-weight:500; }
+    .track { height:5px; background:var(--line); border-radius:3px; overflow:hidden; }
+    .track i { display:block; height:100%; background:var(--blue); border-radius:3px; transition:width .7s cubic-bezier(.2,.7,.2,1); }
+
+    /* form controls */
+    .field { margin-bottom:1rem; }
+    .field > .lbl { display:block; margin-bottom:.55rem; }
+    .chips { display:flex; gap:.45rem; flex-wrap:wrap; }
+    .chip {
+      flex:1; min-width:70px; padding:.6rem .3rem; border-radius:11px;
+      border:1.5px solid var(--line); background:transparent; color:var(--platinum);
+      font-family:inherit; font-size:.78rem; cursor:pointer; transition:all .18s;
+    }
+    .chip.sel { border-color:var(--blue); background:rgba(12,97,218,.14); color:var(--white); font-weight:500; }
+    .scale { display:flex; gap:.45rem; }
+    .scale button {
+      flex:1; aspect-ratio:1; border-radius:11px; border:1.5px solid var(--line);
+      background:transparent; color:var(--platinum); font-family:inherit; font-size:.95rem; cursor:pointer; transition:all .18s;
+    }
+    .scale button.sel { border-color:var(--blue); background:rgba(12,97,218,.14); color:var(--white); font-weight:600; }
+    .nums { display:grid; grid-template-columns:1fr 1fr; gap:.7rem; }
+    input[type=number], input[type=text], textarea {
+      width:100%; padding:.7rem .85rem; border-radius:11px; border:1.5px solid var(--line);
+      background:#11141a; color:var(--white); font-family:inherit; font-size:.95rem; outline:none; transition:border-color .2s;
+    }
+    input:focus, textarea:focus { border-color:var(--blue); }
+    textarea { resize:none; min-height:70px; font-weight:300; font-size:.88rem; }
+    ::placeholder { color:var(--dim); }
+
+    .btn {
+      width:100%; padding:.9rem; border-radius:12px; border:none; background:var(--blue); color:#fff;
+      font-family:inherit; font-size:.98rem; font-weight:500; cursor:pointer; transition:background .2s, transform .1s;
+    }
+    .btn:active { transform:scale(.985); }
+    .btn:disabled { background:var(--line); color:var(--dim); cursor:default; }
+    .btn--ghost { background:transparent; border:1.5px solid var(--line); color:var(--platinum); }
+    .btn--ghost:hover { border-color:var(--platinum); color:var(--white); }
+    .btn--danger:hover { border-color:var(--stressed); color:var(--stressed); }
+    .btn + .btn { margin-top:.6rem; }
+
+    .saved { text-align:center; padding:.8rem; font-size:.85rem; color:var(--blue); font-weight:500; }
+
+    /* trends */
+    .bars { display:flex; align-items:flex-end; gap:5px; height:104px; margin:.9rem 0 1.4rem; }
+    .bars .b { flex:1; background:var(--line); border-radius:4px; position:relative; min-height:3px; transition:height .6s cubic-bezier(.2,.7,.2,1); }
+    .bars .b.hi { background:var(--blue); }
+    .bars .b span { position:absolute; bottom:-1.25rem; left:50%; transform:translateX(-50%); font-size:.55rem; color:var(--dim); }
+    .statgrid { display:grid; grid-template-columns:1fr 1fr; gap:.7rem; }
+    .stat { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:.9rem 1rem; }
+    .stat .big { font-size:1.5rem; font-weight:500; margin-top:.15rem; }
+    .stat .big small { font-size:.7rem; color:var(--platinum); font-weight:400; }
+    .moodsplit { display:flex; gap:3px; height:8px; margin:.8rem 0 .5rem; border-radius:4px; overflow:hidden; }
+    .moodsplit i { display:block; }
+    .msleg { display:flex; flex-wrap:wrap; gap:.7rem; font-size:.62rem; color:var(--platinum); }
+    .msleg span::before { content:""; display:inline-block; width:7px; height:7px; border-radius:2px; background:var(--c); margin-right:.3rem; }
+
+    /* history */
+    .entry { display:flex; align-items:center; gap:.85rem; padding:.8rem 0; border-bottom:1px solid var(--line); }
+    .entry:last-child { border-bottom:none; }
+    .entry .sc { width:42px; height:42px; border-radius:12px; display:grid; place-items:center; font-weight:600; font-size:.9rem; flex-shrink:0; background:rgba(12,97,218,.14); color:var(--blue); }
+    .entry .d { font-size:.85rem; font-weight:500; }
+    .entry .m { font-size:.68rem; color:var(--platinum); margin-top:.12rem; }
+    .entry .x { margin-left:auto; background:none; border:none; color:var(--dim); font-size:1.1rem; cursor:pointer; padding:.3rem .4rem; }
+    .entry .x:hover { color:var(--stressed); }
+    .empty { text-align:center; padding:2.5rem 1rem; color:var(--dim); font-weight:300; font-size:.9rem; }
+
+    /* privacy */
+    .shieldbox { text-align:center; padding:.6rem 0 1rem; }
+    .shieldbox svg { width:44px; height:44px; fill:none; stroke:var(--blue); stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+    .shieldbox p { font-size:.82rem; color:var(--platinum); font-weight:300; margin-top:.7rem; line-height:1.6; }
+    .kv { display:flex; justify-content:space-between; padding:.6rem 0; border-bottom:1px solid var(--line); font-size:.82rem; }
+    .kv:last-child { border-bottom:none; }
+    .kv span:last-child { color:var(--platinum); }
+
+    /* tabs */
+    nav.tabs {
+      display:flex; border-top:1px solid var(--line); flex-shrink:0;
+      padding:.5rem .3rem calc(env(safe-area-inset-bottom) + .7rem);
+      background:rgba(11,14,18,.92); backdrop-filter:blur(10px);
+    }
+    nav.tabs button {
+      flex:1; background:none; border:none; color:var(--dim); display:grid; justify-items:center; gap:.28rem;
+      padding:.35rem 0; cursor:pointer; font-family:inherit; transition:color .2s;
+    }
+    nav.tabs svg { width:20px; height:20px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+    nav.tabs span { font-size:.55rem; letter-spacing:.1em; text-transform:uppercase; }
+    nav.tabs button.on { color:var(--blue); }
+
+    .toast {
+      position:fixed; left:50%; bottom:calc(env(safe-area-inset-bottom) + 5.2rem); transform:translateX(-50%) translateY(20px);
+      background:var(--blue); color:#fff; padding:.7rem 1.2rem; border-radius:999px; font-size:.85rem; font-weight:500;
+      opacity:0; pointer-events:none; transition:all .3s; z-index:50; white-space:nowrap;
+    }
+    .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+
+    .install {
+      display:none; width:100%; margin-bottom:.8rem; padding:.75rem;
+      border-radius:12px; border:1.5px dashed var(--blue); background:rgba(12,97,218,.08);
+      color:var(--blue); font-family:inherit; font-size:.85rem; font-weight:500; cursor:pointer;
+    }
+    .install.show { display:block; }
+  </style>
+</head>
+<body>
+<div class="app">
+
+  <header class="bar">
+    <div class="brand">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <rect x="10" y="36" width="11" height="28" rx="5.5" fill="#f6f7f8"/>
+        <rect x="28" y="26" width="11" height="48" rx="5.5" fill="#f6f7f8"/>
+        <rect x="46" y="14" width="11" height="72" rx="5.5" fill="#0c61da"/>
+        <rect x="64" y="26" width="11" height="48" rx="5.5" fill="#f6f7f8"/>
+        <rect x="82" y="36" width="11" height="28" rx="5.5" fill="#f6f7f8"/>
+      </svg>
+      <span>TRACE</span><sup>&#8482;</sup>
+    </div>
+    <span class="today-chip" id="dateChip"></span>
+  </header>
+
+  <div class="railwrap" aria-hidden="true">
+    <div class="rail-track"></div>
+    <div class="rail-fill" id="railFill"></div>
+    <svg class="rail-blip" id="railBlip" viewBox="0 0 40 24"><path d="M0 12 h9 l4 -8 l6 16 l4 -8 h17"/></svg>
+  </div>
+
+  <main>
+    <!-- ===== TODAY ===== -->
+    <section class="view on" id="v-today">
+      <button class="install" id="installBtn">Install TRACE on this device</button>
+      <h1 class="vt" id="greeting">Hello</h1>
+      <p class="vs" id="todaySub">Log today to see where you are.</p>
+
+      <div class="card">
+        <div class="scorewrap">
+          <div class="ring">
+            <svg viewBox="0 0 120 120">
+              <circle class="t" cx="60" cy="60" r="52"/>
+              <circle class="v" id="ringVal" cx="60" cy="60" r="52" stroke-dasharray="327" stroke-dashoffset="327"/>
+            </svg>
+            <div class="mid"><div><p class="n" id="scoreNum">--</p><p class="c">Readiness</p></div></div>
+          </div>
+          <div class="breakdown" id="breakdown"></div>
+        </div>
+      </div>
+
+      <div class="card" id="todayDetail" style="display:none;"></div>
+      <button class="btn" id="goLog">Log today</button>
+    </section>
+
+    <!-- ===== LOG ===== -->
+    <section class="view" id="v-log">
+      <h1 class="vt">How are you today?</h1>
+      <p class="vs" id="logSub">Takes about twenty seconds.</p>
+
+      <div class="card">
+        <div class="field">
+          <span class="lbl">Mood</span>
+          <div class="chips" id="moodChips">
+            <button class="chip" data-mood="calm">Calm</button>
+            <button class="chip" data-mood="focused">Focused</button>
+            <button class="chip" data-mood="anxious">Anxious</button>
+            <button class="chip" data-mood="stressed">Stressed</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <span class="lbl">Energy</span>
+          <div class="scale" id="energyScale">
+            <button data-energy="1">1</button><button data-energy="2">2</button>
+            <button data-energy="3">3</button><button data-energy="4">4</button>
+            <button data-energy="5">5</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <span class="lbl">Sleep &amp; movement</span>
+          <div class="nums">
+            <input type="number" id="inSleep" placeholder="Sleep (hrs)" step="0.5" min="0" max="24" inputmode="decimal">
+            <input type="number" id="inSteps" placeholder="Steps" min="0" max="100000" inputmode="numeric">
+          </div>
+        </div>
+
+        <div class="field">
+          <span class="lbl">Resting heart rate</span>
+          <input type="number" id="inRhr" placeholder="bpm (optional)" min="30" max="140" inputmode="numeric">
+        </div>
+
+        <div class="field" style="margin-bottom:0;">
+          <span class="lbl">Anything worth remembering</span>
+          <textarea id="inNote" placeholder="Optional. Only you will ever read this."></textarea>
+        </div>
+      </div>
+
+      <button class="btn" id="saveBtn" disabled>Choose a mood and energy to save</button>
+      <button class="btn btn--ghost" id="cancelBtn">Cancel</button>
+    </section>
+
+    <!-- ===== TRENDS ===== -->
+    <section class="view" id="v-trends">
+      <h1 class="vt">Your trend</h1>
+      <p class="vs" id="trendSub">Built only from what you have logged.</p>
+      <div class="card">
+        <span class="lbl">Readiness, last 14 entries</span>
+        <div class="bars" id="trendBars"></div>
+      </div>
+      <div class="statgrid">
+        <div class="stat"><span class="lbl">Average</span><p class="big" id="stAvg">--</p></div>
+        <div class="stat"><span class="lbl">Entries</span><p class="big" id="stCount">0</p></div>
+        <div class="stat"><span class="lbl">Streak</span><p class="big" id="stStreak">0<small> days</small></p></div>
+        <div class="stat"><span class="lbl">Avg sleep</span><p class="big" id="stSleep">--</p></div>
+      </div>
+      <div class="card" style="margin-top:.8rem;">
+        <span class="lbl">How you have felt</span>
+        <div class="moodsplit" id="moodSplit"></div>
+        <div class="msleg" id="moodLegend"></div>
+      </div>
+    </section>
+
+    <!-- ===== HISTORY ===== -->
+    <section class="view" id="v-history">
+      <h1 class="vt">History</h1>
+      <p class="vs">Every entry, newest first. Tap the cross to remove one.</p>
+      <div class="card" id="historyCard"></div>
+    </section>
+
+    <!-- ===== PRIVACY ===== -->
+    <section class="view" id="v-privacy">
+      <h1 class="vt">Your data</h1>
+      <p class="vs">Where it lives and what you can do with it.</p>
+
+      <div class="card">
+        <div class="shieldbox">
+          <svg viewBox="0 0 48 48"><path d="M24 5l15 6v10c0 9-6.4 16.5-15 21-8.6-4.5-15-12-15-21V11z"/><path d="M17 24l5 5 9-10"/></svg>
+          <p>Everything you log is stored on this device only.<br>There is no account, no server, no analytics.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="lbl">Storage</span>
+        <div style="margin-top:.6rem;">
+          <div class="kv"><span>Entries saved</span><span id="pvCount">0</span></div>
+          <div class="kv"><span>Space used</span><span id="pvSize">0 KB</span></div>
+          <div class="kv"><span>Kept where</span><span>This browser</span></div>
+          <div class="kv"><span>Sent anywhere</span><span>Never</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="lbl">Your record</span>
+        <div style="margin-top:.7rem;">
+          <button class="btn btn--ghost" id="exportBtn">Export everything as JSON</button>
+          <button class="btn btn--ghost btn--danger" id="wipeBtn">Delete all my data</button>
+        </div>
+        <p style="font-size:.7rem;color:var(--dim);margin-top:.8rem;line-height:1.6;font-weight:300;">Deletion is immediate and permanent. Nothing is kept in a backup, because there is no backup.</p>
+      </div>
+
+      <div class="card">
+        <span class="lbl">Your name</span>
+        <div style="margin-top:.6rem;">
+          <input type="text" id="inName" placeholder="What should TRACE call you?" maxlength="24">
+          <button class="btn btn--ghost" style="margin-top:.6rem;" id="saveName">Save name</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="tabs">
+    <button class="on" data-go="today"><svg viewBox="0 0 24 24"><path d="M2 12h4l2-6 3 12 2-8 1.5 2H22"/></svg><span>Today</span></button>
+    <button data-go="trends"><svg viewBox="0 0 24 24"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg><span>Trends</span></button>
+    <button data-go="history"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>History</span></button>
+    <button data-go="privacy"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v5c0 4.6-3.4 8.6-8 10.5C7.4 19.6 4 15.6 4 11V6z"/></svg><span>Privacy</span></button>
+  </nav>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* =========================================================
+   TRACE — a real, working, offline wellbeing log.
+   All data lives in localStorage on this device. No server.
+   ========================================================= */
+
+const KEY_ENTRIES = "trace.entries";
+const KEY_PROFILE = "trace.profile";
+
+const MOODS = {
+  calm:     { label: "Calm",     points: 30, color: "var(--calm)" },
+  focused:  { label: "Focused",  points: 26, color: "var(--focused)" },
+  anxious:  { label: "Anxious",  points: 14, color: "var(--anxious)" },
+  stressed: { label: "Stressed", points: 8,  color: "var(--stressed)" }
+};
+
+const load = (k, f) => { try { return JSON.parse(localStorage.getItem(k)) ?? f; } catch { return f; } };
+const save = (k, v) => localStorage.setItem(k, JSON.stringify(v));
+let entries = load(KEY_ENTRIES, []);
+let profile = load(KEY_PROFILE, { name: "" });
+
+const todayKey = () => new Date().toISOString().slice(0, 10);
+const prettyDate = (iso) => new Date(iso + "T00:00:00").toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" });
+
+/* ---- the score is a real, transparent calculation ---- */
+function scoreOf(e) {
+  const sleep  = Math.min((e.sleep ?? 0) / 8, 1) * 40;      // 40 pts, full at 8 hours
+  const energy = ((e.energy ?? 0) / 5) * 30;                 // 30 pts
+  const mood   = MOODS[e.mood] ? MOODS[e.mood].points : 0;   // up to 30 pts
+  return Math.round(sleep + energy + mood);
+}
+function partsOf(e) {
+  return [
+    { name: "Sleep",  val: Math.round(Math.min((e.sleep ?? 0) / 8, 1) * 100), note: (e.sleep ?? 0) + " h" },
+    { name: "Energy", val: Math.round(((e.energy ?? 0) / 5) * 100), note: (e.energy ?? 0) + " / 5" },
+    { name: "Mood",   val: Math.round(((MOODS[e.mood]?.points ?? 0) / 30) * 100), note: MOODS[e.mood]?.label ?? "--" }
+  ];
+}
+
+/* ---------------- rendering ---------------- */
+const $ = (s) => document.querySelector(s);
+const toast = (msg) => {
+  const t = $("#toast"); t.textContent = msg; t.classList.add("show");
+  clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove("show"), 2200);
+};
+
+function greet() {
+  const h = new Date().getHours();
+  const part = h < 12 ? "Good morning" : h < 18 ? "Good afternoon" : "Good evening";
+  return profile.name ? part + ", " + profile.name : part;
+}
+
+function renderToday() {
+  $("#dateChip").textContent = new Date().toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" });
+  $("#greeting").textContent = greet();
+
+  const e = entries.find((x) => x.date === todayKey());
+  const ring = $("#ringVal");
+  const C = 327;
+
+  if (!e) {
+    $("#todaySub").textContent = "Nothing logged today yet.";
+    $("#scoreNum").textContent = "--";
+    ring.style.strokeDashoffset = C;
+    $("#breakdown").innerHTML = '<p style="font-size:.8rem;color:var(--platinum);font-weight:300;line-height:1.6;">Your readiness appears once you log today. It is built from your sleep, energy and mood, and nothing else.</p>';
+    $("#todayDetail").style.display = "none";
+    $("#goLog").textContent = "Log today";
+    return;
+  }
+
+  const s = scoreOf(e);
+  $("#todaySub").textContent = s >= 75 ? "You are in good shape today." : s >= 50 ? "A steady day. Nothing to push against." : "Take it gently today.";
+  $("#scoreNum").textContent = s;
+  requestAnimationFrame(() => { ring.style.strokeDashoffset = C - (C * s) / 100; });
+
+  $("#breakdown").innerHTML = partsOf(e).map((p) => `
+    <div class="brow">
+      <div><span>${p.name}</span><b>${p.note}</b></div>
+      <div class="track"><i style="width:${p.val}%"></i></div>
+    </div>`).join("");
+
+  const bits = [];
+  if (e.steps) bits.push(`<div class="kv"><span>Steps</span><span>${Number(e.steps).toLocaleString()}</span></div>`);
+  if (e.rhr) bits.push(`<div class="kv"><span>Resting heart rate</span><span>${e.rhr} bpm</span></div>`);
+  if (e.note) bits.push(`<div style="padding-top:.7rem;font-size:.85rem;font-weight:300;color:#c5cad0;line-height:1.6;">${escapeHtml(e.note)}</div>`);
+  $("#todayDetail").innerHTML = bits.length ? '<span class="lbl">Also today</span><div style="margin-top:.5rem;">' + bits.join("") + "</div>" : "";
+  $("#todayDetail").style.display = bits.length ? "block" : "none";
+  $("#goLog").textContent = "Update today";
+}
+
+function renderTrends() {
+  const recent = entries.slice(-14);
+  $("#trendSub").textContent = entries.length ? `Built from ${entries.length} ${entries.length === 1 ? "entry" : "entries"} you logged.` : "Log a few days and this fills in.";
+
+  const max = 100;
+  $("#trendBars").innerHTML = recent.length
+    ? recent.map((e) => {
+        const s = scoreOf(e);
+        const hi = s === Math.max(...recent.map(scoreOf));
+        return `<div class="b${hi ? " hi" : ""}" style="height:${Math.max((s / max) * 100, 3)}%" title="${prettyDate(e.date)}: ${s}"><span>${new Date(e.date + "T00:00:00").toLocaleDateString("en-GB", { weekday: "narrow" })}</span></div>`;
+      }).join("")
+    : '<p style="font-size:.82rem;color:var(--dim);font-weight:300;align-self:center;">No entries yet.</p>';
+
+  const scores = entries.map(scoreOf);
+  $("#stAvg").textContent = scores.length ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) : "--";
+  $("#stCount").textContent = entries.length;
+  $("#stStreak").innerHTML = streak() + "<small> days</small>";
+  const sleeps = entries.filter((e) => e.sleep).map((e) => e.sleep);
+  $("#stSleep").innerHTML = sleeps.length ? (sleeps.reduce((a, b) => a + b, 0) / sleeps.length).toFixed(1) + "<small> h</small>" : "--";
+
+  const counts = {};
+  entries.forEach((e) => { counts[e.mood] = (counts[e.mood] || 0) + 1; });
+  const total = entries.length || 1;
+  $("#moodSplit").innerHTML = Object.keys(MOODS)
+    .filter((m) => counts[m])
+    .map((m) => `<i style="width:${(counts[m] / total) * 100}%;background:${MOODS[m].color};"></i>`).join("");
+  $("#moodLegend").innerHTML = Object.keys(MOODS)
+    .filter((m) => counts[m])
+    .map((m) => `<span style="--c:${MOODS[m].color}">${MOODS[m].label} ${Math.round((counts[m] / total) * 100)}%</span>`).join("");
+}
+
+function streak() {
+  if (!entries.length) return 0;
+  const set = new Set(entries.map((e) => e.date));
+  let n = 0;
+  const d = new Date();
+  if (!set.has(d.toISOString().slice(0, 10))) d.setDate(d.getDate() - 1);
+  while (set.has(d.toISOString().slice(0, 10))) { n++; d.setDate(d.getDate() - 1); }
+  return n;
+}
+
+function renderHistory() {
+  const list = [...entries].reverse();
+  $("#historyCard").innerHTML = list.length
+    ? list.map((e) => `
+      <div class="entry">
+        <div class="sc">${scoreOf(e)}</div>
+        <div>
+          <p class="d">${prettyDate(e.date)}</p>
+          <p class="m">${MOODS[e.mood]?.label ?? ""} · energy ${e.energy ?? "-"}${e.sleep ? " · " + e.sleep + "h sleep" : ""}${e.steps ? " · " + Number(e.steps).toLocaleString() + " steps" : ""}</p>
+        </div>
+        <button class="x" data-del="${e.date}" aria-label="Delete entry">&times;</button>
+      </div>`).join("")
+    : '<p class="empty">Nothing logged yet.<br>Your history stays empty until you fill it.</p>';
+
+  document.querySelectorAll("[data-del]").forEach((b) =>
+    b.addEventListener("click", () => {
+      entries = entries.filter((x) => x.date !== b.dataset.del);
+      save(KEY_ENTRIES, entries);
+      renderAll(); toast("Entry deleted");
+    })
+  );
+}
+
+function renderPrivacy() {
+  $("#pvCount").textContent = entries.length;
+  const bytes = new Blob([JSON.stringify(entries)]).size;
+  $("#pvSize").textContent = bytes < 1024 ? bytes + " B" : (bytes / 1024).toFixed(1) + " KB";
+  $("#inName").value = profile.name || "";
+}
+
+function renderAll() { renderToday(); renderTrends(); renderHistory(); renderPrivacy(); }
+function escapeHtml(s) { return s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
+
+/* ---------------- log form ---------------- */
+let draft = { mood: null, energy: null };
+
+function syncSave() {
+  const ok = draft.mood && draft.energy;
+  $("#saveBtn").disabled = !ok;
+  $("#saveBtn").textContent = ok ? "Save today" : "Choose a mood and energy to save";
+}
+
+document.querySelectorAll("#moodChips .chip").forEach((c) =>
+  c.addEventListener("click", () => {
+    draft.mood = c.dataset.mood;
+    document.querySelectorAll("#moodChips .chip").forEach((x) => x.classList.toggle("sel", x === c));
+    syncSave();
+  })
+);
+document.querySelectorAll("#energyScale button").forEach((b) =>
+  b.addEventListener("click", () => {
+    draft.energy = Number(b.dataset.energy);
+    document.querySelectorAll("#energyScale button").forEach((x) => x.classList.toggle("sel", x === b));
+    syncSave();
+  })
+);
+
+function openLog() {
+  const e = entries.find((x) => x.date === todayKey());
+  draft = { mood: e?.mood ?? null, energy: e?.energy ?? null };
+  $("#logSub").textContent = e ? "Updating today's entry." : "Takes about twenty seconds.";
+  document.querySelectorAll("#moodChips .chip").forEach((c) => c.classList.toggle("sel", c.dataset.mood === draft.mood));
+  document.querySelectorAll("#energyScale button").forEach((b) => b.classList.toggle("sel", Number(b.dataset.energy) === draft.energy));
+  $("#inSleep").value = e?.sleep ?? "";
+  $("#inSteps").value = e?.steps ?? "";
+  $("#inRhr").value = e?.rhr ?? "";
+  $("#inNote").value = e?.note ?? "";
+  syncSave();
+  go("log");
+}
+
+$("#goLog").addEventListener("click", openLog);
+$("#cancelBtn").addEventListener("click", () => go("today"));
+
+$("#saveBtn").addEventListener("click", () => {
+  const entry = {
+    date: todayKey(),
+    mood: draft.mood,
+    energy: draft.energy,
+    sleep: $("#inSleep").value ? Number($("#inSleep").value) : null,
+    steps: $("#inSteps").value ? Number($("#inSteps").value) : null,
+    rhr: $("#inRhr").value ? Number($("#inRhr").value) : null,
+    note: $("#inNote").value.trim(),
+    at: new Date().toISOString()
+  };
+  const i = entries.findIndex((x) => x.date === entry.date);
+  if (i >= 0) entries[i] = entry; else entries.push(entry);
+  entries.sort((a, b) => a.date.localeCompare(b.date));
+  save(KEY_ENTRIES, entries);
+  renderAll();
+  go("today");
+  toast("Saved. Only you can see it.");
+});
+
+/* ---------------- privacy actions ---------------- */
+$("#exportBtn").addEventListener("click", () => {
+  const blob = new Blob([JSON.stringify({ profile, entries, exported: new Date().toISOString() }, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "trace-export-" + todayKey() + ".json";
+  a.click();
+  URL.revokeObjectURL(url);
+  toast("Exported to your downloads");
+});
+
+$("#wipeBtn").addEventListener("click", () => {
+  if (!entries.length) { toast("There is nothing to delete"); return; }
+  if (confirm("Delete all " + entries.length + " entries permanently? This cannot be undone.")) {
+    entries = [];
+    save(KEY_ENTRIES, entries);
+    renderAll();
+    toast("Everything deleted");
+  }
+});
+
+$("#saveName").addEventListener("click", () => {
+  profile.name = $("#inName").value.trim();
+  save(KEY_PROFILE, profile);
+  renderToday();
+  toast(profile.name ? "Hello, " + profile.name : "Name cleared");
+});
+
+/* ---------------- pulse thread ---------------- */
+const railWrap = document.querySelector(".railwrap");
+const railFill = $("#railFill");
+const railBlip = $("#railBlip");
+const scroller = document.querySelector("main");
+
+function placeRail() {
+  // the rail spans exactly the scrolling area, between the header and the tabs
+  const app = document.querySelector(".app").getBoundingClientRect();
+  const box = scroller.getBoundingClientRect();
+  railWrap.style.top = (box.top - app.top) + "px";
+  railWrap.style.height = box.height + "px";
+  drawRail();
+}
+function drawRail() {
+  const H = scroller.clientHeight;
+  const max = scroller.scrollHeight - H;
+  // On a screen with nothing to scroll the signal still has to read as live,
+  // so it rests a short way down the rail rather than collapsing to nothing.
+  const p = max > 4 ? Math.min(scroller.scrollTop / max, 1) : 0.12;
+  railFill.style.height = Math.round(p * H) + "px";
+  railBlip.style.top = Math.round(Math.max(9, Math.min(p * H, H - 9))) + "px";
+}
+scroller.addEventListener("scroll", drawRail, { passive: true });
+window.addEventListener("resize", placeRail);
+placeRail();
+
+/* ---------------- navigation ---------------- */
+function go(view) {
+  document.querySelectorAll(".view").forEach((v) => v.classList.toggle("on", v.id === "v-" + view));
+  document.querySelectorAll("nav.tabs button").forEach((b) => b.classList.toggle("on", b.dataset.go === view));
+  document.querySelector("main").scrollTop = 0;
+  drawRail();
+}
+document.querySelectorAll("nav.tabs button").forEach((b) => b.addEventListener("click", () => go(b.dataset.go)));
+
+/* ---------------- install + offline ---------------- */
+let deferredPrompt = null;
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  $("#installBtn").classList.add("show");
+});
+$("#installBtn").addEventListener("click", async () => {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  await deferredPrompt.userChoice;
+  deferredPrompt = null;
+  $("#installBtn").classList.remove("show");
+});
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+}
+
+renderAll();
+</script>
+</body>
+</html>

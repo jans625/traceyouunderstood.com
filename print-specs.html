@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRACE — Print Specifications</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --white:#f6f7f8; --ink:#0b0e12; --platinum:#9aa1a8; --blue:#0c61da; --border:#e2e5e8; --grey-100:#eef0f2; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:"Inter",sans-serif; background:var(--white); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased; }
+    .page { max-width:980px; margin:0 auto; padding:3.5rem 2rem 5rem; }
+    .back { display:block; text-align:right; font-size:0.92rem; font-weight:500; color:#444a51; text-decoration:none; margin-bottom:2rem; }
+    .back:hover { color:var(--ink); }
+    .head { padding-bottom:2rem; border-bottom:1px solid var(--ink); margin-bottom:3rem; }
+    .head h1 { font-weight:300; font-size:2.4rem; letter-spacing:-0.03em; margin:0.5rem 0 0.3rem; }
+    .head p { color:#444a51; font-weight:300; }
+    .eyebrow { font-family:"Oswald",sans-serif; font-size:0.72rem; font-weight:500; letter-spacing:0.24em; text-transform:uppercase; color:var(--blue); }
+    section { margin-bottom:3.2rem; }
+    h2 { font-weight:300; font-size:1.5rem; letter-spacing:-0.02em; margin:0.5rem 0 1.2rem; }
+    table { width:100%; border-collapse:collapse; background:#fff; border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+    th, td { text-align:left; padding:0.75rem 1rem; font-size:0.85rem; border-bottom:1px solid var(--border); }
+    th { font-family:"Oswald",sans-serif; font-weight:500; font-size:0.66rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--platinum); }
+    tr:last-child td { border-bottom:none; }
+    td.mono { font-family:"Oswald",sans-serif; letter-spacing:0.08em; }
+    .chip { display:inline-block; width:14px; height:14px; border-radius:4px; vertical-align:-2px; margin-right:0.5rem; border:1px solid var(--border); }
+    .files { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+    .file { background:#fff; border:1px solid var(--border); border-radius:12px; padding:1.2rem; }
+    .file__stage { height:88px; border-radius:8px; display:grid; place-items:center; margin-bottom:0.9rem; }
+    .file__stage img { max-width:80%; max-height:56px; }
+    .file b { display:block; font-family:"Oswald",sans-serif; font-size:0.66rem; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:0.3rem; }
+    .file span { font-size:0.8rem; color:#444a51; font-weight:300; }
+    .note { background:#fff; border:1px solid var(--border); border-left:3px solid var(--blue); border-radius:10px; padding:1.2rem 1.4rem; font-size:0.88rem; font-weight:300; color:#444a51; }
+    .note b { color:var(--ink); font-weight:600; }
+    .note + .note { margin-top:0.8rem; }
+    .foot { border-top:1px solid var(--border); padding-top:1.4rem; display:flex; justify-content:space-between; font-size:0.72rem; color:var(--platinum); }
+    @media (max-width:760px) { .files { grid-template-columns:1fr; } }
+    @media print { .back { display:none; } .page { padding:1rem; } section { page-break-inside:avoid; } }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <a href="brand.html" class="back">&larr; Back to brand guidelines</a>
+
+    <header class="head">
+      <p class="eyebrow">Production</p>
+      <h1>Print specifications</h1>
+      <p>Everything a printer needs to reproduce the TRACE identity correctly.</p>
+    </header>
+
+    <section>
+      <p class="eyebrow">01 · Colour</p>
+      <h2>Press values</h2>
+      <table>
+        <tr><th>Colour</th><th>Hex (screen)</th><th>CMYK (coated)</th><th>One colour</th></tr>
+        <tr><td><span class="chip" style="background:#0b0e12;"></span>Carbon</td><td class="mono">#0B0E12</td><td class="mono">C60 M40 Y40 K100</td><td class="mono">K100</td></tr>
+        <tr><td><span class="chip" style="background:#0c61da;"></span>Olympian</td><td class="mono">#0C61DA</td><td class="mono">C90 M60 Y0 K0</td><td class="mono">K100</td></tr>
+        <tr><td><span class="chip" style="background:#9aa1a8;"></span>Platinum</td><td class="mono">#9AA1A8</td><td class="mono">C8 M4 Y0 K34</td><td class="mono">K35</td></tr>
+        <tr><td><span class="chip" style="background:#f6f7f8;"></span>Near White</td><td class="mono">#F6F7F8</td><td class="mono">Unprinted stock</td><td class="mono">Knockout</td></tr>
+      </table>
+      <div class="note" style="margin-top:1rem;"><b>Always proof before a full run.</b> These CMYK values are conversions, not measured swatches. Olympian is a saturated blue that sits near the edge of the CMYK gamut, so it prints slightly duller than it appears on screen. For critical work, run it as a spot colour and match to a physical swatch under daylight.</div>
+    </section>
+
+    <section>
+      <p class="eyebrow">02 · Files</p>
+      <h2>What is in the print folder</h2>
+      <div class="files">
+        <div class="file">
+          <div class="file__stage" style="background:var(--grey-100);"><img src="brand/print/trace-lockup-cmyk.svg" alt="Full colour lockup"></div>
+          <b>Lockup · full colour</b>
+          <span>trace-lockup-cmyk.svg<br>100 mm wide. Default for most printed work.</span>
+        </div>
+        <div class="file">
+          <div class="file__stage" style="background:var(--grey-100);"><img src="brand/print/trace-lockup-black.svg" alt="Black lockup"></div>
+          <b>Lockup · black</b>
+          <span>trace-lockup-black.svg<br>Single-colour printing, stamping, engraving.</span>
+        </div>
+        <div class="file">
+          <div class="file__stage" style="background:var(--ink);"><img src="brand/print/trace-lockup-white.svg" alt="White lockup"></div>
+          <b>Lockup · white</b>
+          <span>trace-lockup-white.svg<br>Dark substrates, reversed printing, foil.</span>
+        </div>
+        <div class="file">
+          <div class="file__stage" style="background:var(--grey-100);"><img src="brand/print/trace-mark-cmyk.svg" alt="Full colour mark"></div>
+          <b>Mark · full colour</b>
+          <span>trace-mark-cmyk.svg<br>40 mm. Pure geometry, no fonts needed.</span>
+        </div>
+        <div class="file">
+          <div class="file__stage" style="background:var(--grey-100);"><img src="brand/print/trace-mark-black.svg" alt="Black mark"></div>
+          <b>Mark · black</b>
+          <span>trace-mark-black.svg<br>One-colour work and embroidery.</span>
+        </div>
+        <div class="file">
+          <div class="file__stage" style="background:var(--ink);"><img src="brand/print/trace-mark-white.svg" alt="White mark"></div>
+          <b>Mark · white</b>
+          <span>trace-mark-white.svg<br>Knockout on carbon and dark stock.</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <p class="eyebrow">03 · Before you send to press</p>
+      <h2>Two things that matter</h2>
+      <div class="note"><b>Outline the type.</b> The lockup files contain live text set in Inter Light 300. Open the file in Illustrator and choose Type &gt; Create Outlines, or in Inkscape choose Path &gt; Object to Path, then save. Without this step a press without Inter installed will substitute another font and the wordmark will be wrong. The mark-only files contain no type and need nothing done to them.</div>
+      <div class="note"><b>SVG is an RGB format.</b> These files carry the correct artwork and geometry, but colour must be assigned in your layout application using the CMYK values above, and the final artwork supplied as PDF, EPS or AI. Ask your printer which they prefer.</div>
+    </section>
+
+    <section>
+      <p class="eyebrow">04 · Sizing</p>
+      <h2>Minimums and clear space</h2>
+      <table>
+        <tr><th>Item</th><th>Minimum size</th><th>Note</th></tr>
+        <tr><td>Full lockup</td><td class="mono">28 mm wide</td><td>Below this the trademark symbol fills in. Use the mark instead.</td></tr>
+        <tr><td>Mark alone</td><td class="mono">6 mm wide</td><td>Holds down to embroidery and foil at this size.</td></tr>
+        <tr><td>Clear space</td><td class="mono">= height of one pulse bar</td><td>Measured from the shortest outer bar. Applies on all four sides.</td></tr>
+        <tr><td>Bleed</td><td class="mono">3 mm</td><td>Standard, where the logo runs off the trim edge.</td></tr>
+      </table>
+    </section>
+
+    <footer class="foot">
+      <span>TRACE™ Print Specifications · v1.0</span>
+      <span>© 2026 TRACE™</span>
+    </footer>
+  </div>
+</body>
+</html>
