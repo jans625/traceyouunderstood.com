@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  TRACE — pulse mark, one colour (black). For single-colour printing,
+  stamping, embossing, engraving, faxable documents and embroidery.
+  Press value: K100 solid. Artwork size 40 x 40 mm at 1:1.
+  All shapes are geometry. No fonts are used in this file.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40mm" height="40mm">
+  <rect x="10" y="36" width="11" height="28" rx="5.5" fill="#000000"/>
+  <rect x="28" y="26" width="11" height="48" rx="5.5" fill="#000000"/>
+  <rect x="46" y="14" width="11" height="72" rx="5.5" fill="#000000"/>
+  <rect x="64" y="26" width="11" height="48" rx="5.5" fill="#000000"/>
+  <rect x="82" y="36" width="11" height="28" rx="5.5" fill="#000000"/>
+</svg>
