@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  TRACE — pulse mark, full colour, print master
+  Artwork size: 40 x 40 mm at 1:1. Scales without loss.
+  Colour targets for press (SVG itself is RGB, set these values in your layout app):
+    Carbon   #0B0E12  =  C60 M40 Y40 K100 (rich black)  |  1-colour: K100
+    Olympian #0C61DA  =  C90 M60 Y0  K0
+  All shapes are geometry. No fonts are used in this file.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="40mm" height="40mm">
+  <rect x="10" y="36" width="11" height="28" rx="5.5" fill="#0b0e12"/>
+  <rect x="28" y="26" width="11" height="48" rx="5.5" fill="#0b0e12"/>
+  <rect x="46" y="14" width="11" height="72" rx="5.5" fill="#0c61da"/>
+  <rect x="64" y="26" width="11" height="48" rx="5.5" fill="#0b0e12"/>
+  <rect x="82" y="36" width="11" height="28" rx="5.5" fill="#0b0e12"/>
+</svg>

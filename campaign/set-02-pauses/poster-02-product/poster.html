@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRACE — Pauses, Product Poster</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@100;200;300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --white:#f6f7f8; --ink:#0b0e12; --platinum:#9aa1a8; --blue:#0c61da; --border:#e2e5e8; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { background:#e8eaec; font-family:"Inter",sans-serif; display:grid; place-items:center; min-height:100vh; padding:2rem; }
+    .board {
+      container-type:inline-size; width:100%; max-width:620px; aspect-ratio:297/420;
+      background:var(--white); color:var(--ink); padding:7cqw;
+      display:flex; flex-direction:column; justify-content:space-between;
+      box-shadow:0 30px 70px -30px rgba(11,14,18,.35);
+    }
+    .top,.bottom { display:flex; justify-content:space-between; align-items:flex-end; }
+    .kicker { font-family:"Oswald",sans-serif; font-weight:500; text-transform:uppercase; letter-spacing:.26em; color:var(--platinum); font-size:2.1cqw; }
+    .line { font-weight:200; letter-spacing:-.035em; line-height:1.04; font-size:9.2cqw; }
+    .dot { color:var(--blue); }
+    .bandwrap { position:relative; display:grid; place-items:center; }
+    .bandwrap::before {
+      content:""; position:absolute; width:70%; aspect-ratio:2/1;
+      background:radial-gradient(ellipse at center, rgba(12,97,218,.18), transparent 68%); filter:blur(6px);
+    }
+    .bandwrap img { position:relative; width:88%; display:block; }
+    .support { font-weight:300; color:#5b6168; font-size:2.9cqw; line-height:1.6; max-width:80%; margin-top:3cqw; }
+    .lock { display:flex; align-items:center; gap:1.6cqw; }
+    .lock svg { width:5cqw; height:5cqw; }
+    .lock span { font-weight:300; letter-spacing:.32em; font-size:3.3cqw; }
+    .lock sup { font-size:.42em; color:var(--platinum); margin-left:-.28em; vertical-align:.95em; }
+
+    @page { size: A3 portrait; margin: 0; }
+    @media print {
+      *, *::before, *::after { -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+      body { background:none; padding:0; display:block; min-height:0; }
+      .board { max-width:none; box-shadow:none; aspect-ratio:297/416; }
+      /* the blurred radial glow is a transparent gradient, which flattens the
+         page to a low resolution bitmap in print, so it is dropped */
+      .bandwrap::before { display:none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="board">
+    <div class="top">
+      <span class="kicker">The TRACE band</span>
+      <span class="kicker">TRACE&#8482;</span>
+    </div>
+    <div class="bandwrap">
+      <img src="../../../brand/print/trace-band-woven.png" alt="The TRACE band">
+    </div>
+    <div>
+      <p class="line">Even your pauses<br>say something<span class="dot">.</span></p>
+      <p class="support">Worn continuously. Heart rate variability, typing rhythm and voice sentiment, read in the spaces as closely as in the signal.</p>
+    </div>
+    <div class="bottom">
+      <div class="lock">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <rect x="10" y="36" width="11" height="28" rx="5.5" fill="#0b0e12"/><rect x="28" y="26" width="11" height="48" rx="5.5" fill="#0b0e12"/>
+          <rect x="46" y="14" width="11" height="72" rx="5.5" fill="#0c61da"/><rect x="64" y="26" width="11" height="48" rx="5.5" fill="#0b0e12"/>
+          <rect x="82" y="36" width="11" height="28" rx="5.5" fill="#0b0e12"/>
+        </svg>
+        <span>TRACE<sup>&#8482;</sup></span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

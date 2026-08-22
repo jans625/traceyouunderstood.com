@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  TRACE — primary lockup, full colour, PRINT MASTER (type outlined)
+
+  Artwork size: 100 mm wide at 1:1. Scales without loss.
+
+  NO FONTS ARE REQUIRED BY THIS FILE.
+  The wordmark has been converted from Inter Light 300 into vector outlines,
+  so it reproduces identically on any machine, including a press that does not
+  have Inter installed. Nothing needs to be done to it before printing.
+
+  Colour targets for press (SVG itself is an RGB format, so assign these
+  values in your layout application):
+    Carbon   #0B0E12  =  C60 M40 Y40 K100 (rich black)  |  1 colour: K100
+    Olympian #0C61DA  =  C90 M60 Y0  K0
+    Platinum #9AA1A8  =  C8  M4  Y0  K34   (trademark symbol only)
+
+  Olympian sits near the edge of the CMYK gamut and will print slightly duller
+  than it appears on screen. For critical work run it as a spot colour and
+  match to a physical swatch.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 342 100" width="100mm" height="29.2mm">
+
+  <!-- pulse mark: five rounded bars, blue centre bar -->
+  <g id="mark">
+    <rect x="10" y="36" width="11" height="28" rx="5.5" fill="#0b0e12"/>
+    <rect x="28" y="26" width="11" height="48" rx="5.5" fill="#0b0e12"/>
+    <rect x="46" y="14" width="11" height="72" rx="5.5" fill="#0c61da"/>
+    <rect x="64" y="26" width="11" height="48" rx="5.5" fill="#0b0e12"/>
+    <rect x="82" y="36" width="11" height="28" rx="5.5" fill="#0b0e12"/>
+  </g>
+
+  <!-- wordmark: Inter Light 300, 44 units, +14 tracking, converted to outlines -->
+  <path id="wordmark" fill="#0b0e12" d="M138.45 36.63L128.31 36.63L128.31 34L151.52 34L151.52 36.63L141.38 36.63L141.38 66L138.45 66L138.45 36.63Z M175 66L172.08 66L172.08 34L182.41 34Q185.81 34 188.10 35.23Q190.39 36.45 191.55 38.62Q192.72 40.78 192.72 43.58L192.72 43.58Q192.72 46.38 191.55 48.52Q190.39 50.66 188.11 51.86Q185.83 53.06 182.45 53.06L182.45 53.06L173.66 53.06L173.66 50.39L182.38 50.39Q184.88 50.39 186.54 49.56Q188.20 48.73 189.02 47.20Q189.84 45.67 189.84 43.58L189.84 43.58Q189.84 41.48 189.02 39.91Q188.19 38.34 186.52 37.48Q184.86 36.63 182.33 36.63L182.33 36.63L175 36.63L175 66ZM182.89 51.56L186.19 51.56L194.06 66L190.69 66L182.89 51.56Z M223.92 37.80L213.89 66L210.83 66L222.47 34L225.59 34L237.23 66L234.17 66L224.14 37.80L223.92 37.80ZM216.09 56.36L216.09 53.73L231.97 53.73L231.97 56.36L216.09 56.36Z M281.78 44L281.78 44L278.84 44Q278.52 42.36 277.66 40.96Q276.81 39.56 275.53 38.52Q274.25 37.47 272.63 36.89Q271 36.31 269.11 36.31L269.11 36.31Q266.08 36.31 263.59 37.89Q261.09 39.47 259.60 42.52Q258.11 45.58 258.11 50L258.11 50Q258.11 54.45 259.60 57.50Q261.09 60.55 263.59 62.12Q266.08 63.69 269.11 63.69L269.11 63.69Q271 63.69 272.63 63.11Q274.25 62.53 275.53 61.49Q276.81 60.45 277.66 59.05Q278.52 57.64 278.84 56L278.84 56L281.78 56Q281.39 58.20 280.32 60.10Q279.25 62 277.60 63.42Q275.95 64.84 273.81 65.64Q271.67 66.44 269.11 66.44L269.11 66.44Q265.08 66.44 261.95 64.41Q258.83 62.39 257.05 58.70Q255.28 55.02 255.28 50L255.28 50Q255.28 44.98 257.05 41.30Q258.83 37.61 261.95 35.59Q265.08 33.56 269.11 33.56L269.11 33.56Q271.67 33.56 273.81 34.35Q275.95 35.14 277.60 36.57Q279.25 38 280.32 39.89Q281.39 41.78 281.78 44Z M321.53 66L302.66 66L302.66 34L321.22 34L321.22 36.63L305.58 36.63L305.58 48.67L320.23 48.67L320.23 51.30L305.58 51.30L305.58 63.38L321.53 63.38L321.53 66Z"/>
+
+  <!-- trademark symbol, outlined, set to the cap height -->
+  <path id="trademark" fill="#9aa1a8" d="M330.71 30.41L330.42 30.41L329.06 27.27L329.53 27.27L330.56 29.73L331.60 27.27L332.07 27.27L330.71 30.41ZM329.43 30.41L328.97 30.41L328.97 27.27L329.43 27.27L329.43 30.41ZM332.16 30.41L331.70 30.41L331.70 27.27L332.16 27.27L332.16 30.41ZM327.42 30.41L326.96 30.41L326.96 27.50L327.42 27.50L327.42 30.41ZM328.37 27.68L326.01 27.68L326.01 27.27L328.37 27.27L328.37 27.68Z"/>
+</svg>

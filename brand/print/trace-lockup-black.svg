@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  TRACE — primary lockup, one colour (black).
+  For single-colour printing, stamping, embossing and engraving.
+  Press value: K100 solid throughout. Artwork size 100 mm wide at 1:1.
+
+  IMPORTANT, TYPE IS LIVE IN THIS FILE.
+  Convert the wordmark to outlines before sending to press
+  (Illustrator: Type > Create Outlines. Inkscape: Path > Object to Path).
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 329 100" width="100mm" height="30.4mm" font-family="Inter, 'Segoe UI', sans-serif">
+  <rect x="10" y="36" width="11" height="28" rx="5.5" fill="#000000"/>
+  <rect x="28" y="26" width="11" height="48" rx="5.5" fill="#000000"/>
+  <rect x="46" y="14" width="11" height="72" rx="5.5" fill="#000000"/>
+  <rect x="64" y="26" width="11" height="48" rx="5.5" fill="#000000"/>
+  <rect x="82" y="36" width="11" height="28" rx="5.5" fill="#000000"/>
+  <text x="126" y="66" font-size="44" font-weight="300" letter-spacing="14" fill="#000000">TRACE</text>
+  <text x="309" y="36" font-size="12" font-weight="400" fill="#000000">&#8482;</text>
+</svg>
