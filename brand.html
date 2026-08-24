@@ -60,6 +60,27 @@
       font-family: "Oswald", sans-serif;
     }
     .doc-title { font-weight: 300; font-size: 2.6rem; letter-spacing: -0.03em; margin-bottom: 0.4rem; }
+    .doc-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      margin-top: 1.3rem;
+      padding: 0.7rem 1.3rem;
+      border-radius: 999px;
+      background: var(--blue);
+      color: #fff;
+      font-size: 0.92rem;
+      font-weight: 500;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .doc-download:hover { background: #0a4eb6; transform: translateY(-1px); }
+    .doc-download svg {
+      width: 17px; height: 17px;
+      fill: none; stroke: currentColor; stroke-width: 2;
+      stroke-linecap: round; stroke-linejoin: round;
+    }
 
     /* Sections */
     section { margin-bottom: 4.5rem; }
@@ -536,8 +557,9 @@
       body { font-size: 10.5pt; line-height: 1.55; }
       .page { max-width: none; padding: 0; }
 
-      /* screen-only furniture */
-      .pulse-rail, .back-link { display: none !important; }
+      /* screen-only furniture. The download button must not appear inside
+         the PDF it links to. */
+      .pulse-rail, .back-link, .doc-download { display: none !important; }
 
       /* Let content flow and fill each page. Sections are kept together
          where they fit, rather than each one starting a fresh page,
@@ -663,6 +685,10 @@
         <div class="doc-head__logo"><img src="brand/print/logo-primary.svg" alt="TRACE logo"></div>
         <h1 class="doc-title" style="margin-top:1.6rem;">Brand Guidelines</h1>
         <p style="font-weight:300; color:#444a51;">One-page identity reference · Version 1.0</p>
+        <a class="doc-download" href="TRACE-Brand-Guidelines.pdf" download>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 11l5 5 5-5M4 20h16"/></svg>
+          Download PDF
+        </a>
       </div>
       <div class="doc-head__meta">
         TRACE<br>
