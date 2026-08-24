@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TRACE — IG 1:1 — The band</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@100;200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --white:#f6f7f8; --ink:#0b0e12; --platinum:#9aa1a8; --blue:#0c61da; }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:#e8eaec}
+  .board{
+    width:1080px;height:1080px;background:var(--white);color:var(--ink);
+    padding:92px;display:flex;flex-direction:column;justify-content:space-between;
+    font-family:"Inter",sans-serif;
+  }
+  .top,.bottom{display:flex;justify-content:space-between;align-items:flex-end}
+  .kicker{font-family:"Oswald",sans-serif;font-weight:500;font-size:20px;letter-spacing:.26em;text-transform:uppercase;color:var(--platinum)}
+  .bandwrap{display:grid;place-items:center;flex:1}
+  .bandwrap img{width:84%;display:block}
+  .line{font-weight:200;font-size:84px;line-height:1.05;letter-spacing:-.035em}
+  .dot{color:var(--blue)}
+  .support{font-weight:300;font-size:26px;line-height:1.55;color:#5b6168;margin-top:22px;max-width:86%}
+  .lock{display:flex;align-items:center;gap:18px}
+  .lock svg{width:52px;height:52px}
+  .lock span{font-weight:300;font-size:34px;letter-spacing:.32em}
+  .lock sup{font-size:.42em;color:var(--platinum);margin-left:-.28em;vertical-align:.95em}
+</style>
+</head>
+<body>
+<div class="board">
+  <div class="top">
+    <span class="kicker">The TRACE band</span>
+    <span class="kicker">TRACE&#8482;</span>
+  </div>
+  <div class="bandwrap">
+    <img src="../../brand/print/trace-band-woven.png" alt="The TRACE band">
+  </div>
+  <div>
+    <p class="line">Even your pauses<br>say something<span class="dot">.</span></p>
+    <p class="support">Worn continuously. Read in the spaces as closely as in the signal.</p>
+  </div>
+  <div class="bottom">
+    <div class="lock">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <rect x="10" y="36" width="11" height="28" rx="5.5" fill="#0b0e12"/><rect x="28" y="26" width="11" height="48" rx="5.5" fill="#0b0e12"/>
+        <rect x="46" y="14" width="11" height="72" rx="5.5" fill="#0c61da"/><rect x="64" y="26" width="11" height="48" rx="5.5" fill="#0b0e12"/>
+        <rect x="82" y="36" width="11" height="28" rx="5.5" fill="#0b0e12"/>
+      </svg>
+      <span>TRACE<sup>&#8482;</sup></span>
+    </div>
+  </div>
+</div>
+</body>
+</html>

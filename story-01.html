@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TRACE — IG Story 9:16</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@100;200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --white:#f6f7f8; --ink:#0b0e12; --platinum:#9aa1a8; --blue:#0c61da; }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:#e8eaec}
+  .board{
+    width:1080px;height:1920px;background:var(--ink);color:var(--white);
+    /* generous top and bottom insets keep the type clear of Instagram's UI */
+    padding:250px 96px 260px;display:flex;flex-direction:column;justify-content:space-between;
+    font-family:"Inter",sans-serif;position:relative;
+  }
+  .kicker{font-family:"Oswald",sans-serif;font-weight:500;font-size:22px;letter-spacing:.26em;text-transform:uppercase;color:var(--platinum)}
+  .line{font-weight:200;font-size:140px;line-height:1.04;letter-spacing:-.035em}
+  .dot{color:var(--blue)}
+  .rail{position:absolute;left:96px;top:250px;bottom:260px;width:3px;background:rgba(154,161,168,.28)}
+  .rail i{position:absolute;left:0;top:22%;width:100%;height:30%;background:var(--blue);display:block}
+  .inner{margin-left:56px}
+  .lock{display:flex;align-items:center;gap:20px}
+  .lock svg{width:60px;height:60px}
+  .lock span{font-weight:300;font-size:40px;letter-spacing:.32em}
+  .lock sup{font-size:.42em;color:var(--platinum);margin-left:-.28em;vertical-align:.95em}
+</style>
+</head>
+<body>
+<div class="board">
+  <div class="rail" aria-hidden="true"><i></i></div>
+  <div class="inner"><span class="kicker">Wellbeing, understood</span></div>
+  <div class="inner">
+    <p class="line">Everything<br>sensed<span class="dot">.</span><br>Nothing<br>shared<span class="dot">.</span></p>
+  </div>
+  <div class="inner">
+    <div class="lock">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <rect x="10" y="36" width="11" height="28" rx="5.5" fill="#f6f7f8"/><rect x="28" y="26" width="11" height="48" rx="5.5" fill="#f6f7f8"/>
+        <rect x="46" y="14" width="11" height="72" rx="5.5" fill="#0c61da"/><rect x="64" y="26" width="11" height="48" rx="5.5" fill="#f6f7f8"/>
+        <rect x="82" y="36" width="11" height="28" rx="5.5" fill="#f6f7f8"/>
+      </svg>
+      <span>TRACE<sup>&#8482;</sup></span>
+    </div>
+  </div>
+</div>
+</body>
+</html>

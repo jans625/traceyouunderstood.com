@@ -14,6 +14,22 @@
     .pkg-head { padding-bottom: 2rem; border-bottom: 1px solid var(--ink); margin-bottom: 3.5rem; }
     .pkg-head h1 { font-weight: 300; font-size: 2.6rem; letter-spacing: -0.03em; margin: 0.6rem 0 0.3rem; }
     .pkg-head p { color: var(--grey-700); font-weight: 300; }
+    .pkg-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1.4rem;
+      padding: 0.7rem 1.3rem;
+      border-radius: 999px;
+      background: var(--blue);
+      color: #fff;
+      font-size: 0.92rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .pkg-cta:hover { background: #0a4eb6; transform: translateY(-1px); }
+    .pkg-cta span { font-size: 1.05em; }
 
     .pkg-section { margin-bottom: 4.5rem; }
 
@@ -47,33 +63,53 @@
 
     /* Closed box */
     .box {
-      width: 230px;
-      height: 230px;
-      background: linear-gradient(145deg, #ffffff, #f2f3f5);
-      border-radius: 10px;
+      width: 248px;
+      height: 248px;
+      /* matte board: light falls from the upper left, so the face carries a
+         soft diagonal gradient rather than a flat fill */
+      background:
+        linear-gradient(152deg, #ffffff 0%, #fbfbfc 46%, #f1f2f4 100%);
+      border-radius: 12px;
       box-shadow:
-        0 30px 50px -18px rgba(11, 14, 18, 0.28),
-        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        0 44px 60px -28px rgba(11, 14, 18, 0.34),
+        0 6px 14px -6px rgba(11, 14, 18, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.95),
+        inset 0 0 0 1px rgba(11, 14, 18, 0.045);
       display: grid;
+      grid-template-rows: 1fr 1fr;
       place-items: center;
       position: relative;
+      /* a hint of perspective so it reads as an object, not a swatch */
+      transform: perspective(1400px) rotateX(1.5deg) rotateY(-2deg);
     }
     .box::after {
-      /* lid seam */
+      /* lid seam, sitting exactly on the halfway line */
       content: "";
       position: absolute;
-      left: 0; right: 0; top: 58%;
+      left: 0; right: 0; top: 50%;
       height: 1px;
-      background: rgba(11, 14, 18, 0.07);
+      background: linear-gradient(90deg,
+        rgba(11, 14, 18, 0.03),
+        rgba(11, 14, 18, 0.10) 18%,
+        rgba(11, 14, 18, 0.10) 82%,
+        rgba(11, 14, 18, 0.03));
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
     }
-    .box__mark { width: 64px; height: 64px; opacity: 0.92; }
+    .box__mark {
+      width: 84px;
+      height: 84px;
+      /* debossed: shadow cast down into the board, highlight on the lower lip */
+      filter:
+        drop-shadow(0 1px 0 rgba(255, 255, 255, 0.95))
+        drop-shadow(0 -1px 1px rgba(11, 14, 18, 0.30))
+        drop-shadow(0 3px 5px rgba(11, 14, 18, 0.10));
+    }
     .box__word {
-      position: absolute;
-      bottom: 1.1rem;
       font-weight: 300;
-      letter-spacing: 0.32em;
-      font-size: 0.72rem;
-      color: var(--grey-500);
+      letter-spacing: 0.38em;
+      font-size: 0.8rem;
+      color: #8f959c;
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
     }
     .box__word sup {
       font-size: 0.5em;
@@ -260,6 +296,10 @@
       <p class="section__eyebrow">Deliverable · Physical Package</p>
       <h1>The unboxing, understood<span class="accent">.</span></h1>
       <p>TRACE ships as a small, wrist-worn sensor in a matte white, minimal box. Inside: the device, a welcome card, and a booklet titled "Your Wellbeing, Understood."</p>
+      <a class="pkg-cta" href="https://rigor-unity-62081790.figma.site/" target="_blank" rel="noopener noreferrer">
+        View the interactive packaging mockup
+        <span aria-hidden="true">&rarr;</span>
+      </a>
     </header>
 
     <!-- 01 The box -->

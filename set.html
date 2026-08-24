@@ -1,106 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TRACE — Campaign Set 02: Pauses</title>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@100;200;300;400;500;600&display=swap" rel="stylesheet">
-  <style>
-    :root { --white:#f6f7f8; --ink:#0b0e12; --platinum:#9aa1a8; --blue:#0c61da; --border:#e2e5e8; --grey:#444a51; }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family:"Inter",sans-serif; background:var(--white); color:var(--ink); line-height:1.7; -webkit-font-smoothing:antialiased; }
-    .wrap { max-width:1080px; margin:0 auto; padding:3.5rem 1.5rem 6rem; }
-    .back { display:block; text-align:right; font-size:.92rem; font-weight:500; color:var(--grey); text-decoration:none; margin-bottom:2rem; }
-    .head { padding-bottom:2rem; border-bottom:1px solid var(--ink); margin-bottom:3rem; }
-    .eyebrow { font-family:"Oswald",sans-serif; font-size:.72rem; font-weight:500; letter-spacing:.24em; text-transform:uppercase; color:var(--blue); }
-    .head h1 { font-weight:300; font-size:2.4rem; letter-spacing:-.03em; margin:.5rem 0 .4rem; }
-    .head p { color:var(--grey); font-weight:300; max-width:680px; }
-    .label { font-family:"Oswald",sans-serif; font-size:.66rem; font-weight:500; letter-spacing:.2em; text-transform:uppercase; color:var(--platinum); margin:2.6rem 0 .8rem; }
-    .note { background:#fff; border:1px solid var(--border); border-radius:12px; padding:1.3rem 1.5rem; font-size:.88rem; color:var(--grey); font-weight:300; margin-top:.9rem; }
-    .note b { color:var(--ink); font-weight:600; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TRACE — Campaign Set 03: It never looks away</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@100;200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --white:#f6f7f8; --ink:#0b0e12; --platinum:#9aa1a8; --blue:#0c61da; --border:#e2e5e8; --grey:#444a51; }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:"Inter",sans-serif;background:var(--white);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:3.5rem 1.5rem 6rem}
+  .back{display:block;text-align:right;font-size:.92rem;font-weight:500;color:var(--grey);text-decoration:none;margin-bottom:2rem}
+  .head{padding-bottom:2rem;border-bottom:1px solid var(--ink);margin-bottom:3rem}
+  .eyebrow{font-family:"Oswald",sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--blue)}
+  .head h1{font-weight:300;font-size:2.4rem;letter-spacing:-.03em;margin:.5rem 0 .4rem}
+  .head p{color:var(--grey);font-weight:300;max-width:700px}
+  .label{font-family:"Oswald",sans-serif;font-size:.66rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--platinum);margin:2.6rem 0 .8rem}
+  .note{background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.3rem 1.5rem;font-size:.88rem;color:var(--grey);font-weight:300;margin-top:.9rem}
+  .note b{color:var(--ink);font-weight:600}
 
-    /* ---------- artboards ---------- */
-    .board { container-type:inline-size; position:relative; overflow:hidden; display:flex; flex-direction:column; justify-content:space-between; border-radius:4px; }
-    .board--portrait { aspect-ratio:297/420; }
-    .board--landscape { aspect-ratio:16/9; }
-    .pad { padding:7cqw; }
-    .dark {
-      background:
-        repeating-linear-gradient(45deg, rgba(255,255,255,.016) 0 2px, transparent 2px 6px),
-        repeating-linear-gradient(-45deg, rgba(255,255,255,.013) 0 2px, transparent 2px 6px),
-        var(--ink);
-      color:var(--white);
-    }
-    .light { background:var(--white); color:var(--ink); border:1px solid var(--border); }
-    .top,.bottom { display:flex; justify-content:space-between; align-items:flex-end; }
-    .kicker { font-family:"Oswald",sans-serif; font-weight:500; text-transform:uppercase; letter-spacing:.26em; color:var(--platinum); }
-    .board--portrait .kicker { font-size:2.1cqw; }
-    .board--landscape .kicker { font-size:1.3cqw; }
+  .board{container-type:inline-size;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;border-radius:4px}
+  .board--portrait{aspect-ratio:297/420}
+  .board--landscape{aspect-ratio:16/9}
+  .pad{padding:7cqw}
+  .dark{
+    background:
+      repeating-linear-gradient(45deg, rgba(255,255,255,.016) 0 2px, transparent 2px 6px),
+      repeating-linear-gradient(-45deg, rgba(255,255,255,.013) 0 2px, transparent 2px 6px),
+      var(--ink);
+    color:var(--white);
+  }
+  .light{background:var(--white);color:var(--ink);border:1px solid var(--border)}
+  .top,.bottom{display:flex;justify-content:space-between;align-items:flex-end}
+  .kicker{font-family:"Oswald",sans-serif;font-weight:500;text-transform:uppercase;letter-spacing:.26em;color:var(--platinum)}
+  .board--portrait .kicker{font-size:2.1cqw}
+  .board--landscape .kicker{font-size:1.3cqw}
 
-    .line { font-weight:200; letter-spacing:-.035em; line-height:1.04; }
-    .board--portrait .line { font-size:11.6cqw; }
-    .board--landscape .line { font-size:6.4cqw; }
-    .dot { color:var(--blue); }
+  .line{font-weight:200;letter-spacing:-.035em;line-height:1.04}
+  .board--portrait .line{font-size:11.2cqw}
+  .board--landscape .line{font-size:6cqw}
+  .dot{color:var(--blue)}
 
-    /* the pause: a signal that flatlines and keeps recording */
-    .pause { display:block; width:100%; margin:4cqw 0; }
-    .pause path { fill:none; stroke:var(--blue); stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round; vector-effect:non-scaling-stroke; }
-    .pause .flat { stroke:var(--platinum); }
+  .support{font-weight:300;color:var(--platinum)}
+  .board--portrait .support{font-size:2.9cqw;line-height:1.6;max-width:76%;margin-top:5cqw}
+  .light .support{color:#5b6168}
 
-    .support { font-weight:300; color:var(--platinum); }
-    .board--portrait .support { font-size:2.9cqw; line-height:1.6; max-width:74%; }
-    .board--landscape .support { font-size:1.6cqw; line-height:1.6; max-width:58%; }
+  /* an unblinking eye rendered as the brand's own signal */
+  .watch{display:block;width:34cqw;margin:5cqw 0 0}
+  .watch path,.watch circle{fill:none;stroke:var(--blue);stroke-width:2;vector-effect:non-scaling-stroke}
 
-    .band { width:100%; display:block; }
-    .bandwrap { position:relative; display:grid; place-items:center; }
-    .bandwrap::before {
-      content:""; position:absolute; width:70%; aspect-ratio:2/1;
-      background:radial-gradient(ellipse at center, rgba(12,97,218,.22), transparent 68%);
-      filter:blur(6px);
-    }
-    .bandwrap img { position:relative; }
+  .rail{position:absolute;left:7cqw;top:0;bottom:0;width:.35cqw;background:rgba(154,161,168,.28)}
+  .rail i{position:absolute;left:0;top:16%;width:100%;height:38%;background:var(--blue);display:block}
 
-    .lock { display:flex; align-items:center; gap:1.6cqw; }
-    .lock svg { width:5cqw; height:5cqw; }
-    .board--landscape .lock svg { width:3cqw; height:3cqw; }
-    .lock span { font-weight:300; letter-spacing:.32em; }
-    .board--portrait .lock span { font-size:3.3cqw; }
-    .board--landscape .lock span { font-size:2cqw; }
-    .lock sup { font-size:.42em; color:var(--platinum); margin-left:-.28em; vertical-align:.95em; }
+  .lock{display:flex;align-items:center;gap:1.6cqw}
+  .lock svg{width:5cqw;height:5cqw}
+  .board--landscape .lock svg{width:3cqw;height:3cqw}
+  .lock span{font-weight:300;letter-spacing:.32em}
+  .board--portrait .lock span{font-size:3.3cqw}
+  .board--landscape .lock span{font-size:2cqw}
+  .lock sup{font-size:.42em;color:var(--platinum);margin-left:-.28em;vertical-align:.95em}
 
-    .rationale { margin-top:3.5rem; padding-top:2rem; border-top:1px solid var(--border); }
-    .rationale h2 { font-weight:300; font-size:1.6rem; letter-spacing:-.02em; margin:.4rem 0 1rem; }
-    .rationale p, .rationale li { color:var(--grey); font-weight:300; margin-bottom:1rem; }
-    .rationale ul { margin:0 0 1rem 1.1rem; }
-    .rationale strong { color:var(--ink); font-weight:600; }
-    .foot { margin-top:3rem; padding-top:1.4rem; border-top:1px solid var(--border); display:flex; justify-content:space-between; font-size:.72rem; color:var(--platinum); }
-  </style>
+  .rationale{margin-top:3.5rem;padding-top:2rem;border-top:1px solid var(--border)}
+  .rationale h2{font-weight:300;font-size:1.6rem;letter-spacing:-.02em;margin:.4rem 0 1rem}
+  .rationale p,.rationale li{color:var(--grey);font-weight:300;margin-bottom:1rem}
+  .rationale ul{margin:0 0 1rem 1.1rem}
+  .rationale strong{color:var(--ink);font-weight:600}
+  .foot{margin-top:3rem;padding-top:1.4rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:.72rem;color:var(--platinum)}
+
+  @page{size:A3 portrait;margin:0}
+  @media print{
+    *,*::before,*::after{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}
+    .back,.head,.label,.note,.rationale,.foot{display:none !important}
+    .wrap{max-width:none;padding:0}
+    .board{break-before:page;break-after:auto;border-radius:0;border:none;width:100%}
+    .board.is-first{break-before:auto}
+    .board--portrait{aspect-ratio:297/416}
+    .dark{background:var(--ink) !important}
+  }
+</style>
 </head>
 <body>
 <div class="wrap">
   <a href="../../index.html" class="back">&larr; Back to home</a>
 
   <header class="head">
-    <p class="eyebrow">Campaign Set 02</p>
-    <h1>Even your pauses say something<span class="dot">.</span></h1>
-    <p>Three executions built around the silence between actions. Where the first campaign promised confidentiality, this one quietly admits how little escapes the sensor: the gaps in your typing, your speech and your movement are readings too.</p>
+    <p class="eyebrow">Campaign Set 03</p>
+    <h1>It never looks away. That's the point<span class="dot">.</span></h1>
+    <p>Where the earlier campaigns promised confidentiality and then quietly annexed your silence, this set stops negotiating. It states the surveillance plainly and sells it as devotion.</p>
   </header>
 
-  <!-- 01 PRIMARY -->
+  <!-- 01 -->
   <p class="label">01 &middot; Primary poster &middot; A3 portrait &middot; carbon</p>
-  <div class="board board--portrait dark pad">
+  <div class="board board--portrait dark pad is-first">
     <div class="top">
       <span class="kicker">Wellbeing, understood</span>
       <span class="kicker">TRACE&#8482;</span>
     </div>
     <div>
-      <p class="line">Even your<br>pauses<br>say something<span class="dot">.</span></p>
-      <svg class="pause" viewBox="0 0 600 54" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M0 27 h26 l7 -17 l9 34 l7 -17 h30 l7 -13 l9 26 l7 -13 h32"/>
-        <path class="flat" d="M134 27 H386"/>
-        <path d="M386 27 h26 l7 -17 l9 34 l7 -17 h30 l7 -13 l9 26 l7 -13 h62"/>
-      </svg>
-      <p class="support">The sensor does not stop when you do. Your stillness, your hesitation and your silence are recorded with the same care as your effort.</p>
+      <p class="line">It never<br>looks away<span class="dot">.</span><br>That's<br>the point<span class="dot">.</span></p>
+      <p class="support">Sleep, strain, hesitation, silence. Nothing about you is too small to be worth recording.</p>
     </div>
     <div class="bottom">
       <div class="lock">
@@ -113,21 +111,18 @@
       </div>
     </div>
   </div>
-  <div class="note"><b>Reading.</b> The waveform beats, flatlines for the width of the poster, then beats again. The flat section is set in platinum rather than blue, so the pause reads as recorded but unremarkable, which is exactly the claim the copy is making. Nothing stops. The line simply goes quiet and carries on.</div>
+  <div class="note"><b>Reading.</b> Four short lines, each landing on a full stop, so the poster reads like a series of statements rather than a sentence. "That's the point" is the move: it anticipates the objection and adopts it as the selling proposition, which is exactly how the category answers criticism.</div>
 
-  <!-- 02 PRODUCT -->
-  <p class="label">02 &middot; Product poster &middot; A3 portrait &middot; near white</p>
+  <!-- 02 -->
+  <p class="label">02 &middot; A3 portrait &middot; near white</p>
   <div class="board board--portrait light pad">
     <div class="top">
-      <span class="kicker">The TRACE band</span>
+      <span class="kicker">Wellbeing, understood</span>
       <span class="kicker">TRACE&#8482;</span>
     </div>
-    <div class="bandwrap">
-      <img class="band" src="../../brand/print/trace-band-woven.png" alt="The TRACE band" style="width:88%;">
-    </div>
     <div>
-      <p class="line" style="font-size:9.2cqw;">Even your pauses<br>say something<span class="dot">.</span></p>
-      <p class="support" style="color:#5b6168;margin-top:3cqw;">Worn continuously. Heart rate variability, typing rhythm and voice sentiment, read in the spaces as closely as in the signal.</p>
+      <p class="line" style="font-size:9.6cqw;">You will never<br>have to explain<br>yourself again<span class="dot">.</span></p>
+      <p class="support">TRACE has already read the week you had. There is nothing left for you to put into words.</p>
     </div>
     <div class="bottom">
       <div class="lock">
@@ -140,23 +135,41 @@
       </div>
     </div>
   </div>
-  <div class="note"><b>Reading.</b> The band is shown at rest on an empty field, small in the frame. Giving the product very little of the page is the point: the object is unremarkable, and the claim underneath it is not.</div>
+  <div class="note"><b>Reading.</b> Written as relief from the burden of self-description, and it removes the thing being relieved: your own account of yourself. Set on near white so the promise arrives warmly, which makes the second reading land harder.</div>
 
-  <!-- 03 BILLBOARD -->
-  <p class="label">03 &middot; Digital billboard &middot; 16:9 &middot; carbon</p>
+  <!-- 03 -->
+  <p class="label">03 &middot; A3 portrait &middot; carbon with signal rail</p>
+  <div class="board board--portrait dark pad">
+    <div class="rail" aria-hidden="true"><i></i></div>
+    <div class="top">
+      <span class="kicker" style="margin-left:6cqw;">Wellbeing, understood</span>
+      <span class="kicker">TRACE&#8482;</span>
+    </div>
+    <div style="margin-left:6cqw;">
+      <p class="line">It knew<br>before<br>you did<span class="dot">.</span></p>
+      <p class="support">Your heart rate variability shifts hours ahead of the feeling. TRACE simply tells you what your body has already decided.</p>
+    </div>
+    <div class="bottom" style="margin-left:6cqw;">
+      <div class="lock">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <rect x="10" y="36" width="11" height="28" rx="5.5" fill="#f6f7f8"/><rect x="28" y="26" width="11" height="48" rx="5.5" fill="#f6f7f8"/>
+          <rect x="46" y="14" width="11" height="72" rx="5.5" fill="#0c61da"/><rect x="64" y="26" width="11" height="48" rx="5.5" fill="#f6f7f8"/>
+          <rect x="82" y="36" width="11" height="28" rx="5.5" fill="#f6f7f8"/>
+        </svg>
+        <span>TRACE<sup>&#8482;</sup></span>
+      </div>
+    </div>
+  </div>
+  <div class="note"><b>Reading.</b> Lifted from the brand's own origin story, where a colleague looks at her stress curve and says "so it already knew". Used as advertising it becomes a boast, and the claim is scientifically plausible enough that nobody stops to object.</div>
+
+  <!-- 04 -->
+  <p class="label">04 &middot; Digital billboard &middot; 16:9 &middot; carbon</p>
   <div class="board board--landscape dark pad">
     <div class="top">
       <span class="kicker">TRACE&#8482;</span>
       <span class="kicker">Wellbeing, understood</span>
     </div>
-    <div>
-      <p class="line">Even your pauses say something<span class="dot">.</span></p>
-      <svg class="pause" viewBox="0 0 900 40" preserveAspectRatio="none" aria-hidden="true" style="margin:2.5cqw 0 0;">
-        <path d="M0 20 h40 l6 -13 l8 26 l6 -13 h44 l6 -10 l8 20 l6 -10 h40"/>
-        <path class="flat" d="M164 20 H612"/>
-        <path d="M612 20 h40 l6 -13 l8 26 l6 -13 h44 l6 -10 l8 20 l6 -10 h164"/>
-      </svg>
-    </div>
+    <p class="line">It never looks away<span class="dot">.</span> That's the point<span class="dot">.</span></p>
     <div class="bottom">
       <div class="lock">
         <svg viewBox="0 0 100 100" aria-hidden="true">
@@ -172,18 +185,18 @@
 
   <section class="rationale">
     <p class="eyebrow">Rationale</p>
-    <h2>Why the pause is the strongest thing to advertise</h2>
-    <p><strong>The line closes the last gap in the promise.</strong> The first campaign offered a trade: everything sensed, nothing shared. This one removes the idea that there is anything left outside the reading. Silence is usually where a person assumes they are unobserved, and the copy calmly reclassifies it as data. It is written as attentiveness, which is what makes it uncomfortable rather than threatening.</p>
+    <h2>Selling the objection back to the reader</h2>
+    <p><strong>This set drops the defence.</strong> The first campaign offered a trade, everything sensed for nothing shared. The second admitted that even your pauses are read. This one states that the device never stops watching and then, in three words, converts that into the reason to buy. "That's the point" is the most honest line in the whole project and also the most manipulative, which is precisely why it belongs here.</p>
     <ul>
-      <li><strong>The flatline is the headline.</strong> A signal that stops beating normally means alarm. Here it goes quiet, stays quiet for most of the page, and resumes without incident, because for TRACE the pause is not an emergency, it is simply more information.</li>
-      <li><strong>Platinum for the pause.</strong> Blue is reserved throughout the brand for live signal, so setting the flat section in platinum marks it as the quiet passage while keeping it unmistakably part of the same line.</li>
-      <li><strong>The band appears small.</strong> On the product poster the device occupies a fraction of the frame with nothing around it. The restraint reads as confidence, and it keeps the sentence, rather than the object, as the thing being sold.</li>
-      <li><strong>Same type system.</strong> Inter at 200, tracking at -0.035em, and the full stop in Olympian blue, so the set reads as a continuation of the first campaign rather than a departure.</li>
+      <li><strong>Every line is a complete sentence.</strong> No clauses, no qualifiers, nothing to argue with. The full stops do the persuading, which is why they are the only element carrying the accent colour.</li>
+      <li><strong>Three different registers.</strong> One boasts, one comforts, one claims foresight. Together they cover the ways this category talks: confidence, relief, and quiet authority.</li>
+      <li><strong>The tonal flip.</strong> Poster 02 is the only near white execution in the set. Putting the most intimate promise on the lightest ground is deliberate, since warmth is what makes it slip past.</li>
+      <li><strong>Nothing is exaggerated.</strong> Every claim here is one the product, as designed, could actually make. That is the test the project has to keep passing.</li>
     </ul>
   </section>
 
   <footer class="foot">
-    <span>TRACE&#8482; Campaign Set 02 &middot; Pauses</span>
+    <span>TRACE&#8482; Campaign Set 03</span>
     <span>&copy; 2026 TRACE&#8482;</span>
   </footer>
 </div>
